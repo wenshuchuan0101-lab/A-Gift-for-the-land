@@ -43,10 +43,19 @@ position = Vector2(576, 300)
 
 [node name="Player" parent="PlayerSpawn" instance=ExtResource("1_player")]
 
+[node name="SeedTarget" type="Marker2D" parent="."]
+position = Vector2(1100, 525)
+
+[node name="Visual" type="Polygon2D" parent="SeedTarget"]
+polygon = PackedVector2Array(0, -10, 10, 0, 0, 10, -10, 0)
+color = Color(0.82, 0.42, 0.24, 0.85)
+
 [node name="Seed" parent="." instance=ExtResource("2_seed")]
 player_path = NodePath("../PlayerSpawn/Player")
+target_path = NodePath("../SeedTarget")
 follow_offset = Vector2(60, -50)
 follow_speed = 5.0
+guide_distance = 70.0
 
 [node name="MobileControls" type="CanvasLayer" parent="."]
 layer = 10
