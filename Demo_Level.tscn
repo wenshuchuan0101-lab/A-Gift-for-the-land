@@ -69,7 +69,9 @@ energy = 80.0
 [node name="GrassGridRepairPoint" parent="." instance=ExtResource("7_grass_grid")]
 position = Vector2(670, 548)
 seed_path = NodePath("../Seed")
+wind_zone_path = NodePath("../WindZone")
 energy_reward = 20.0
+repaired_wind_modifier = 0.5
 
 [node name="MapPoint" type="Area2D" parent="."]
 position = Vector2(900, 525)
