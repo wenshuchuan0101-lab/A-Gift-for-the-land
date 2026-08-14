@@ -315,6 +315,48 @@ theme_override_font_sizes/font_size = 32
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="LetterUI" type="CanvasLayer" parent="."]
+layer = 25
+
+[node name="LetterPanel" type="Control" parent="LetterUI"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Background" type="ColorRect" parent="LetterUI/LetterPanel"]
+layout_mode = 1
+anchor_left = 0.04
+anchor_top = 0.04
+anchor_right = 0.72
+anchor_bottom = 0.96
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.025, 0.03, 0.035, 0.96)
+
+[node name="TextLabel" type="Label" parent="LetterUI/LetterPanel"]
+layout_mode = 1
+anchor_left = 0.08
+anchor_top = 0.06
+anchor_right = 0.68
+anchor_bottom = 0.94
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.96, 0.94, 0.86, 1)
+theme_override_colors/font_outline_color = Color(0.02, 0.025, 0.03, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 24
+text = "如果你看到这封信，\n说明风还没有停。\n\n我们曾经以为，\n只要建起足够高的墙，\n就能保护这片土地。\n\n后来我们才明白。\n\n土地需要的不是墙。\n\n而是有人愿意留下来。\n\n沿着风吹来的方向走，\n那里还有乐园留下的痕迹。"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
 [node name="MapUI" type="CanvasLayer" parent="."]
 layer = 20
 

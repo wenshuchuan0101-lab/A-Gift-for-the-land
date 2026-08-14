@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="Script" path="res://abandoned_house.gd" id="1_house"]
 [ext_resource type="Script" path="res://pickup_item.gd" id="2_pickup_item"]
@@ -18,10 +18,14 @@ size = Vector2(480, 210)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_item_area"]
 size = Vector2(80, 100)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_letter_area"]
+size = Vector2(40, 100)
+
 [node name="AbandonedHouse" type="Node2D"]
 script = ExtResource("1_house")
 wind_zone_path = NodePath("../WindZone")
 prompt_label_path = NodePath("../HousePromptUI/PromptLabel")
+letter_panel_path = NodePath("../LetterUI/LetterPanel")
 indoor_wind_multiplier = 0.0
 
 [node name="OuterWalls" type="Node2D" parent="."]
@@ -94,6 +98,23 @@ shape = SubResource("RectangleShape2D_item_area")
 [node name="Visual" type="Polygon2D" parent="MapItem"]
 polygon = PackedVector2Array(-22, -16, 22, -16, 22, 16, -22, 16)
 color = Color(0.38, 0.64, 0.72, 1)
+
+[node name="LetterItem" type="Area2D" parent="."]
+position = Vector2(-220, -55)
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LetterItem"]
+shape = SubResource("RectangleShape2D_letter_area")
+
+[node name="Visual" type="Polygon2D" parent="LetterItem"]
+polygon = PackedVector2Array(-18, -12, 18, -12, 18, 12, -18, 12)
+color = Color(0.86, 0.78, 0.58, 1)
+
+[node name="Fold" type="Polygon2D" parent="LetterItem"]
+polygon = PackedVector2Array(-18, -12, 0, 2, 18, -12)
+color = Color(0.66, 0.56, 0.38, 1)
 
 [node name="CloakItem" type="Area2D" parent="."]
 position = Vector2(40, -55)
