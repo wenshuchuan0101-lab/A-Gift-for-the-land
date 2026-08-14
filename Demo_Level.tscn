@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=11 format=3]
 
 [ext_resource type="PackedScene" path="res://Player.tscn" id="1_player"]
 [ext_resource type="PackedScene" path="res://Seed.tscn" id="2_seed"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" path="res://WindZone.tscn" id="4_wind_zone"]
 [ext_resource type="PackedScene" path="res://RockCover.tscn" id="5_rock_cover"]
 [ext_resource type="PackedScene" path="res://AbandonedHouse.tscn" id="6_abandoned_house"]
+[ext_resource type="PackedScene" path="res://GrassGridRepairPoint.tscn" id="7_grass_grid"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
 size = Vector2(3400, 80)
@@ -63,6 +64,12 @@ target_path = NodePath("../SeedTarget")
 follow_offset = Vector2(60, -50)
 follow_speed = 5.0
 guide_distance = 70.0
+energy = 80.0
+
+[node name="GrassGridRepairPoint" parent="." instance=ExtResource("7_grass_grid")]
+position = Vector2(670, 548)
+seed_path = NodePath("../Seed")
+energy_reward = 20.0
 
 [node name="MapPoint" type="Area2D" parent="."]
 position = Vector2(900, 525)

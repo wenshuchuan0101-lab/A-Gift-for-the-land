@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://grass_grid_repair_point.gd" id="1_grass_grid"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_repair_area"]
+size = Vector2(96, 100)
+
+[node name="GrassGridRepairPoint" type="Area2D"]
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+script = ExtResource("1_grass_grid")
+energy_reward = 20.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -48)
+shape = SubResource("RectangleShape2D_repair_area")
+
+[node name="Visual" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-36, -12, 36, -12, 36, 12, -36, 12)
+color = Color(0.46, 0.3, 0.16, 1)
