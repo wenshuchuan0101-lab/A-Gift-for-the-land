@@ -1,0 +1,129 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://totem_memory.gd" id="1_totem_memory"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_interaction"]
+size = Vector2(72, 120)
+
+[node name="TotemMemory" type="Area2D"]
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+script = ExtResource("1_totem_memory")
+memory_duration = 4.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -60)
+shape = SubResource("RectangleShape2D_interaction")
+
+[node name="Visual" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-24, 0, 24, 0, 20, -94, 11, -112, -11, -112, -20, -94)
+color = Color(0.46, 0.49, 0.5, 1)
+
+[node name="Glyph" type="Polygon2D" parent="."]
+position = Vector2(0, -72)
+polygon = PackedVector2Array(0, -14, 12, 0, 0, 14, -12, 0)
+color = Color(0.62, 0.82, 0.82, 1)
+
+[node name="MemoryTimer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[node name="MemoryOverlay" type="CanvasLayer" parent="."]
+layer = 30
+
+[node name="MemoryPanel" type="Control" parent="MemoryOverlay"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+
+[node name="Background" type="ColorRect" parent="MemoryOverlay/MemoryPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.025, 0.04, 0.05, 0.96)
+
+[node name="GhostImage" type="Control" parent="MemoryOverlay/MemoryPanel"]
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -300.0
+offset_top = -250.0
+offset_right = 300.0
+offset_bottom = -48.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="PastGround" type="ColorRect" parent="MemoryOverlay/MemoryPanel/GhostImage"]
+layout_mode = 0
+offset_top = 150.0
+offset_right = 600.0
+offset_bottom = 174.0
+mouse_filter = 2
+color = Color(0.28, 0.58, 0.34, 1)
+
+[node name="WaterLine" type="ColorRect" parent="MemoryOverlay/MemoryPanel/GhostImage"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 180.0
+offset_right = 550.0
+offset_bottom = 188.0
+mouse_filter = 2
+color = Color(0.3, 0.68, 0.82, 1)
+
+[node name="TreeTrunk" type="ColorRect" parent="MemoryOverlay/MemoryPanel/GhostImage"]
+layout_mode = 0
+offset_left = 410.0
+offset_top = 62.0
+offset_right = 438.0
+offset_bottom = 150.0
+mouse_filter = 2
+color = Color(0.42, 0.32, 0.2, 1)
+
+[node name="TreeCrown" type="ColorRect" parent="MemoryOverlay/MemoryPanel/GhostImage"]
+layout_mode = 0
+offset_left = 350.0
+offset_top = 18.0
+offset_right = 498.0
+offset_bottom = 90.0
+mouse_filter = 2
+color = Color(0.34, 0.68, 0.38, 1)
+
+[node name="Person" type="ColorRect" parent="MemoryOverlay/MemoryPanel/GhostImage"]
+layout_mode = 0
+offset_left = 164.0
+offset_top = 88.0
+offset_right = 202.0
+offset_bottom = 150.0
+mouse_filter = 2
+color = Color(0.9, 0.92, 0.9, 1)
+
+[node name="TextLabel" type="Label" parent="MemoryOverlay/MemoryPanel"]
+layout_mode = 1
+anchor_left = 0.1
+anchor_top = 0.08
+anchor_right = 0.9
+anchor_bottom = 0.58
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.94, 0.96, 0.92, 1)
+theme_override_colors/font_outline_color = Color(0.02, 0.025, 0.03, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 24
+text = "这里曾经有一片森林。\n\n人们依靠它生活。\n\n直到风带走了最后一片绿色。\n\n他们留下了种子。\n\n等待后来的人。"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2

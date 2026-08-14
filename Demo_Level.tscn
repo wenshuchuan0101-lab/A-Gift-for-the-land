@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3]
+[gd_scene load_steps=12 format=3]
 
 [ext_resource type="PackedScene" path="res://Player.tscn" id="1_player"]
 [ext_resource type="PackedScene" path="res://Seed.tscn" id="2_seed"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" path="res://RockCover.tscn" id="5_rock_cover"]
 [ext_resource type="PackedScene" path="res://AbandonedHouse.tscn" id="6_abandoned_house"]
 [ext_resource type="PackedScene" path="res://GrassGridRepairPoint.tscn" id="7_grass_grid"]
+[ext_resource type="PackedScene" path="res://TotemMemory.tscn" id="8_totem_memory"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
 size = Vector2(3400, 80)
@@ -88,6 +89,12 @@ shape = SubResource("CircleShape2D_map_point")
 [node name="Visual" type="Polygon2D" parent="MapPoint"]
 polygon = PackedVector2Array(0, -14, 14, 0, 0, 14, -14, 0)
 color = Color(0.32, 0.58, 0.72, 0.9)
+
+[node name="TotemMemory" parent="." instance=ExtResource("8_totem_memory")]
+position = Vector2(1120, 560)
+player_path = NodePath("../PlayerSpawn/Player")
+mobile_controls_path = NodePath("../MobileControls")
+memory_duration = 4.0
 
 [node name="WindZone" parent="." instance=ExtResource("4_wind_zone")]
 position = Vector2(1250, 470)

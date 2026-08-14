@@ -56,6 +56,12 @@ func get_wind_resistance() -> float:
 	return 1.0
 
 
+func set_control_enabled(enabled: bool) -> void:
+	velocity = Vector2.ZERO
+	external_force = Vector2.ZERO
+	set_physics_process(enabled)
+
+
 func _set_anchored(anchored: bool) -> void:
 	is_anchored = anchored
 	anchor_visual.visible = anchored
