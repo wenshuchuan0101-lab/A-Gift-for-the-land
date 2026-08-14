@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3]
+[gd_scene load_steps=9 format=3]
 
 [ext_resource type="PackedScene" path="res://Player.tscn" id="1_player"]
 [ext_resource type="PackedScene" path="res://Seed.tscn" id="2_seed"]
 [ext_resource type="Script" path="res://map_point.gd" id="3_map_point"]
 [ext_resource type="PackedScene" path="res://WindZone.tscn" id="4_wind_zone"]
+[ext_resource type="PackedScene" path="res://RockCover.tscn" id="5_rock_cover"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
 size = Vector2(2200, 80)
@@ -80,6 +81,9 @@ color = Color(0.32, 0.58, 0.72, 0.9)
 
 [node name="WindZone" parent="." instance=ExtResource("4_wind_zone")]
 position = Vector2(1250, 470)
+
+[node name="RockCover" parent="." instance=ExtResource("5_rock_cover")]
+position = Vector2(1320, 520)
 
 [node name="MobileControls" type="CanvasLayer" parent="."]
 layer = 10

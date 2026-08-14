@@ -6,6 +6,7 @@ extends Area2D
 var player: CharacterBody2D
 var player_in_zone := false
 var wind_velocity := Vector2.ZERO
+var wind_multiplier := 1.0
 
 
 func _ready() -> void:
@@ -16,7 +17,11 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	if player_in_zone and player != null and player.is_physics_processing():
-		player.add_external_force(wind_velocity)
+		player.add_external_force(wind_velocity * wind_multiplier)
+
+
+func set_wind_multiplier(multiplier: float) -> void:
+	wind_multiplier = clampf(multiplier, 0.0, 1.0)
 
 
 func _on_body_entered(body: Node2D) -> void:
