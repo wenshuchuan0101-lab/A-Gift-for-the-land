@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=5 format=3]
 
 [ext_resource type="PackedScene" path="res://Player.tscn" id="1_player"]
+[ext_resource type="PackedScene" path="res://Seed.tscn" id="2_seed"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
 size = Vector2(2200, 80)
@@ -41,6 +42,11 @@ color = Color(0.64, 0.48, 0.28, 1)
 position = Vector2(576, 300)
 
 [node name="Player" parent="PlayerSpawn" instance=ExtResource("1_player")]
+
+[node name="Seed" parent="." instance=ExtResource("2_seed")]
+player_path = NodePath("../PlayerSpawn/Player")
+follow_offset = Vector2(60, -50)
+follow_speed = 5.0
 
 [node name="MobileControls" type="CanvasLayer" parent="."]
 layer = 10

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://seed.gd" id="1_seed"]
+
+[node name="Seed" type="Node2D"]
+script = ExtResource("1_seed")
+
+[node name="Visual" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(8, 0, 7.391, 3.061, 5.657, 5.657, 3.061, 7.391, 0, 8, -3.061, 7.391, -5.657, 5.657, -7.391, 3.061, -8, 0, -7.391, -3.061, -5.657, -5.657, -3.061, -7.391, 0, -8, 3.061, -7.391, 5.657, -5.657, 7.391, -3.061)
+color = Color(0.96, 0.82, 0.24, 1)
