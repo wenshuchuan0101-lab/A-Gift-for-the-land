@@ -1,13 +1,17 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="PackedScene" path="res://Player.tscn" id="1_player"]
 [ext_resource type="PackedScene" path="res://Seed.tscn" id="2_seed"]
+[ext_resource type="Script" path="res://map_point.gd" id="3_map_point"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
 size = Vector2(2200, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mobile_button"]
 size = Vector2(88, 88)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_map_point"]
+radius = 120.0
 
 [node name="Demo_Level" type="Control"]
 layout_mode = 3
@@ -56,6 +60,22 @@ target_path = NodePath("../SeedTarget")
 follow_offset = Vector2(60, -50)
 follow_speed = 5.0
 guide_distance = 70.0
+
+[node name="MapPoint" type="Area2D" parent="."]
+position = Vector2(900, 525)
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+script = ExtResource("3_map_point")
+player_path = NodePath("../PlayerSpawn/Player")
+map_panel_path = NodePath("../MapUI/MapPanel")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MapPoint"]
+shape = SubResource("CircleShape2D_map_point")
+
+[node name="Visual" type="Polygon2D" parent="MapPoint"]
+polygon = PackedVector2Array(0, -14, 14, 0, 0, 14, -14, 0)
+color = Color(0.32, 0.58, 0.72, 0.9)
 
 [node name="MobileControls" type="CanvasLayer" parent="."]
 layer = 10
@@ -153,5 +173,98 @@ mouse_filter = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 36
 text = "↑"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InteractControl" type="Control" parent="MobileControls"]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -120.0
+offset_top = -240.0
+offset_right = -24.0
+offset_bottom = -144.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="InteractButton" type="TouchScreenButton" parent="MobileControls/InteractControl"]
+position = Vector2(48, 52)
+shape = SubResource("RectangleShape2D_mobile_button")
+action = "interact"
+passby_press = true
+visibility_mode = 0
+
+[node name="Background" type="Polygon2D" parent="MobileControls/InteractControl/InteractButton"]
+polygon = PackedVector2Array(-44, -44, 44, -44, 44, 44, -44, 44)
+color = Color(0.28, 0.34, 0.42, 0.78)
+
+[node name="Label" type="Label" parent="MobileControls/InteractControl/InteractButton"]
+offset_left = -44.0
+offset_top = -44.0
+offset_right = 44.0
+offset_bottom = 44.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 36
+text = "E"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MapUI" type="CanvasLayer" parent="."]
+layer = 20
+
+[node name="MapPanel" type="Control" parent="MapUI"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+visible = false
+
+[node name="Background" type="ColorRect" parent="MapUI/MapPanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.015, 0.025, 0.04, 0.92)
+
+[node name="MapContent" type="Control" parent="MapUI/MapPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -360.0
+offset_top = -220.0
+offset_right = 360.0
+offset_bottom = 220.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="RouteVisual" type="Polygon2D" parent="MapUI/MapPanel/MapContent"]
+polygon = PackedVector2Array(-270, 70, -170, 20, -70, 55, 40, -10, 160, 25, 270, -75)
+color = Color(0.86, 0.68, 0.32, 1)
+
+[node name="Text" type="Label" parent="MapUI/MapPanel/MapContent"]
+layout_mode = 0
+offset_left = -320.0
+offset_top = 120.0
+offset_right = 320.0
+offset_bottom = 200.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 32
+text = "穿过风口，便是乐园。"
 horizontal_alignment = 1
 vertical_alignment = 1
