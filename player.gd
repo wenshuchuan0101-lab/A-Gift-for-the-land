@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var jump_velocity: float = -420.0
 
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
+var external_force := Vector2.ZERO
 
 
 func _physics_process(delta: float) -> void:
@@ -16,4 +17,10 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
+	velocity += external_force
 	move_and_slide()
+	external_force = Vector2.ZERO
+
+
+func add_external_force(force: Vector2) -> void:
+	external_force += force
