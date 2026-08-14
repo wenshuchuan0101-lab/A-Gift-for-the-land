@@ -1,0 +1,121 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="Script" path="res://abandoned_house.gd" id="1_house"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_roof"]
+size = Vector2(520, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_right_wall"]
+size = Vector2(24, 240)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_left_upper_wall"]
+size = Vector2(24, 100)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_inner_area"]
+size = Vector2(480, 210)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_item_area"]
+size = Vector2(80, 100)
+
+[node name="AbandonedHouse" type="Node2D"]
+script = ExtResource("1_house")
+wind_zone_path = NodePath("../WindZone")
+prompt_label_path = NodePath("../HousePromptUI/PromptLabel")
+indoor_wind_multiplier = 0.0
+
+[node name="OuterWalls" type="Node2D" parent="."]
+
+[node name="Backdrop" type="Polygon2D" parent="OuterWalls"]
+z_index = -2
+polygon = PackedVector2Array(-260, -228, 260, -228, 260, 0, -260, 0)
+color = Color(0.14, 0.17, 0.18, 0.96)
+
+[node name="Roof" type="StaticBody2D" parent="OuterWalls"]
+position = Vector2(0, -240)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OuterWalls/Roof"]
+shape = SubResource("RectangleShape2D_roof")
+
+[node name="Visual" type="Polygon2D" parent="OuterWalls/Roof"]
+polygon = PackedVector2Array(-260, -12, 260, -12, 260, 12, -260, 12)
+color = Color(0.43, 0.45, 0.43, 1)
+
+[node name="LeftUpperWall" type="StaticBody2D" parent="OuterWalls"]
+position = Vector2(-248, -190)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OuterWalls/LeftUpperWall"]
+shape = SubResource("RectangleShape2D_left_upper_wall")
+
+[node name="Visual" type="Polygon2D" parent="OuterWalls/LeftUpperWall"]
+polygon = PackedVector2Array(-12, -50, 12, -50, 12, 50, -12, 50)
+color = Color(0.43, 0.45, 0.43, 1)
+
+[node name="RightWall" type="StaticBody2D" parent="OuterWalls"]
+position = Vector2(248, -120)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OuterWalls/RightWall"]
+shape = SubResource("RectangleShape2D_right_wall")
+
+[node name="Visual" type="Polygon2D" parent="OuterWalls/RightWall"]
+polygon = PackedVector2Array(-12, -120, 12, -120, 12, 120, -12, 120)
+color = Color(0.43, 0.45, 0.43, 1)
+
+[node name="InnerArea" type="Node2D" parent="."]
+
+[node name="FloorVisual" type="Polygon2D" parent="InnerArea"]
+z_index = -1
+polygon = PackedVector2Array(-260, -8, 260, -8, 260, 0, -260, 0)
+color = Color(0.52, 0.47, 0.36, 1)
+
+[node name="DoorTrigger" type="Area2D" parent="."]
+position = Vector2(0, -105)
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorTrigger"]
+shape = SubResource("RectangleShape2D_inner_area")
+
+[node name="DoorVisual" type="Polygon2D" parent="DoorTrigger"]
+z_index = -1
+polygon = PackedVector2Array(-240, -105, -220, -105, -220, 105, -240, 105)
+color = Color(0.66, 0.7, 0.62, 0.45)
+
+[node name="MapItem" type="Area2D" parent="."]
+position = Vector2(-110, -55)
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MapItem"]
+shape = SubResource("RectangleShape2D_item_area")
+
+[node name="Visual" type="Polygon2D" parent="MapItem"]
+polygon = PackedVector2Array(-22, -16, 22, -16, 22, 16, -22, 16)
+color = Color(0.38, 0.64, 0.72, 1)
+
+[node name="CloakItem" type="Area2D" parent="."]
+position = Vector2(40, -55)
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CloakItem"]
+shape = SubResource("RectangleShape2D_item_area")
+
+[node name="Visual" type="Polygon2D" parent="CloakItem"]
+polygon = PackedVector2Array(0, -24, 22, 22, -22, 22)
+color = Color(0.48, 0.62, 0.48, 1)
+
+[node name="SpearItem" type="Area2D" parent="."]
+position = Vector2(180, -55)
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpearItem"]
+shape = SubResource("RectangleShape2D_item_area")
+
+[node name="Visual" type="Polygon2D" parent="SpearItem"]
+polygon = PackedVector2Array(-4, -32, 4, -32, 4, 32, -4, 32)
+color = Color(0.72, 0.62, 0.42, 1)

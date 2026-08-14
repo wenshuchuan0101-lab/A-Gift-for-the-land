@@ -1,13 +1,14 @@
-[gd_scene load_steps=9 format=3]
+[gd_scene load_steps=10 format=3]
 
 [ext_resource type="PackedScene" path="res://Player.tscn" id="1_player"]
 [ext_resource type="PackedScene" path="res://Seed.tscn" id="2_seed"]
 [ext_resource type="Script" path="res://map_point.gd" id="3_map_point"]
 [ext_resource type="PackedScene" path="res://WindZone.tscn" id="4_wind_zone"]
 [ext_resource type="PackedScene" path="res://RockCover.tscn" id="5_rock_cover"]
+[ext_resource type="PackedScene" path="res://AbandonedHouse.tscn" id="6_abandoned_house"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
-size = Vector2(2200, 80)
+size = Vector2(3400, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mobile_button"]
 size = Vector2(88, 88)
@@ -41,7 +42,7 @@ position = Vector2(576, 600)
 shape = SubResource("RectangleShape2D_ground")
 
 [node name="GroundVisual" type="Polygon2D" parent="Ground"]
-polygon = PackedVector2Array(-1100, -40, 1100, -40, 1100, 40, -1100, 40)
+polygon = PackedVector2Array(-1700, -40, 1700, -40, 1700, 40, -1700, 40)
 color = Color(0.64, 0.48, 0.28, 1)
 
 [node name="PlayerSpawn" type="Marker2D" parent="."]
@@ -84,6 +85,9 @@ position = Vector2(1250, 470)
 
 [node name="RockCover" parent="." instance=ExtResource("5_rock_cover")]
 position = Vector2(1320, 520)
+
+[node name="AbandonedHouse" parent="." instance=ExtResource("6_abandoned_house")]
+position = Vector2(1700, 560)
 
 [node name="MobileControls" type="CanvasLayer" parent="."]
 layer = 10
@@ -219,6 +223,27 @@ mouse_filter = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 36
 text = "E"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HousePromptUI" type="CanvasLayer" parent="."]
+layer = 15
+
+[node name="PromptLabel" type="Label" parent="HousePromptUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 160.0
+offset_top = 40.0
+offset_right = -160.0
+offset_bottom = 96.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0.03, 0.04, 0.05, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 32
 horizontal_alignment = 1
 vertical_alignment = 1
 
