@@ -14,3 +14,14 @@ shape = SubResource("RectangleShape2D_player")
 [node name="Visual" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(-20, -35, 20, -35, 20, 35, -20, 35)
 color = Color(0.78, 0.8, 0.86, 1)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(115.2, 0)
+enabled = true
+position_smoothing_enabled = false
+drag_horizontal_enabled = false
+drag_vertical_enabled = true
+drag_vertical_offset = 0.0
+drag_top_margin = 1.0
+drag_bottom_margin = 1.0
+ignore_rotation = true
