@@ -4,6 +4,8 @@
 
 [node name="Seed" type="Node2D"]
 script = ExtResource("1_seed")
+max_energy = 100.0
+energy = 100.0
 
 [node name="Visual" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(8, 0, 7.391, 3.061, 5.657, 5.657, 3.061, 7.391, 0, 8, -3.061, 7.391, -5.657, 5.657, -7.391, 3.061, -8, 0, -7.391, -3.061, -5.657, -5.657, -3.061, -7.391, 0, -8, 3.061, -7.391, 5.657, -5.657, 7.391, -3.061)
