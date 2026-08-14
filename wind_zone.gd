@@ -17,7 +17,10 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	if player_in_zone and player != null and player.is_physics_processing():
-		player.add_external_force(wind_velocity * wind_multiplier)
+		var player_wind_multiplier := 1.0
+		if player.has_method("get_wind_resistance"):
+			player_wind_multiplier = clampf(float(player.call("get_wind_resistance")), 0.0, 1.0)
+		player.add_external_force(wind_velocity * wind_multiplier * player_wind_multiplier)
 
 
 func set_wind_multiplier(multiplier: float) -> void:
