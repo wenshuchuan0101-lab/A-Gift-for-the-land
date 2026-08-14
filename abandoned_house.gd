@@ -33,8 +33,13 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	if active_item != null and prompt_label != null and Input.is_action_just_pressed("interact"):
-		prompt_label.text = ITEM_PROMPTS[String(active_item.name)]
+		var item := active_item
+		prompt_label.text = ITEM_PROMPTS[String(item.name)]
 		prompt_label.visible = true
+		if item.has_method("pickup"):
+			item.pickup()
+			active_item = null
+			set_process(false)
 
 
 func _on_door_trigger_body_entered(body: Node2D) -> void:
@@ -47,10 +52,15 @@ func _on_door_trigger_body_exited(body: Node2D) -> void:
 	if body == house_player:
 		house_player = null
 		_set_wind_multiplier(1.0)
+		_hide_prompt()
 
 
 func _on_item_body_entered(body: Node2D, item: Area2D) -> void:
 	if body is CharacterBody2D:
+		if item.has_signal("picked_up") and body.has_method("receive_item"):
+			var receiver := Callable(body, "receive_item")
+			if not item.is_connected("picked_up", receiver):
+				item.connect("picked_up", receiver)
 		active_item = item
 		_hide_prompt()
 		set_process(true)

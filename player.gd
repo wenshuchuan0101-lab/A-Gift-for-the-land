@@ -5,6 +5,8 @@ extends CharacterBody2D
 
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var external_force := Vector2.ZERO
+var has_cloak := false
+var has_spear := false
 
 
 func _physics_process(delta: float) -> void:
@@ -24,3 +26,11 @@ func _physics_process(delta: float) -> void:
 
 func add_external_force(force: Vector2) -> void:
 	external_force += force
+
+
+func receive_item(item_type: StringName) -> void:
+	match item_type:
+		&"cloak":
+			has_cloak = true
+		&"spear":
+			has_spear = true

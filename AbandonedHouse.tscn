@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3]
+[gd_scene load_steps=8 format=3]
 
 [ext_resource type="Script" path="res://abandoned_house.gd" id="1_house"]
+[ext_resource type="Script" path="res://pickup_item.gd" id="2_pickup_item"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_roof"]
 size = Vector2(520, 24)
@@ -99,6 +100,8 @@ position = Vector2(40, -55)
 collision_layer = 0
 collision_mask = 1
 monitoring = true
+script = ExtResource("2_pickup_item")
+item_type = &"cloak"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CloakItem"]
 shape = SubResource("RectangleShape2D_item_area")
@@ -112,6 +115,8 @@ position = Vector2(180, -55)
 collision_layer = 0
 collision_mask = 1
 monitoring = true
+script = ExtResource("2_pickup_item")
+item_type = &"spear"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpearItem"]
 shape = SubResource("RectangleShape2D_item_area")
