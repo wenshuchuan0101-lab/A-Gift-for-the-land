@@ -102,3 +102,41 @@ theme_override_font_sizes/font_size = 36
 text = "→"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="JumpControl" type="Control" parent="MobileControls"]
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -120.0
+offset_top = -128.0
+offset_right = -24.0
+offset_bottom = -24.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="JumpButton" type="TouchScreenButton" parent="MobileControls/JumpControl"]
+position = Vector2(48, 52)
+shape = SubResource("RectangleShape2D_mobile_button")
+action = "jump"
+passby_press = true
+visibility_mode = 0
+
+[node name="Background" type="Polygon2D" parent="MobileControls/JumpControl/JumpButton"]
+polygon = PackedVector2Array(-44, -44, 44, -44, 44, 44, -44, 44)
+color = Color(0.2, 0.3, 0.2, 0.72)
+
+[node name="Arrow" type="Label" parent="MobileControls/JumpControl/JumpButton"]
+offset_left = -44.0
+offset_top = -44.0
+offset_right = 44.0
+offset_bottom = 44.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 36
+text = "↑"
+horizontal_alignment = 1
+vertical_alignment = 1
