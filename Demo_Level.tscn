@@ -188,6 +188,7 @@ grass_monster_speed = 120.0
 [node name="AncientTreeArea" parent="." instance=ExtResource("14_ancient_tree_area")]
 position = Vector2(6400, 560)
 player_path = NodePath("../PlayerSpawn/Player")
+seed_path = NodePath("../Seed")
 chase_controller_path = NodePath("../ChaseRoute/ChaseController")
 wind_zone_path = NodePath("../ChaseRoute/WindZone")
 
