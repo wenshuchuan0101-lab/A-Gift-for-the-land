@@ -54,10 +54,18 @@ func _on_start_trigger_body_entered(body: Node2D) -> void:
 
 
 func _on_end_trigger_body_entered(body: Node2D) -> void:
-	if body != player or chase_state != ChaseState.CHASE:
+	if body != player:
+		return
+
+	stop_chase()
+
+
+func stop_chase() -> void:
+	if chase_state != ChaseState.CHASE:
 		return
 
 	chase_state = ChaseState.COMPLETE
+	player_in_grass = false
 	_set_monster_speed(normal_monster_speed)
 	if monster != null and monster.has_method("stop_chase"):
 		monster.stop_chase()

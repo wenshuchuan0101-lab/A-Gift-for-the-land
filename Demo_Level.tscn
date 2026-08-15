@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3]
+[gd_scene load_steps=20 format=3]
 
 [ext_resource type="PackedScene" path="res://Player.tscn" id="1_player"]
 [ext_resource type="PackedScene" path="res://Seed.tscn" id="2_seed"]
@@ -13,9 +13,10 @@
 [ext_resource type="PackedScene" path="res://Checkpoint.tscn" id="11_checkpoint"]
 [ext_resource type="PackedScene" path="res://SandMonster.tscn" id="12_sand_monster"]
 [ext_resource type="Script" path="res://chase_controller.gd" id="13_chase_controller"]
+[ext_resource type="PackedScene" path="res://AncientTreeArea.tscn" id="14_ancient_tree_area"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
-size = Vector2(13000, 80)
+size = Vector2(15000, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mobile_button"]
 size = Vector2(88, 88)
@@ -58,7 +59,7 @@ position = Vector2(576, 600)
 shape = SubResource("RectangleShape2D_ground")
 
 [node name="GroundVisual" type="Polygon2D" parent="Ground"]
-polygon = PackedVector2Array(-6500, -40, 6500, -40, 6500, 40, -6500, 40)
+polygon = PackedVector2Array(-7500, -40, 7500, -40, 7500, 40, -7500, 40)
 color = Color(0.64, 0.48, 0.28, 1)
 
 [node name="PlayerSpawn" type="Marker2D" parent="."]
@@ -67,7 +68,7 @@ position = Vector2(576, 300)
 [node name="Player" parent="PlayerSpawn" instance=ExtResource("1_player")]
 
 [node name="SeedTarget" type="Marker2D" parent="."]
-position = Vector2(6100, 525)
+position = Vector2(6400, 495)
 
 [node name="Visual" type="Polygon2D" parent="SeedTarget"]
 polygon = PackedVector2Array(0, -10, 10, 0, 0, 10, -10, 0)
@@ -174,24 +175,21 @@ position = Vector2(5000, 470)
 [node name="RockCover" parent="ChaseRoute" instance=ExtResource("5_rock_cover")]
 position = Vector2(5500, 520)
 
-[node name="ChaseEndTrigger" type="Area2D" parent="ChaseRoute"]
-position = Vector2(5900, 470)
-collision_layer = 0
-collision_mask = 1
-monitoring = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseRoute/ChaseEndTrigger"]
-shape = SubResource("RectangleShape2D_stage_trigger")
-
 [node name="ChaseController" type="Node" parent="ChaseRoute"]
 script = ExtResource("13_chase_controller")
 player_path = NodePath("../../PlayerSpawn/Player")
 monster_path = NodePath("../MonsterSpawn/SandMonster")
 start_trigger_path = NodePath("../ChaseStartTrigger")
-end_trigger_path = NodePath("../ChaseEndTrigger")
+end_trigger_path = NodePath("../../AncientTreeArea/TreeTrigger")
 grass_slow_zone_path = NodePath("../../GrassArea/GrassChaseSlowZone")
 normal_monster_speed = 180.0
 grass_monster_speed = 120.0
+
+[node name="AncientTreeArea" parent="." instance=ExtResource("14_ancient_tree_area")]
+position = Vector2(6400, 560)
+player_path = NodePath("../PlayerSpawn/Player")
+chase_controller_path = NodePath("../ChaseRoute/ChaseController")
+wind_zone_path = NodePath("../ChaseRoute/WindZone")
 
 [node name="StageTriggers" type="Node2D" parent="."]
 

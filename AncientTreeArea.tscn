@@ -1,0 +1,52 @@
+[gd_scene load_steps=4 format=3]
+
+[ext_resource type="Script" path="res://ancient_tree_area.gd" id="1_ancient_tree_area"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_safe_zone"]
+size = Vector2(1000, 260)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tree_trigger"]
+size = Vector2(80, 260)
+
+[node name="AncientTreeArea" type="Node2D"]
+script = ExtResource("1_ancient_tree_area")
+
+[node name="TreeRootVisual" type="Polygon2D" parent="."]
+z_index = -1
+polygon = PackedVector2Array(-170, -340, 170, -340, 145, -80, 260, 0, 85, 0, 60, -220, -60, -220, -85, 0, -260, 0, -145, -80)
+color = Color(0.3, 0.34, 0.31, 1)
+
+[node name="InnerBand" type="Polygon2D" parent="TreeRootVisual"]
+polygon = PackedVector2Array(-132, -310, 132, -310, 118, -250, -118, -250)
+color = Color(0.46, 0.5, 0.4, 1)
+
+[node name="SeedPlacePoint" type="Marker2D" parent="."]
+position = Vector2(0, -65)
+
+[node name="SlotVisual" type="Polygon2D" parent="SeedPlacePoint"]
+z_index = 1
+polygon = PackedVector2Array(-26, 18, -18, -18, 18, -18, 26, 18, 13, 18, 9, -5, -9, -5, -13, 18)
+color = Color(0.82, 0.72, 0.36, 1)
+
+[node name="SafeZone" type="Area2D" parent="."]
+position = Vector2(100, -90)
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SafeZone"]
+shape = SubResource("RectangleShape2D_safe_zone")
+
+[node name="Visual" type="Polygon2D" parent="SafeZone"]
+z_index = -2
+polygon = PackedVector2Array(-500, -130, 500, -130, 500, 130, -500, 130)
+color = Color(0.18, 0.42, 0.32, 0.14)
+
+[node name="TreeTrigger" type="Area2D" parent="."]
+position = Vector2(-360, -90)
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TreeTrigger"]
+shape = SubResource("RectangleShape2D_tree_trigger")
