@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://wind_zone.gd" id="1_wind_zone"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wind_zone"]
-size = Vector2(400, 220)
+size = Vector2(800, 220)
 
 [node name="WindZone" type="Area2D"]
 collision_layer = 0
@@ -17,17 +17,17 @@ wind_force = 120.0
 shape = SubResource("RectangleShape2D_wind_zone")
 
 [node name="Visual" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(-200, -110, 200, -110, 200, 110, -200, 110)
+polygon = PackedVector2Array(-400, -110, 400, -110, 400, 110, -400, 110)
 color = Color(0.28, 0.55, 0.68, 0.18)
 
 [node name="DirectionLabel" type="Label" parent="."]
-offset_left = -180.0
+offset_left = -360.0
 offset_top = -30.0
-offset_right = 180.0
+offset_right = 360.0
 offset_bottom = 30.0
 mouse_filter = 2
 theme_override_colors/font_color = Color(0.78, 0.92, 1, 0.92)
 theme_override_font_sizes/font_size = 32
-text = "<<<<    <<<<"
+text = "<<<<        <<<<        <<<<"
 horizontal_alignment = 1
 vertical_alignment = 1

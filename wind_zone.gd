@@ -2,8 +2,8 @@ extends Area2D
 
 const NORMAL_ZONE_COLOR := Color(0.28, 0.55, 0.68, 0.18)
 const REDUCED_ZONE_COLOR := Color(0.24, 0.5, 0.34, 0.14)
-const NORMAL_DIRECTION_TEXT := "<<<<    <<<<"
-const REDUCED_DIRECTION_TEXT := "<<      <<"
+const NORMAL_DIRECTION_TEXT := "<<<<        <<<<        <<<<"
+const REDUCED_DIRECTION_TEXT := "<<          <<          <<"
 
 @export var wind_direction: Vector2 = Vector2.LEFT
 @export var wind_force: float = 120.0

@@ -12,7 +12,7 @@
 [ext_resource type="Script" path="res://level_flow_controller.gd" id="10_level_flow"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
-size = Vector2(4400, 80)
+size = Vector2(11000, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mobile_button"]
 size = Vector2(88, 88)
@@ -52,7 +52,7 @@ position = Vector2(576, 600)
 shape = SubResource("RectangleShape2D_ground")
 
 [node name="GroundVisual" type="Polygon2D" parent="Ground"]
-polygon = PackedVector2Array(-2200, -40, 2200, -40, 2200, 40, -2200, 40)
+polygon = PackedVector2Array(-5500, -40, 5500, -40, 5500, 40, -5500, 40)
 color = Color(0.64, 0.48, 0.28, 1)
 
 [node name="PlayerSpawn" type="Marker2D" parent="."]
@@ -61,7 +61,7 @@ position = Vector2(576, 300)
 [node name="Player" parent="PlayerSpawn" instance=ExtResource("1_player")]
 
 [node name="SeedTarget" type="Marker2D" parent="."]
-position = Vector2(2420, 525)
+position = Vector2(5350, 525)
 
 [node name="Visual" type="Polygon2D" parent="SeedTarget"]
 polygon = PackedVector2Array(0, -10, 10, 0, 0, 10, -10, 0)
@@ -82,22 +82,22 @@ script = ExtResource("9_grass_grid_manager")
 wind_zone_path = NodePath("../../WindZone")
 
 [node name="GrassGrid01" parent="GrassArea" instance=ExtResource("7_grass_grid")]
-position = Vector2(2070, 548)
+position = Vector2(5000, 548)
 seed_path = NodePath("../../Seed")
 energy_reward = 20.0
 
 [node name="GrassGrid02" parent="GrassArea" instance=ExtResource("7_grass_grid")]
-position = Vector2(2220, 548)
+position = Vector2(5150, 548)
 seed_path = NodePath("../../Seed")
 energy_reward = 20.0
 
 [node name="GrassGrid03" parent="GrassArea" instance=ExtResource("7_grass_grid")]
-position = Vector2(2370, 548)
+position = Vector2(5300, 548)
 seed_path = NodePath("../../Seed")
 energy_reward = 20.0
 
 [node name="MapPoint" type="Area2D" parent="."]
-position = Vector2(900, 525)
+position = Vector2(2750, 525)
 collision_layer = 0
 collision_mask = 1
 monitoring = true
@@ -113,24 +113,24 @@ polygon = PackedVector2Array(0, -14, 14, 0, 0, 14, -14, 0)
 color = Color(0.32, 0.58, 0.72, 0.9)
 
 [node name="TotemMemory" parent="." instance=ExtResource("8_totem_memory")]
-position = Vector2(1120, 560)
+position = Vector2(2500, 560)
 player_path = NodePath("../PlayerSpawn/Player")
 mobile_controls_path = NodePath("../MobileControls")
 memory_duration = 4.0
 
 [node name="WindZone" parent="." instance=ExtResource("4_wind_zone")]
-position = Vector2(1250, 470)
+position = Vector2(1700, 470)
 
 [node name="RockCover" parent="." instance=ExtResource("5_rock_cover")]
-position = Vector2(1320, 520)
+position = Vector2(2000, 520)
 
 [node name="AbandonedHouse" parent="." instance=ExtResource("6_abandoned_house")]
-position = Vector2(1700, 560)
+position = Vector2(3400, 560)
 
 [node name="StageTriggers" type="Node2D" parent="."]
 
 [node name="WindStageTrigger" type="Area2D" parent="StageTriggers"]
-position = Vector2(1050, 470)
+position = Vector2(1340, 470)
 collision_layer = 0
 collision_mask = 1
 monitoring = true
@@ -138,31 +138,41 @@ monitoring = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StageTriggers/WindStageTrigger"]
 shape = SubResource("RectangleShape2D_stage_trigger")
 
-[node name="HouseStageTrigger" type="Area2D" parent="StageTriggers"]
-position = Vector2(1480, 470)
+[node name="ShelterStageTrigger" type="Area2D" parent="StageTriggers"]
+position = Vector2(1910, 470)
 collision_layer = 0
 collision_mask = 1
 monitoring = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StageTriggers/HouseStageTrigger"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StageTriggers/ShelterStageTrigger"]
 shape = SubResource("RectangleShape2D_stage_trigger")
 
-[node name="GrassStageTrigger" type="Area2D" parent="StageTriggers"]
-position = Vector2(2040, 470)
+[node name="ToolsStageTrigger" type="Area2D" parent="StageTriggers"]
+position = Vector2(3200, 470)
 collision_layer = 0
 collision_mask = 1
 monitoring = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StageTriggers/GrassStageTrigger"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StageTriggers/ToolsStageTrigger"]
+shape = SubResource("RectangleShape2D_stage_trigger")
+
+[node name="RepairStageTrigger" type="Area2D" parent="StageTriggers"]
+position = Vector2(4110, 470)
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StageTriggers/RepairStageTrigger"]
 shape = SubResource("RectangleShape2D_stage_trigger")
 
 [node name="LevelFlowController" type="Node" parent="."]
 script = ExtResource("10_level_flow")
 wind_trigger_path = NodePath("../StageTriggers/WindStageTrigger")
-house_trigger_path = NodePath("../StageTriggers/HouseStageTrigger")
-grass_trigger_path = NodePath("../StageTriggers/GrassStageTrigger")
-prompt_label_path = NodePath("../StagePromptUI/PromptLabel")
-prompt_duration = 2.5
+shelter_trigger_path = NodePath("../StageTriggers/ShelterStageTrigger")
+tools_trigger_path = NodePath("../StageTriggers/ToolsStageTrigger")
+repair_trigger_path = NodePath("../StageTriggers/RepairStageTrigger")
+tutorial_text_path = NodePath("../TutorialUI/TutorialText")
+prompt_duration = 3.0
 
 [node name="PromptTimer" type="Timer" parent="LevelFlowController"]
 one_shot = true
@@ -393,18 +403,18 @@ theme_override_font_sizes/font_size = 32
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="StagePromptUI" type="CanvasLayer" parent="."]
+[node name="TutorialUI" type="CanvasLayer" parent="."]
 layer = 14
 
-[node name="PromptLabel" type="Label" parent="StagePromptUI"]
+[node name="TutorialText" type="Label" parent="TutorialUI"]
 visible = false
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_left = 160.0
-offset_top = 112.0
+offset_top = 96.0
 offset_right = -160.0
-offset_bottom = 168.0
+offset_bottom = 200.0
 grow_horizontal = 2
 mouse_filter = 2
 theme_override_colors/font_color = Color(0.94, 0.96, 0.92, 1)
@@ -413,6 +423,7 @@ theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 30
 horizontal_alignment = 1
 vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="LetterUI" type="CanvasLayer" parent="."]
 layer = 25
