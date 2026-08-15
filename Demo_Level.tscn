@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3]
+[gd_scene load_steps=18 format=3]
 
 [ext_resource type="PackedScene" path="res://Player.tscn" id="1_player"]
 [ext_resource type="PackedScene" path="res://Seed.tscn" id="2_seed"]
@@ -11,6 +11,8 @@
 [ext_resource type="Script" path="res://grass_grid_manager.gd" id="9_grass_grid_manager"]
 [ext_resource type="Script" path="res://level_flow_controller.gd" id="10_level_flow"]
 [ext_resource type="PackedScene" path="res://Checkpoint.tscn" id="11_checkpoint"]
+[ext_resource type="PackedScene" path="res://SandMonster.tscn" id="12_sand_monster"]
+[ext_resource type="Script" path="res://sand_monster_trigger.gd" id="13_sand_monster_trigger"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
 size = Vector2(11000, 80)
@@ -135,6 +137,24 @@ position = Vector2(3000, 525)
 
 [node name="Checkpoint02" parent="Checkpoints" instance=ExtResource("11_checkpoint")]
 position = Vector2(4700, 525)
+
+[node name="MonsterSpawn" type="Marker2D" parent="."]
+position = Vector2(4200, 525)
+
+[node name="SandMonster" parent="MonsterSpawn" instance=ExtResource("12_sand_monster")]
+player_path = NodePath("../../PlayerSpawn/Player")
+chase_speed = 170.0
+
+[node name="MonsterChaseTrigger" type="Area2D" parent="."]
+position = Vector2(4800, 470)
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+script = ExtResource("13_sand_monster_trigger")
+monster_path = NodePath("../MonsterSpawn/SandMonster")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MonsterChaseTrigger"]
+shape = SubResource("RectangleShape2D_stage_trigger")
 
 [node name="StageTriggers" type="Node2D" parent="."]
 

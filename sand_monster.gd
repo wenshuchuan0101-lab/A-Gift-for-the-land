@@ -1,0 +1,59 @@
+extends CharacterBody2D
+
+@export var player_path: NodePath
+@export_range(1.0, 1000.0, 1.0) var chase_speed: float = 170.0
+
+@onready var collision_shape: CollisionShape2D = $CollisionShape2D
+
+var player: CharacterBody2D
+var active := false
+var spawn_position := Vector2.ZERO
+
+
+func _ready() -> void:
+	player = get_node_or_null(player_path) as CharacterBody2D
+	spawn_position = global_position
+	visible = false
+	collision_shape.disabled = true
+	set_physics_process(false)
+
+
+func _physics_process(_delta: float) -> void:
+	if not active or not is_instance_valid(player):
+		stop_chase()
+		return
+
+	var direction := global_position.direction_to(player.global_position)
+	velocity = direction * chase_speed
+	move_and_slide()
+
+	for collision_index in range(get_slide_collision_count()):
+		var collision := get_slide_collision(collision_index)
+		if collision.get_collider() == player:
+			_catch_player()
+			return
+
+
+func start_chase() -> void:
+	if active or not is_instance_valid(player):
+		return
+	active = true
+	visible = true
+	collision_shape.set_deferred("disabled", false)
+	set_physics_process(true)
+
+
+func stop_chase() -> void:
+	active = false
+	velocity = Vector2.ZERO
+	collision_shape.set_deferred("disabled", true)
+	set_physics_process(false)
+
+
+func _catch_player() -> void:
+	stop_chase()
+	global_position = spawn_position
+	visible = false
+	reset_physics_interpolation()
+	if player != null and player.has_method("respawn"):
+		player.respawn()
