@@ -32,7 +32,7 @@ radius = 120.0
 size = Vector2(80, 220)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_grass_slow_zone"]
-size = Vector2(600, 220)
+size = Vector2(1200, 220)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_final_danger"]
 size = Vector2(180, 220)
@@ -117,13 +117,17 @@ seed_path = NodePath("../../Seed")
 energy_reward = 20.0
 
 [node name="GrassChaseSlowZone" type="Area2D" parent="GrassArea"]
-position = Vector2(6000, 470)
+position = Vector2(5500, 470)
 collision_layer = 0
 collision_mask = 1
 monitoring = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GrassArea/GrassChaseSlowZone"]
 shape = SubResource("RectangleShape2D_grass_slow_zone")
+
+[node name="GrassRouteVisual" type="Polygon2D" parent="GrassArea/GrassChaseSlowZone"]
+polygon = PackedVector2Array(-600, 78, 600, 78, 600, 110, -600, 110)
+color = Color(0.22, 0.5, 0.25, 0.18)
 
 [node name="MapPoint" type="Area2D" parent="."]
 position = Vector2(2750, 525)
@@ -133,6 +137,7 @@ monitoring = true
 script = ExtResource("3_map_point")
 player_path = NodePath("../PlayerSpawn/Player")
 map_panel_path = NodePath("../MapUI/MapPanel")
+mobile_controls_path = NodePath("../MobileControls")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MapPoint"]
 shape = SubResource("CircleShape2D_map_point")
@@ -220,7 +225,7 @@ monitoring = true
 shape = SubResource("RectangleShape2D_final_danger")
 
 [node name="TreeShadow" parent="EndingSequence" instance=ExtResource("15_tree_shadow")]
-position = Vector2(7800, 560)
+position = Vector2(7720, 560)
 
 [node name="EndingSequenceController" type="Node" parent="EndingSequence"]
 script = ExtResource("16_ending_sequence")
@@ -361,10 +366,10 @@ layout_mode = 3
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 24.0
-offset_top = -128.0
-offset_right = 232.0
-offset_bottom = -24.0
+offset_left = 48.0
+offset_top = -152.0
+offset_right = 256.0
+offset_bottom = -48.0
 grow_vertical = 0
 mouse_filter = 2
 
@@ -421,10 +426,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -120.0
-offset_top = -128.0
-offset_right = -24.0
-offset_bottom = -24.0
+offset_left = -144.0
+offset_top = -152.0
+offset_right = -48.0
+offset_bottom = -48.0
 grow_horizontal = 0
 grow_vertical = 0
 mouse_filter = 2
@@ -459,10 +464,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -232.0
-offset_top = -128.0
-offset_right = -136.0
-offset_bottom = -24.0
+offset_left = -256.0
+offset_top = -152.0
+offset_right = -160.0
+offset_bottom = -48.0
 grow_horizontal = 0
 grow_vertical = 0
 mouse_filter = 2
@@ -497,10 +502,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -232.0
-offset_top = -240.0
-offset_right = -136.0
-offset_bottom = -144.0
+offset_left = -256.0
+offset_top = -264.0
+offset_right = -160.0
+offset_bottom = -168.0
 grow_horizontal = 0
 grow_vertical = 0
 mouse_filter = 2
@@ -527,10 +532,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -120.0
-offset_top = -240.0
-offset_right = -24.0
-offset_bottom = -144.0
+offset_left = -144.0
+offset_top = -264.0
+offset_right = -48.0
+offset_bottom = -168.0
 grow_horizontal = 0
 grow_vertical = 0
 mouse_filter = 2
@@ -588,9 +593,9 @@ layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_left = 160.0
-offset_top = 96.0
+offset_top = 112.0
 offset_right = -160.0
-offset_bottom = 200.0
+offset_bottom = 216.0
 grow_horizontal = 2
 mouse_filter = 2
 theme_override_colors/font_color = Color(0.94, 0.96, 0.92, 1)
@@ -637,7 +642,7 @@ mouse_filter = 2
 theme_override_colors/font_color = Color(0.96, 0.94, 0.86, 1)
 theme_override_colors/font_outline_color = Color(0.02, 0.025, 0.03, 1)
 theme_override_constants/outline_size = 4
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 26
 text = "如果你看到这封信，\n说明风还没有停。\n\n我们曾经以为，\n只要建起足够高的墙，\n就能保护这片土地。\n\n后来我们才明白。\n\n土地需要的不是墙。\n\n而是有人愿意留下来。\n\n沿着风吹来的方向走，\n那里还有乐园留下的痕迹。"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -681,19 +686,58 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="RouteVisual" type="Polygon2D" parent="MapUI/MapPanel/MapContent"]
-polygon = PackedVector2Array(-270, 70, -170, 20, -70, 55, 40, -10, 160, 25, 270, -75)
-color = Color(0.86, 0.68, 0.32, 1)
+[node name="RouteVisual" type="Line2D" parent="MapUI/MapPanel/MapContent"]
+position = Vector2(360, 190)
+points = PackedVector2Array(-270, 70, -170, 20, -70, 55, 40, -10, 160, 25, 270, -75)
+width = 12.0
+default_color = Color(0.86, 0.68, 0.32, 1)
+antialiased = true
 
 [node name="Text" type="Label" parent="MapUI/MapPanel/MapContent"]
 layout_mode = 0
-offset_left = -320.0
-offset_top = 120.0
-offset_right = 320.0
-offset_bottom = 200.0
+offset_left = 40.0
+offset_top = 300.0
+offset_right = 680.0
+offset_bottom = 380.0
 mouse_filter = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_font_sizes/font_size = 32
 text = "穿过风口，便是乐园。"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MapCloseControl" type="Control" parent="MapUI/MapPanel"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -144.0
+offset_top = 48.0
+offset_right = -48.0
+offset_bottom = 152.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="MapCloseButton" type="TouchScreenButton" parent="MapUI/MapPanel/MapCloseControl"]
+position = Vector2(48, 52)
+shape = SubResource("RectangleShape2D_mobile_button")
+action = "interact"
+passby_press = true
+visibility_mode = 0
+
+[node name="Background" type="Polygon2D" parent="MapUI/MapPanel/MapCloseControl/MapCloseButton"]
+polygon = PackedVector2Array(-44, -44, 44, -44, 44, 44, -44, 44)
+color = Color(0.34, 0.38, 0.44, 0.9)
+
+[node name="Label" type="Label" parent="MapUI/MapPanel/MapCloseControl/MapCloseButton"]
+offset_left = -44.0
+offset_top = -44.0
+offset_right = 44.0
+offset_bottom = 44.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 36
+text = "×"
 horizontal_alignment = 1
 vertical_alignment = 1

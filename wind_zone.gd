@@ -23,6 +23,7 @@ func _ready() -> void:
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
 	_update_environment_visual()
+	set_physics_process(false)
 
 
 func _physics_process(_delta: float) -> void:
@@ -48,12 +49,14 @@ func _on_body_entered(body: Node2D) -> void:
 	if body is CharacterBody2D and body.has_method("add_external_force"):
 		player = body
 		player_in_zone = true
+		set_physics_process(true)
 
 
 func _on_body_exited(body: Node2D) -> void:
 	if body == player:
 		player_in_zone = false
 		player = null
+		set_physics_process(false)
 
 
 func _update_environment_visual() -> void:
