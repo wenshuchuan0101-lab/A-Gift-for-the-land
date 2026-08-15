@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+signal item_received(item_type: StringName)
+
 const DEFEND_MOVE_MULTIPLIER := 0.5
 const DEFEND_WIND_MULTIPLIER := 0.3
 const RESPAWN_SETTLE_FRAMES := 2
@@ -106,6 +108,13 @@ func _set_anchored(anchored: bool) -> void:
 func receive_item(item_type: StringName) -> void:
 	match item_type:
 		&"cloak":
+			if has_cloak:
+				return
 			has_cloak = true
 		&"spear":
+			if has_spear:
+				return
 			has_spear = true
+		_:
+			return
+	item_received.emit(item_type)

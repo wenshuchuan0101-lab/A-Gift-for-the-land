@@ -1,5 +1,7 @@
 extends Node
 
+signal repair_count_changed(repaired_count: int, total_count: int)
+
 const WIND_MODIFIERS: Array[float] = [1.0, 0.8, 0.6, 0.4]
 
 @export var wind_zone_path: NodePath
@@ -26,6 +28,7 @@ func _on_grass_repair_completed() -> void:
 		return
 	repaired_count += 1
 	_apply_wind_modifier()
+	repair_count_changed.emit(repaired_count, total_count)
 
 
 func _apply_wind_modifier() -> void:

@@ -1,5 +1,7 @@
 extends Node
 
+signal ending_completed
+
 enum EndingState {
 	WAIT,
 	MONSTER_ATTACK,
@@ -99,6 +101,7 @@ func _on_monster_obstacle_hit(obstacle: Node) -> void:
 		if wind_zone.has_method("set_environment_modifier"):
 			wind_zone.set_environment_modifier(0.0)
 	ending_state = EndingState.END
+	ending_completed.emit()
 
 
 func _show_narrative(text: String) -> void:

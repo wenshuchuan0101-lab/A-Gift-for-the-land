@@ -1,5 +1,7 @@
 extends Area2D
 
+signal memory_completed
+
 @export var player_path: NodePath
 @export var mobile_controls_path: NodePath
 @export_range(3.0, 5.0, 0.5) var memory_duration: float = 4.0
@@ -71,6 +73,7 @@ func _finish_memory() -> void:
 	if mobile_controls != null:
 		mobile_controls.visible = mobile_controls_were_visible
 	set_process(player_in_range)
+	memory_completed.emit()
 
 
 func _set_player_control_enabled(enabled: bool) -> void:

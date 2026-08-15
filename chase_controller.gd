@@ -1,5 +1,8 @@
 extends Node
 
+signal chase_started
+signal chase_completed
+
 enum ChaseState {
 	IDLE,
 	CHASE,
@@ -51,6 +54,7 @@ func _on_start_trigger_body_entered(body: Node2D) -> void:
 	_set_monster_speed(grass_monster_speed if player_in_grass else normal_monster_speed)
 	if monster != null and monster.has_method("start_chase"):
 		monster.start_chase()
+	chase_started.emit()
 
 
 func _on_end_trigger_body_entered(body: Node2D) -> void:
@@ -69,6 +73,7 @@ func stop_chase() -> void:
 	_set_monster_speed(normal_monster_speed)
 	if monster != null and monster.has_method("stop_chase"):
 		monster.stop_chase()
+	chase_completed.emit()
 
 
 func _on_grass_slow_zone_body_entered(body: Node2D) -> void:
