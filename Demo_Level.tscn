@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3]
+[gd_scene load_steps=23 format=3]
 
 [ext_resource type="PackedScene" path="res://Player.tscn" id="1_player"]
 [ext_resource type="PackedScene" path="res://Seed.tscn" id="2_seed"]
@@ -14,6 +14,8 @@
 [ext_resource type="PackedScene" path="res://SandMonster.tscn" id="12_sand_monster"]
 [ext_resource type="Script" path="res://chase_controller.gd" id="13_chase_controller"]
 [ext_resource type="PackedScene" path="res://AncientTreeArea.tscn" id="14_ancient_tree_area"]
+[ext_resource type="PackedScene" path="res://TreeShadow.tscn" id="15_tree_shadow"]
+[ext_resource type="Script" path="res://ending_sequence_controller.gd" id="16_ending_sequence"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
 size = Vector2(15000, 80)
@@ -29,6 +31,9 @@ size = Vector2(80, 220)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_grass_slow_zone"]
 size = Vector2(600, 220)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_final_danger"]
+size = Vector2(180, 220)
 
 [node name="Demo_Level" type="Control"]
 layout_mode = 3
@@ -191,6 +196,58 @@ player_path = NodePath("../PlayerSpawn/Player")
 seed_path = NodePath("../Seed")
 chase_controller_path = NodePath("../ChaseRoute/ChaseController")
 wind_zone_path = NodePath("../ChaseRoute/WindZone")
+
+[node name="EndingSequence" type="Node2D" parent="."]
+
+[node name="FinalMonsterSpawn" type="Marker2D" parent="EndingSequence"]
+position = Vector2(5900, 525)
+
+[node name="DangerTrigger" type="Area2D" parent="EndingSequence"]
+position = Vector2(6070, 470)
+collision_layer = 0
+collision_mask = 2
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EndingSequence/DangerTrigger"]
+shape = SubResource("RectangleShape2D_final_danger")
+
+[node name="TreeShadow" parent="EndingSequence" instance=ExtResource("15_tree_shadow")]
+position = Vector2(6200, 560)
+
+[node name="EndingSequenceController" type="Node" parent="EndingSequence"]
+script = ExtResource("16_ending_sequence")
+seed_path = NodePath("../../Seed")
+monster_path = NodePath("../../ChaseRoute/MonsterSpawn/SandMonster")
+monster_spawn_path = NodePath("../FinalMonsterSpawn")
+danger_trigger_path = NodePath("../DangerTrigger")
+tree_shadow_path = NodePath("../TreeShadow")
+wind_zone_path = NodePath("../../ChaseRoute/WindZone")
+narrative_text_path = NodePath("../EndingUI/NarrativeText")
+
+[node name="AttackDelay" type="Timer" parent="EndingSequence/EndingSequenceController"]
+wait_time = 3.0
+one_shot = true
+
+[node name="EndingUI" type="CanvasLayer" parent="EndingSequence"]
+layer = 35
+
+[node name="NarrativeText" type="Label" parent="EndingSequence/EndingUI"]
+visible = false
+layout_mode = 1
+anchor_left = 0.12
+anchor_top = 0.08
+anchor_right = 0.88
+anchor_bottom = 0.48
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.88, 0.96, 0.9, 1)
+theme_override_colors/font_outline_color = Color(0.02, 0.035, 0.03, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 28
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
 
 [node name="StageTriggers" type="Node2D" parent="."]
 

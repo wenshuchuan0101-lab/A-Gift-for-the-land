@@ -1,6 +1,7 @@
 extends CharacterBody2D
 
 signal player_caught
+signal obstacle_hit(obstacle: Node)
 
 @export var player_path: NodePath
 @export_range(1.0, 1000.0, 1.0) var chase_speed: float = 180.0
@@ -11,6 +12,7 @@ var player: CharacterBody2D
 var active := false
 var spawn_position := Vector2.ZERO
 var current_chase_speed := 180.0
+var last_obstacle: Node
 
 
 func _ready() -> void:
@@ -33,14 +35,19 @@ func _physics_process(_delta: float) -> void:
 
 	for collision_index in range(get_slide_collision_count()):
 		var collision := get_slide_collision(collision_index)
-		if collision.get_collider() == player:
+		var collider := collision.get_collider()
+		if collider == player:
 			_catch_player()
 			return
+		if collider is StaticBody2D and collider != last_obstacle:
+			last_obstacle = collider
+			obstacle_hit.emit(collider)
 
 
 func start_chase() -> void:
 	if active or not is_instance_valid(player):
 		return
+	last_obstacle = null
 	active = true
 	visible = true
 	collision_shape.set_deferred("disabled", false)

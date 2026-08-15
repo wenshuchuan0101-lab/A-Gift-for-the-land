@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://tree_shadow.gd" id="1_tree_shadow"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tree_shadow"]
+size = Vector2(80, 420)
+
+[node name="TreeShadow" type="StaticBody2D"]
+collision_layer = 1
+collision_mask = 1
+script = ExtResource("1_tree_shadow")
+
+[node name="Visual" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-70, -430, 70, -430, 82, -110, 220, 0, 55, 0, 38, -270, -38, -270, -55, 0, -220, 0, -82, -110)
+color = Color(0.52, 0.86, 0.72, 0.42)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -210)
+disabled = true
+shape = SubResource("RectangleShape2D_tree_shadow")
