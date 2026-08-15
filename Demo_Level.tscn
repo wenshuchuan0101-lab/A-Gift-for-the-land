@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3]
+[gd_scene load_steps=15 format=3]
 
 [ext_resource type="PackedScene" path="res://Player.tscn" id="1_player"]
 [ext_resource type="PackedScene" path="res://Seed.tscn" id="2_seed"]
@@ -9,15 +9,19 @@
 [ext_resource type="PackedScene" path="res://GrassGridRepairPoint.tscn" id="7_grass_grid"]
 [ext_resource type="PackedScene" path="res://TotemMemory.tscn" id="8_totem_memory"]
 [ext_resource type="Script" path="res://grass_grid_manager.gd" id="9_grass_grid_manager"]
+[ext_resource type="Script" path="res://level_flow_controller.gd" id="10_level_flow"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
-size = Vector2(3400, 80)
+size = Vector2(4400, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mobile_button"]
 size = Vector2(88, 88)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_map_point"]
 radius = 120.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_stage_trigger"]
+size = Vector2(80, 220)
 
 [node name="Demo_Level" type="Control"]
 layout_mode = 3
@@ -28,7 +32,10 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = -10
+
+[node name="Background" type="ColorRect" parent="BackgroundLayer"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -45,7 +52,7 @@ position = Vector2(576, 600)
 shape = SubResource("RectangleShape2D_ground")
 
 [node name="GroundVisual" type="Polygon2D" parent="Ground"]
-polygon = PackedVector2Array(-1700, -40, 1700, -40, 1700, 40, -1700, 40)
+polygon = PackedVector2Array(-2200, -40, 2200, -40, 2200, 40, -2200, 40)
 color = Color(0.64, 0.48, 0.28, 1)
 
 [node name="PlayerSpawn" type="Marker2D" parent="."]
@@ -54,7 +61,7 @@ position = Vector2(576, 300)
 [node name="Player" parent="PlayerSpawn" instance=ExtResource("1_player")]
 
 [node name="SeedTarget" type="Marker2D" parent="."]
-position = Vector2(1100, 525)
+position = Vector2(2420, 525)
 
 [node name="Visual" type="Polygon2D" parent="SeedTarget"]
 polygon = PackedVector2Array(0, -10, 10, 0, 0, 10, -10, 0)
@@ -75,17 +82,17 @@ script = ExtResource("9_grass_grid_manager")
 wind_zone_path = NodePath("../../WindZone")
 
 [node name="GrassGrid01" parent="GrassArea" instance=ExtResource("7_grass_grid")]
-position = Vector2(350, 548)
+position = Vector2(2070, 548)
 seed_path = NodePath("../../Seed")
 energy_reward = 20.0
 
 [node name="GrassGrid02" parent="GrassArea" instance=ExtResource("7_grass_grid")]
-position = Vector2(500, 548)
+position = Vector2(2220, 548)
 seed_path = NodePath("../../Seed")
 energy_reward = 20.0
 
 [node name="GrassGrid03" parent="GrassArea" instance=ExtResource("7_grass_grid")]
-position = Vector2(670, 548)
+position = Vector2(2370, 548)
 seed_path = NodePath("../../Seed")
 energy_reward = 20.0
 
@@ -119,6 +126,46 @@ position = Vector2(1320, 520)
 
 [node name="AbandonedHouse" parent="." instance=ExtResource("6_abandoned_house")]
 position = Vector2(1700, 560)
+
+[node name="StageTriggers" type="Node2D" parent="."]
+
+[node name="WindStageTrigger" type="Area2D" parent="StageTriggers"]
+position = Vector2(1050, 470)
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StageTriggers/WindStageTrigger"]
+shape = SubResource("RectangleShape2D_stage_trigger")
+
+[node name="HouseStageTrigger" type="Area2D" parent="StageTriggers"]
+position = Vector2(1480, 470)
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StageTriggers/HouseStageTrigger"]
+shape = SubResource("RectangleShape2D_stage_trigger")
+
+[node name="GrassStageTrigger" type="Area2D" parent="StageTriggers"]
+position = Vector2(2040, 470)
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StageTriggers/GrassStageTrigger"]
+shape = SubResource("RectangleShape2D_stage_trigger")
+
+[node name="LevelFlowController" type="Node" parent="."]
+script = ExtResource("10_level_flow")
+wind_trigger_path = NodePath("../StageTriggers/WindStageTrigger")
+house_trigger_path = NodePath("../StageTriggers/HouseStageTrigger")
+grass_trigger_path = NodePath("../StageTriggers/GrassStageTrigger")
+prompt_label_path = NodePath("../StagePromptUI/PromptLabel")
+prompt_duration = 2.5
+
+[node name="PromptTimer" type="Timer" parent="LevelFlowController"]
+one_shot = true
 
 [node name="MobileControls" type="CanvasLayer" parent="."]
 layer = 10
@@ -343,6 +390,27 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_colors/font_outline_color = Color(0.03, 0.04, 0.05, 1)
 theme_override_constants/outline_size = 8
 theme_override_font_sizes/font_size = 32
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StagePromptUI" type="CanvasLayer" parent="."]
+layer = 14
+
+[node name="PromptLabel" type="Label" parent="StagePromptUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 160.0
+offset_top = 112.0
+offset_right = -160.0
+offset_bottom = 168.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.94, 0.96, 0.92, 1)
+theme_override_colors/font_outline_color = Color(0.03, 0.04, 0.05, 1)
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 30
 horizontal_alignment = 1
 vertical_alignment = 1
 

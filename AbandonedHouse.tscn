@@ -7,7 +7,7 @@
 size = Vector2(520, 24)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_right_wall"]
-size = Vector2(24, 240)
+size = Vector2(24, 100)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_left_upper_wall"]
 size = Vector2(24, 100)
@@ -56,13 +56,13 @@ polygon = PackedVector2Array(-12, -50, 12, -50, 12, 50, -12, 50)
 color = Color(0.43, 0.45, 0.43, 1)
 
 [node name="RightWall" type="StaticBody2D" parent="OuterWalls"]
-position = Vector2(248, -120)
+position = Vector2(248, -190)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="OuterWalls/RightWall"]
 shape = SubResource("RectangleShape2D_right_wall")
 
 [node name="Visual" type="Polygon2D" parent="OuterWalls/RightWall"]
-polygon = PackedVector2Array(-12, -120, 12, -120, 12, 120, -12, 120)
+polygon = PackedVector2Array(-12, -50, 12, -50, 12, 50, -12, 50)
 color = Color(0.43, 0.45, 0.43, 1)
 
 [node name="InnerArea" type="Node2D" parent="."]
