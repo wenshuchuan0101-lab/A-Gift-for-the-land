@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene load_steps=13 format=3]
 
 [ext_resource type="PackedScene" path="res://Player.tscn" id="1_player"]
 [ext_resource type="PackedScene" path="res://Seed.tscn" id="2_seed"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" path="res://AbandonedHouse.tscn" id="6_abandoned_house"]
 [ext_resource type="PackedScene" path="res://GrassGridRepairPoint.tscn" id="7_grass_grid"]
 [ext_resource type="PackedScene" path="res://TotemMemory.tscn" id="8_totem_memory"]
+[ext_resource type="Script" path="res://grass_grid_manager.gd" id="9_grass_grid_manager"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
 size = Vector2(3400, 80)
@@ -65,14 +66,28 @@ target_path = NodePath("../SeedTarget")
 follow_offset = Vector2(60, -50)
 follow_speed = 5.0
 guide_distance = 70.0
-energy = 80.0
+energy = 40.0
 
-[node name="GrassGridRepairPoint" parent="." instance=ExtResource("7_grass_grid")]
-position = Vector2(670, 548)
-seed_path = NodePath("../Seed")
-wind_zone_path = NodePath("../WindZone")
+[node name="GrassArea" type="Node2D" parent="."]
+
+[node name="GrassGridManager" type="Node" parent="GrassArea"]
+script = ExtResource("9_grass_grid_manager")
+wind_zone_path = NodePath("../../WindZone")
+
+[node name="GrassGrid01" parent="GrassArea" instance=ExtResource("7_grass_grid")]
+position = Vector2(350, 548)
+seed_path = NodePath("../../Seed")
 energy_reward = 20.0
-repaired_wind_modifier = 0.5
+
+[node name="GrassGrid02" parent="GrassArea" instance=ExtResource("7_grass_grid")]
+position = Vector2(500, 548)
+seed_path = NodePath("../../Seed")
+energy_reward = 20.0
+
+[node name="GrassGrid03" parent="GrassArea" instance=ExtResource("7_grass_grid")]
+position = Vector2(670, 548)
+seed_path = NodePath("../../Seed")
+energy_reward = 20.0
 
 [node name="MapPoint" type="Area2D" parent="."]
 position = Vector2(900, 525)
