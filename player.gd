@@ -2,6 +2,7 @@ extends CharacterBody2D
 
 const DEFEND_MOVE_MULTIPLIER := 0.5
 const DEFEND_WIND_MULTIPLIER := 0.3
+const RESPAWN_SETTLE_FRAMES := 2
 
 @export var move_speed: float = 220.0
 @export var jump_velocity: float = -420.0
@@ -10,13 +11,30 @@ const DEFEND_WIND_MULTIPLIER := 0.3
 
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 var external_force := Vector2.ZERO
+var current_checkpoint: Vector2
 var has_cloak := false
 var has_spear := false
 var is_defending := false
 var is_anchored := false
+var respawn_settle_frames := 0
+
+
+func _ready() -> void:
+	current_checkpoint = global_position
 
 
 func _physics_process(delta: float) -> void:
+	if Input.is_action_just_pressed("respawn_test"):
+		respawn()
+		return
+
+	if respawn_settle_frames > 0:
+		velocity = Vector2.ZERO
+		external_force = Vector2.ZERO
+		move_and_slide()
+		respawn_settle_frames -= 1
+		return
+
 	if not has_spear and is_anchored:
 		_set_anchored(false)
 	if has_spear and Input.is_action_just_pressed("anchor"):
@@ -43,7 +61,7 @@ func _physics_process(delta: float) -> void:
 
 
 func add_external_force(force: Vector2) -> void:
-	if is_anchored:
+	if is_anchored or respawn_settle_frames > 0:
 		return
 	external_force += force
 
@@ -60,6 +78,21 @@ func set_control_enabled(enabled: bool) -> void:
 	velocity = Vector2.ZERO
 	external_force = Vector2.ZERO
 	set_physics_process(enabled)
+
+
+func set_checkpoint(pos: Vector2) -> void:
+	current_checkpoint = pos
+
+
+func respawn() -> void:
+	global_position = current_checkpoint
+	velocity = Vector2.ZERO
+	external_force = Vector2.ZERO
+	is_defending = false
+	_set_anchored(false)
+	respawn_settle_frames = RESPAWN_SETTLE_FRAMES
+	set_physics_process(true)
+	reset_physics_interpolation()
 
 
 func _set_anchored(anchored: bool) -> void:

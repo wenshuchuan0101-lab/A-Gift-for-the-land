@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3]
+[gd_scene load_steps=16 format=3]
 
 [ext_resource type="PackedScene" path="res://Player.tscn" id="1_player"]
 [ext_resource type="PackedScene" path="res://Seed.tscn" id="2_seed"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" path="res://TotemMemory.tscn" id="8_totem_memory"]
 [ext_resource type="Script" path="res://grass_grid_manager.gd" id="9_grass_grid_manager"]
 [ext_resource type="Script" path="res://level_flow_controller.gd" id="10_level_flow"]
+[ext_resource type="PackedScene" path="res://Checkpoint.tscn" id="11_checkpoint"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
 size = Vector2(11000, 80)
@@ -126,6 +127,14 @@ position = Vector2(2000, 520)
 
 [node name="AbandonedHouse" parent="." instance=ExtResource("6_abandoned_house")]
 position = Vector2(3400, 560)
+
+[node name="Checkpoints" type="Node2D" parent="."]
+
+[node name="Checkpoint01" parent="Checkpoints" instance=ExtResource("11_checkpoint")]
+position = Vector2(3000, 525)
+
+[node name="Checkpoint02" parent="Checkpoints" instance=ExtResource("11_checkpoint")]
+position = Vector2(4700, 525)
 
 [node name="StageTriggers" type="Node2D" parent="."]
 
