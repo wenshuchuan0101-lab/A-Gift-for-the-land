@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://br62ncg7t2v0c"
-path="res://.godot/imported/主题树（远景）.png-012350fe172751dcc1ad096cf025a058.ctex"
+uid="uid://dq8qsaag7fg32"
+path="res://.godot/imported/地面.png-80b9d3d14417cea2273af1ef1effc998.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/scene06_ancient_tree/主题树（远景）.png"
-dest_files=["res://.godot/imported/主题树（远景）.png-012350fe172751dcc1ad096cf025a058.ctex"]
+source_file="res://art/scene06_ancient_tree_runtime/地面.png"
+dest_files=["res://.godot/imported/地面.png-80b9d3d14417cea2273af1ef1effc998.ctex"]
 
 [params]
 
@@ -36,5 +36,5 @@ process/premult_alpha=false
 process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
-process/size_limit=2048
+process/size_limit=0
 detect_3d/compress_to=1

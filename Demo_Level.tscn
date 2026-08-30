@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3]
+[gd_scene load_steps=29 format=3]
 
 [ext_resource type="PackedScene" path="res://Player.tscn" id="1_player"]
 [ext_resource type="PackedScene" path="res://Seed.tscn" id="2_seed"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" path="res://progress_tracker.gd" id="17_progress_tracker"]
 [ext_resource type="Script" path="res://chapter1_controller.gd" id="18_chapter1_controller"]
 [ext_resource type="PackedScene" path="res://scenes/chapter1/scene02.tscn" id="19_scene02"]
+[ext_resource type="PackedScene" path="res://scenes/chapter1/scene06.tscn" id="20_scene06"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
 size = Vector2(19000, 80)
@@ -68,6 +69,10 @@ color = Color(0.06, 0.07, 0.09, 1)
 
 [node name="Scene02" parent="." instance=ExtResource("19_scene02")]
 position = Vector2(2170, 0)
+
+[node name="Scene06" parent="." instance=ExtResource("20_scene06")]
+position = Vector2(6860, 110)
+scale = Vector2(1.05957, 1.05957)
 
 [node name="Ground" type="StaticBody2D" parent="."]
 position = Vector2(576, 600)
@@ -209,6 +214,7 @@ normal_monster_speed = 180.0
 grass_monster_speed = 120.0
 
 [node name="AncientTreeArea" parent="." instance=ExtResource("14_ancient_tree_area")]
+modulate = Color(1, 1, 1, 0)
 position = Vector2(7900, 560)
 player_path = NodePath("../PlayerSpawn/Player")
 seed_path = NodePath("../Seed")

@@ -1,19 +1,19 @@
 [gd_scene load_steps=15 format=3]
 
-[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree/背景.png" id="1_background"]
-[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree/氛围暗光.png" id="2_atmosphere_dark_light"]
-[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree/远景树.png" id="3_distant_trees"]
-[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree/主题树（远景）.png" id="4_distant_main_tree"]
-[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree/中景树.png" id="5_midground_trees"]
-[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree/近景树.png" id="6_near_trees"]
-[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree/近景（远山）.png" id="7_near_distant_mountain"]
-[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree/地面.png" id="8_ground"]
-[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree/中心光晕.png" id="9_center_glow"]
-[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree/主体.png" id="10_main_tree"]
-[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree/眼睛.png" id="11_eyes"]
-[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree/中区小精灵.png" id="12_mid_sprites"]
-[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree/四周小精灵.png" id="13_surrounding_sprites"]
-[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree/前景树（前）.png" id="14_foreground_trees"]
+[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree_runtime/背景.png" id="1_background"]
+[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree_runtime/氛围暗光.png" id="2_atmosphere_dark_light"]
+[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree_runtime/远景树.png" id="3_distant_trees"]
+[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree_runtime/主题树（远景）.png" id="4_distant_main_tree"]
+[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree_runtime/中景树.png" id="5_midground_trees"]
+[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree_runtime/近景树.png" id="6_near_trees"]
+[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree_runtime/近景（远山）.png" id="7_near_distant_mountain"]
+[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree_runtime/地面.png" id="8_ground"]
+[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree_runtime/中心光晕.png" id="9_center_glow"]
+[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree_runtime/主体.png" id="10_main_tree"]
+[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree_runtime/眼睛.png" id="11_eyes"]
+[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree_runtime/中区小精灵.png" id="12_mid_sprites"]
+[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree_runtime/四周小精灵.png" id="13_surrounding_sprites"]
+[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree_runtime/前景树（前）.png" id="14_foreground_trees"]
 
 [node name="Scene06" type="Node2D"]
 
@@ -89,7 +89,7 @@ z_index = 0
 [node name="ForegroundTrees" type="Sprite2D" parent="AncientTree"]
 texture = ExtResource("14_foreground_trees")
 centered = false
-z_index = 20
+z_index = 1
 
 [node name="SceneMarkers" type="Node2D" parent="."]
 
