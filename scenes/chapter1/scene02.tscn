@@ -1,0 +1,87 @@
+[gd_scene load_steps=12 format=3]
+
+[ext_resource type="Texture2D" path="res://art/scene02_windmill/scene02_sky.png" id="1_sky"]
+[ext_resource type="Texture2D" path="res://art/scene02_windmill/scene02_sun.png" id="2_sun"]
+[ext_resource type="Texture2D" path="res://art/scene02_windmill/scene02_cloud_mist.png" id="3_cloud_mist"]
+[ext_resource type="Texture2D" path="res://art/scene02_windmill/scene02_distant_mountains.png" id="4_distant_mountains"]
+[ext_resource type="Texture2D" path="res://art/scene02_windmill/scene02_distant_mountains_2.png" id="5_distant_mountains_2"]
+[ext_resource type="Texture2D" path="res://art/scene02_windmill/scene02_far_trees.png" id="6_far_trees"]
+[ext_resource type="Texture2D" path="res://art/scene02_windmill/scene02_near_trees.png" id="7_near_trees"]
+[ext_resource type="Texture2D" path="res://art/scene02_windmill/scene02_ground.png" id="8_ground"]
+[ext_resource type="Texture2D" path="res://art/scene02_windmill/scene02_front_mist.png" id="9_front_mist"]
+[ext_resource type="Texture2D" path="res://art/scene02_windmill/scene02_windmill_body.png" id="10_windmill_body"]
+[ext_resource type="Texture2D" path="res://art/scene02_windmill/scene02_windmill.png" id="11_windmill"]
+
+[node name="Scene02" type="Node2D"]
+
+[node name="Background" type="Node2D" parent="."]
+
+[node name="Sky" type="Sprite2D" parent="Background"]
+texture = ExtResource("1_sky")
+centered = false
+z_index = -100
+
+[node name="LargeMist" type="Sprite2D" parent="Background"]
+texture = ExtResource("3_cloud_mist")
+centered = false
+z_index = -90
+
+[node name="Sun" type="Sprite2D" parent="Background"]
+texture = ExtResource("2_sun")
+centered = false
+z_index = -85
+
+[node name="DistantMountains" type="Sprite2D" parent="Background"]
+texture = ExtResource("4_distant_mountains")
+centered = false
+z_index = -70
+
+[node name="NearMountains" type="Sprite2D" parent="Background"]
+texture = ExtResource("5_distant_mountains_2")
+centered = false
+z_index = -65
+
+[node name="Windmills" type="Node2D" parent="."]
+
+[node name="WindmillBody" type="Sprite2D" parent="Windmills"]
+texture = ExtResource("10_windmill_body")
+centered = false
+z_index = 10
+
+[node name="WindmillBlades" type="Sprite2D" parent="Windmills"]
+texture = ExtResource("11_windmill")
+centered = false
+z_index = 11
+
+[node name="Environment" type="Node2D" parent="."]
+
+[node name="FarTrees" type="Sprite2D" parent="Environment"]
+texture = ExtResource("6_far_trees")
+centered = false
+z_index = -55
+
+[node name="Ground" type="Sprite2D" parent="Environment"]
+texture = ExtResource("8_ground")
+centered = false
+z_index = -20
+
+[node name="NearTrees" type="Sprite2D" parent="Environment"]
+texture = ExtResource("7_near_trees")
+centered = false
+z_index = -10
+
+[node name="FrontMist" type="Sprite2D" parent="Environment"]
+texture = ExtResource("9_front_mist")
+centered = false
+z_index = 20
+
+[node name="SceneMarkers" type="Node2D" parent="."]
+
+[node name="StartPoint" type="Marker2D" parent="SceneMarkers"]
+position = Vector2(120, 520)
+
+[node name="EndPoint" type="Marker2D" parent="SceneMarkers"]
+position = Vector2(2050, 520)
+
+[node name="PlayerStart" type="Marker2D" parent="SceneMarkers"]
+position = Vector2(180, 500)
