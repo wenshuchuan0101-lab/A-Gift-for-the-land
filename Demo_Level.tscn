@@ -20,9 +20,10 @@
 [ext_resource type="Script" path="res://chapter1_controller.gd" id="18_chapter1_controller"]
 [ext_resource type="PackedScene" path="res://scenes/chapter1/scene02.tscn" id="19_scene02"]
 [ext_resource type="PackedScene" path="res://scenes/chapter1/scene06.tscn" id="20_scene06"]
+[ext_resource type="PackedScene" path="res://scenes/chapter1/scene01.tscn" id="21_scene01"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
-size = Vector2(19000, 80)
+size = Vector2(32000, 80)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mobile_button"]
 size = Vector2(88, 88)
@@ -67,12 +68,17 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.06, 0.07, 0.09, 1)
 
+[node name="Scene01" parent="." instance=ExtResource("21_scene01")]
+position = Vector2(0, 0)
+scale = Vector2(1.08, 1.08)
+
 [node name="Scene02" parent="." instance=ExtResource("19_scene02")]
-position = Vector2(2170, 0)
+position = Vector2(3170, 0)
+scale = Vector2(1.08, 1.08)
 
 [node name="Scene06" parent="." instance=ExtResource("20_scene06")]
-position = Vector2(6860, 110)
-scale = Vector2(1.05957, 1.05957)
+position = Vector2(10721, -24)
+scale = Vector2(1.13485, 1.13485)
 
 [node name="Ground" type="StaticBody2D" parent="."]
 position = Vector2(576, 600)
@@ -82,8 +88,8 @@ shape = SubResource("RectangleShape2D_ground")
 
 [node name="GroundVisual" type="Polygon2D" parent="Ground"]
 z_index = -50
-polygon = PackedVector2Array(-9500, -40, 9500, -40, 9500, 40, -9500, 40)
-color = Color(0.64, 0.48, 0.28, 1)
+polygon = PackedVector2Array(-16000, -40, 16000, -40, 16000, 40, -16000, 40)
+color = Color(0.64, 0.48, 0.28, 0)
 
 [node name="PlayerSpawn" type="Marker2D" parent="."]
 position = Vector2(576, 300)
@@ -91,7 +97,7 @@ position = Vector2(576, 300)
 [node name="Player" parent="PlayerSpawn" instance=ExtResource("1_player")]
 
 [node name="SeedTarget" type="Marker2D" parent="."]
-position = Vector2(7900, 495)
+position = Vector2(11834.89, 495)
 
 [node name="Visual" type="Polygon2D" parent="SeedTarget"]
 polygon = PackedVector2Array(0, -10, 10, 0, 0, 10, -10, 0)
@@ -112,22 +118,22 @@ script = ExtResource("9_grass_grid_manager")
 wind_zone_path = NodePath("../../ChaseRoute/WindZone")
 
 [node name="GrassGrid01" parent="GrassArea" instance=ExtResource("7_grass_grid")]
-position = Vector2(5000, 548)
+position = Vector2(6000, 548)
 seed_path = NodePath("../../Seed")
 energy_reward = 20.0
 
 [node name="GrassGrid02" parent="GrassArea" instance=ExtResource("7_grass_grid")]
-position = Vector2(5150, 548)
+position = Vector2(6150, 548)
 seed_path = NodePath("../../Seed")
 energy_reward = 20.0
 
 [node name="GrassGrid03" parent="GrassArea" instance=ExtResource("7_grass_grid")]
-position = Vector2(5300, 548)
+position = Vector2(6300, 548)
 seed_path = NodePath("../../Seed")
 energy_reward = 20.0
 
 [node name="GrassChaseSlowZone" type="Area2D" parent="GrassArea"]
-position = Vector2(5500, 470)
+position = Vector2(6500, 470)
 collision_layer = 0
 collision_mask = 1
 monitoring = true
@@ -140,7 +146,7 @@ polygon = PackedVector2Array(-600, 78, 600, 78, 600, 110, -600, 110)
 color = Color(0.22, 0.5, 0.25, 0.18)
 
 [node name="MapPoint" type="Area2D" parent="."]
-position = Vector2(2750, 525)
+position = Vector2(3750, 525)
 collision_layer = 0
 collision_mask = 1
 monitoring = true
@@ -157,7 +163,7 @@ polygon = PackedVector2Array(0, -14, 14, 0, 0, 14, -14, 0)
 color = Color(0.32, 0.58, 0.72, 0.9)
 
 [node name="TotemMemory" parent="." instance=ExtResource("8_totem_memory")]
-position = Vector2(5520, 560)
+position = Vector2(6520, 560)
 player_path = NodePath("../PlayerSpawn/Player")
 mobile_controls_path = NodePath("../MobileControls")
 memory_duration = 4.0
@@ -169,27 +175,28 @@ position = Vector2(1700, 470)
 position = Vector2(2000, 520)
 
 [node name="AbandonedHouse" parent="." instance=ExtResource("6_abandoned_house")]
-position = Vector2(3400, 560)
+position = Vector2(9000, 560)
+scale = Vector2(2, 2)
 
 [node name="Checkpoints" type="Node2D" parent="."]
 
 [node name="Checkpoint01" parent="Checkpoints" instance=ExtResource("11_checkpoint")]
-position = Vector2(3000, 525)
+position = Vector2(4000, 525)
 
 [node name="Checkpoint02" parent="Checkpoints" instance=ExtResource("11_checkpoint")]
-position = Vector2(5750, 525)
+position = Vector2(6750, 525)
 
 [node name="ChaseRoute" type="Node2D" parent="."]
 
 [node name="MonsterSpawn" type="Marker2D" parent="ChaseRoute"]
-position = Vector2(5000, 525)
+position = Vector2(6000, 525)
 
 [node name="SandMonster" parent="ChaseRoute/MonsterSpawn" instance=ExtResource("12_sand_monster")]
 player_path = NodePath("../../../PlayerSpawn/Player")
 chase_speed = 180.0
 
 [node name="ChaseStartTrigger" type="Area2D" parent="ChaseRoute"]
-position = Vector2(5900, 470)
+position = Vector2(6900, 470)
 collision_layer = 0
 collision_mask = 1
 monitoring = true
@@ -198,10 +205,10 @@ monitoring = true
 shape = SubResource("RectangleShape2D_stage_trigger")
 
 [node name="WindZone" parent="ChaseRoute" instance=ExtResource("4_wind_zone")]
-position = Vector2(6500, 470)
+position = Vector2(7500, 470)
 
 [node name="RockCover" parent="ChaseRoute" instance=ExtResource("5_rock_cover")]
-position = Vector2(7000, 520)
+position = Vector2(8000, 520)
 
 [node name="ChaseController" type="Node" parent="ChaseRoute"]
 script = ExtResource("13_chase_controller")
@@ -215,7 +222,7 @@ grass_monster_speed = 120.0
 
 [node name="AncientTreeArea" parent="." instance=ExtResource("14_ancient_tree_area")]
 modulate = Color(1, 1, 1, 0)
-position = Vector2(7900, 560)
+position = Vector2(11834.89, 560)
 player_path = NodePath("../PlayerSpawn/Player")
 seed_path = NodePath("../Seed")
 chase_controller_path = NodePath("../ChaseRoute/ChaseController")
@@ -224,10 +231,10 @@ wind_zone_path = NodePath("../ChaseRoute/WindZone")
 [node name="EndingSequence" type="Node2D" parent="."]
 
 [node name="FinalMonsterSpawn" type="Marker2D" parent="EndingSequence"]
-position = Vector2(7500, 525)
+position = Vector2(11406.47, 525)
 
 [node name="DangerTrigger" type="Area2D" parent="EndingSequence"]
-position = Vector2(7670, 470)
+position = Vector2(11588.55, 470)
 collision_layer = 0
 collision_mask = 2
 monitoring = true
@@ -236,7 +243,7 @@ monitoring = true
 shape = SubResource("RectangleShape2D_final_danger")
 
 [node name="TreeShadow" parent="EndingSequence" instance=ExtResource("15_tree_shadow")]
-position = Vector2(7720, 560)
+position = Vector2(11642.1, 560)
 
 [node name="EndingSequenceController" type="Node" parent="EndingSequence"]
 script = ExtResource("16_ending_sequence")
@@ -294,7 +301,7 @@ monitoring = true
 shape = SubResource("RectangleShape2D_stage_trigger")
 
 [node name="ToolsStageTrigger" type="Area2D" parent="StageTriggers"]
-position = Vector2(3200, 470)
+position = Vector2(4200, 470)
 collision_layer = 0
 collision_mask = 1
 monitoring = true
@@ -303,7 +310,7 @@ monitoring = true
 shape = SubResource("RectangleShape2D_stage_trigger")
 
 [node name="RepairStageTrigger" type="Area2D" parent="StageTriggers"]
-position = Vector2(4250, 470)
+position = Vector2(5250, 470)
 collision_layer = 0
 collision_mask = 1
 monitoring = true
@@ -314,7 +321,7 @@ shape = SubResource("RectangleShape2D_stage_trigger")
 [node name="ChapterFlow" type="Node2D" parent="."]
 
 [node name="CloakGate" type="StaticBody2D" parent="ChapterFlow"]
-position = Vector2(5820, 470)
+position = Vector2(10000, 470)
 collision_layer = 1
 collision_mask = 1
 
@@ -326,7 +333,7 @@ polygon = PackedVector2Array(-16, -110, 16, -110, 16, 110, -16, 110)
 color = Color(0.36, 0.4, 0.43, 0.92)
 
 [node name="GateHint" type="Area2D" parent="ChapterFlow"]
-position = Vector2(5730, 470)
+position = Vector2(9910, 470)
 collision_layer = 0
 collision_mask = 1
 monitoring = true

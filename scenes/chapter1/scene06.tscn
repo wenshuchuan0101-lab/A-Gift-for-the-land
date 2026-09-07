@@ -1,100 +1,140 @@
-[gd_scene load_steps=15 format=3]
+[gd_scene format=3 uid="uid://dyjub4mijlqa1"]
 
-[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree_runtime/背景.png" id="1_background"]
-[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree_runtime/氛围暗光.png" id="2_atmosphere_dark_light"]
-[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree_runtime/远景树.png" id="3_distant_trees"]
-[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree_runtime/主题树（远景）.png" id="4_distant_main_tree"]
-[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree_runtime/中景树.png" id="5_midground_trees"]
-[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree_runtime/近景树.png" id="6_near_trees"]
-[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree_runtime/近景（远山）.png" id="7_near_distant_mountain"]
-[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree_runtime/地面.png" id="8_ground"]
-[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree_runtime/中心光晕.png" id="9_center_glow"]
-[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree_runtime/主体.png" id="10_main_tree"]
-[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree_runtime/眼睛.png" id="11_eyes"]
-[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree_runtime/中区小精灵.png" id="12_mid_sprites"]
-[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree_runtime/四周小精灵.png" id="13_surrounding_sprites"]
-[ext_resource type="Texture2D" path="res://art/scene06_ancient_tree_runtime/前景树（前）.png" id="14_foreground_trees"]
+[ext_resource type="Texture2D" uid="uid://c0dmd23uq5hmv" path="res://art/scene06_ancient_tree_runtime/背景.png" id="1_background"]
+[ext_resource type="Texture2D" uid="uid://cy04ytlqd6ep7" path="res://art/scene06_ancient_tree_runtime/氛围暗光.png" id="2_atmosphere_dark_light"]
+[ext_resource type="Texture2D" uid="uid://cho66denigpqu" path="res://art/scene06_ancient_tree_runtime/远景树.png" id="3_distant_trees"]
+[ext_resource type="Texture2D" uid="uid://dxuwbqvm0or18" path="res://art/scene06_ancient_tree_runtime/主题树（远景）.png" id="4_distant_main_tree"]
+[ext_resource type="Texture2D" uid="uid://4lb6dyfutpm7" path="res://art/scene06_ancient_tree_runtime/中景树.png" id="5_midground_trees"]
+[ext_resource type="Texture2D" uid="uid://dcdns02ociy6j" path="res://art/scene06_ancient_tree_runtime/近景树.png" id="6_near_trees"]
+[ext_resource type="Texture2D" uid="uid://t8rs3w46qtfy" path="res://art/scene06_ancient_tree_runtime/近景（远山）.png" id="7_near_distant_mountain"]
+[ext_resource type="Texture2D" uid="uid://dq8qsaag7fg32" path="res://art/scene06_ancient_tree_runtime/地面.png" id="8_ground"]
+[ext_resource type="Texture2D" uid="uid://1bj8syur7kj2" path="res://art/scene06_ancient_tree_runtime/中心光晕.png" id="9_center_glow"]
+[ext_resource type="Texture2D" uid="uid://cju61uiqg34x8" path="res://art/scene06_ancient_tree_runtime/主体.png" id="10_main_tree"]
+[ext_resource type="Texture2D" uid="uid://cehhcg8ptcaub" path="res://art/scene06_ancient_tree_runtime/眼睛.png" id="11_eyes"]
+[ext_resource type="Texture2D" uid="uid://cqrwmrql2bvw5" path="res://art/scene06_ancient_tree_runtime/中区小精灵.png" id="12_mid_sprites"]
+[ext_resource type="Texture2D" uid="uid://c2rjs3ly0kpth" path="res://art/scene06_ancient_tree_runtime/四周小精灵.png" id="13_surrounding_sprites"]
+[ext_resource type="Texture2D" uid="uid://cggosim3434gq" path="res://art/scene06_ancient_tree_runtime/前景树（前）.png" id="14_foreground_trees"]
+[ext_resource type="Script" uid="uid://ca3t02tusixb4" path="res://scenes/chapter1/scene_parallax_controller.gd" id="15_parallax_controller"]
 
-[node name="Scene06" type="Node2D"]
+[node name="Scene06" type="Node2D" unique_id=1726116127]
+script = ExtResource("15_parallax_controller")
+horizontal_only = true
+stop_at_end_point = false
+parallax_enabled = false
 
-[node name="Background" type="Node2D" parent="."]
+[node name="Background" type="Node2D" parent="." unique_id=540860163]
 
-[node name="BackgroundImage" type="Sprite2D" parent="Background"]
+[node name="BackgroundImageParallax" type="Parallax2D" parent="Background" unique_id=1535132615]
+scroll_scale = Vector2(0.03, 1)
+
+[node name="BackgroundImage" type="Sprite2D" parent="Background/BackgroundImageParallax" unique_id=998698124]
+z_index = -100
 texture = ExtResource("1_background")
 centered = false
-z_index = -100
 
-[node name="AtmosphereDarkLight" type="Sprite2D" parent="Background"]
+[node name="AtmosphereDarkLightParallax" type="Parallax2D" parent="Background" unique_id=370428760]
+scroll_scale = Vector2(0.03, 1)
+
+[node name="AtmosphereDarkLight" type="Sprite2D" parent="Background/AtmosphereDarkLightParallax" unique_id=1346718432]
 texture = ExtResource("2_atmosphere_dark_light")
 centered = false
-z_index = 0
 
-[node name="AncientTree" type="Node2D" parent="."]
+[node name="AncientTree" type="Node2D" parent="." unique_id=2026574606]
 
-[node name="DistantTrees" type="Sprite2D" parent="AncientTree"]
+[node name="DistantTreesParallax" type="Parallax2D" parent="AncientTree" unique_id=913261173]
+scroll_scale = Vector2(0.02, 1)
+
+[node name="DistantTrees" type="Sprite2D" parent="AncientTree/DistantTreesParallax" unique_id=1845882414]
+z_index = -80
 texture = ExtResource("3_distant_trees")
 centered = false
-z_index = -80
 
-[node name="DistantMainTree" type="Sprite2D" parent="AncientTree"]
+[node name="DistantMainTreeParallax" type="Parallax2D" parent="AncientTree" unique_id=654726449]
+scroll_scale = Vector2(0, 1)
+
+[node name="DistantMainTree" type="Sprite2D" parent="AncientTree/DistantMainTreeParallax" unique_id=752785435]
 texture = ExtResource("4_distant_main_tree")
 centered = false
-z_index = -70
 
-[node name="MidgroundTrees" type="Sprite2D" parent="AncientTree"]
+[node name="MidgroundTreesParallax" type="Parallax2D" parent="AncientTree" unique_id=1010143285]
+scroll_scale = Vector2(0.08, 1)
+
+[node name="MidgroundTrees" type="Sprite2D" parent="AncientTree/MidgroundTreesParallax" unique_id=231550244]
+z_index = -50
 texture = ExtResource("5_midground_trees")
 centered = false
-z_index = -50
 
-[node name="NearTrees" type="Sprite2D" parent="AncientTree"]
+[node name="NearTreesParallax" type="Parallax2D" parent="AncientTree" unique_id=363568358]
+scroll_scale = Vector2(0.02, 1)
+
+[node name="NearTrees" type="Sprite2D" parent="AncientTree/NearTreesParallax" unique_id=90110096]
+z_index = -30
 texture = ExtResource("6_near_trees")
 centered = false
-z_index = -30
 
-[node name="NearDistantMountain" type="Sprite2D" parent="AncientTree"]
+[node name="NearDistantMountainParallax" type="Parallax2D" parent="AncientTree" unique_id=100041132]
+scroll_scale = Vector2(0.2, 1)
+
+[node name="NearDistantMountain" type="Sprite2D" parent="AncientTree/NearDistantMountainParallax" unique_id=1505150308]
 texture = ExtResource("7_near_distant_mountain")
 centered = false
-z_index = 0
 
-[node name="Ground" type="Sprite2D" parent="AncientTree"]
+[node name="GroundParallax" type="Parallax2D" parent="AncientTree" unique_id=26648982]
+scroll_scale = Vector2(0, 1)
+
+[node name="Ground" type="Sprite2D" parent="AncientTree/GroundParallax" unique_id=2123127902]
 texture = ExtResource("8_ground")
 centered = false
-z_index = 0
 
-[node name="CenterGlow" type="Sprite2D" parent="AncientTree"]
+[node name="CenterGlowParallax" type="Parallax2D" parent="AncientTree" unique_id=1312503851]
+scroll_scale = Vector2(0, 1)
+
+[node name="CenterGlow" type="Sprite2D" parent="AncientTree/CenterGlowParallax" unique_id=184625818]
+z_index = -1
 texture = ExtResource("9_center_glow")
 centered = false
-z_index = 0
 
-[node name="MainTree" type="Sprite2D" parent="AncientTree"]
+[node name="MainTreeParallax" type="Parallax2D" parent="AncientTree" unique_id=1539070766]
+scroll_scale = Vector2(0, 1)
+
+[node name="MainTree" type="Sprite2D" parent="AncientTree/MainTreeParallax" unique_id=2016780534]
 texture = ExtResource("10_main_tree")
 centered = false
-z_index = 0
 
-[node name="Eyes" type="Sprite2D" parent="AncientTree"]
+[node name="EyesParallax" type="Parallax2D" parent="AncientTree" unique_id=1083888565]
+scroll_scale = Vector2(0, 1)
+
+[node name="Eyes" type="Sprite2D" parent="AncientTree/EyesParallax" unique_id=1364033067]
 texture = ExtResource("11_eyes")
 centered = false
-z_index = 0
 
-[node name="MidSprites" type="Sprite2D" parent="AncientTree"]
+[node name="MidSpritesParallax" type="Parallax2D" parent="AncientTree" unique_id=1743895749]
+scroll_scale = Vector2(0, 1)
+
+[node name="MidSprites" type="Sprite2D" parent="AncientTree/MidSpritesParallax" unique_id=1015541245]
 texture = ExtResource("12_mid_sprites")
 centered = false
-z_index = 0
 
-[node name="SurroundingSprites" type="Sprite2D" parent="AncientTree"]
+[node name="SurroundingSpritesParallax" type="Parallax2D" parent="AncientTree" unique_id=769825719]
+scroll_scale = Vector2(0.35, 1)
+
+[node name="SurroundingSprites" type="Sprite2D" parent="AncientTree/SurroundingSpritesParallax" unique_id=1201291759]
 texture = ExtResource("13_surrounding_sprites")
 centered = false
-z_index = 0
 
-[node name="ForegroundTrees" type="Sprite2D" parent="AncientTree"]
+[node name="ForegroundTreesParallax" type="Parallax2D" parent="AncientTree" unique_id=60893346]
+scroll_scale = Vector2(0.2, 1)
+
+[node name="ForegroundTrees" type="Sprite2D" parent="AncientTree/ForegroundTreesParallax" unique_id=1534216197]
+z_index = 1
 texture = ExtResource("14_foreground_trees")
 centered = false
-z_index = 1
 
-[node name="SceneMarkers" type="Node2D" parent="."]
+[node name="SceneMarkers" type="Node2D" parent="." unique_id=247141908]
 
-[node name="StartPoint" type="Marker2D" parent="SceneMarkers"]
+[node name="StartPoint" type="Marker2D" parent="SceneMarkers" unique_id=903064632]
 
-[node name="EndPoint" type="Marker2D" parent="SceneMarkers"]
+[node name="EndPoint" type="Marker2D" parent="SceneMarkers" unique_id=1334540104]
+position = Vector2(2048, 0)
 
-[node name="PlayerStart" type="Marker2D" parent="SceneMarkers"]
+[node name="PlayerStart" type="Marker2D" parent="SceneMarkers" unique_id=1919245482]

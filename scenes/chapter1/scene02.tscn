@@ -1,87 +1,121 @@
-[gd_scene load_steps=12 format=3]
+[gd_scene format=3 uid="uid://lbnu0fwlbnn8"]
 
-[ext_resource type="Texture2D" path="res://art/scene02_windmill/scene02_sky.png" id="1_sky"]
-[ext_resource type="Texture2D" path="res://art/scene02_windmill/scene02_sun.png" id="2_sun"]
-[ext_resource type="Texture2D" path="res://art/scene02_windmill/scene02_cloud_mist.png" id="3_cloud_mist"]
-[ext_resource type="Texture2D" path="res://art/scene02_windmill/scene02_distant_mountains.png" id="4_distant_mountains"]
-[ext_resource type="Texture2D" path="res://art/scene02_windmill/scene02_distant_mountains_2.png" id="5_distant_mountains_2"]
-[ext_resource type="Texture2D" path="res://art/scene02_windmill/scene02_far_trees.png" id="6_far_trees"]
-[ext_resource type="Texture2D" path="res://art/scene02_windmill/scene02_near_trees.png" id="7_near_trees"]
-[ext_resource type="Texture2D" path="res://art/scene02_windmill/scene02_ground.png" id="8_ground"]
-[ext_resource type="Texture2D" path="res://art/scene02_windmill/scene02_front_mist.png" id="9_front_mist"]
-[ext_resource type="Texture2D" path="res://art/scene02_windmill/scene02_windmill_body.png" id="10_windmill_body"]
-[ext_resource type="Texture2D" path="res://art/scene02_windmill/scene02_windmill.png" id="11_windmill"]
+[ext_resource type="Texture2D" uid="uid://b0gd5kqd2ycl0" path="res://art/scene02_windmill/scene02_sky.png" id="1_sky"]
+[ext_resource type="Texture2D" uid="uid://cotqg1f1f5thv" path="res://art/scene02_windmill/scene02_sun.png" id="2_sun"]
+[ext_resource type="Texture2D" uid="uid://7kjsfisuvru2" path="res://art/scene02_windmill/scene02_cloud_mist.png" id="3_cloud_mist"]
+[ext_resource type="Texture2D" uid="uid://begc4x01akdx0" path="res://art/scene02_windmill/scene02_distant_mountains.png" id="4_distant_mountains"]
+[ext_resource type="Texture2D" uid="uid://stwdkx20jmb2" path="res://art/scene02_windmill/scene02_distant_mountains_2.png" id="5_distant_mountains_2"]
+[ext_resource type="Texture2D" uid="uid://ccer2fr8kw1vs" path="res://art/scene02_windmill/scene02_far_trees.png" id="6_far_trees"]
+[ext_resource type="Texture2D" uid="uid://dsa0ojoph4wgd" path="res://art/scene02_windmill/scene02_near_trees.png" id="7_near_trees"]
+[ext_resource type="Texture2D" uid="uid://bu23v671wlh4w" path="res://art/scene02_windmill/scene02_ground.png" id="8_ground"]
+[ext_resource type="Texture2D" uid="uid://sdrk185l6u1m" path="res://art/scene02_windmill/scene02_front_mist.png" id="9_front_mist"]
+[ext_resource type="Texture2D" uid="uid://b23ursbr53kd" path="res://art/scene02_windmill/scene02_windmill_body.png" id="10_windmill_body"]
+[ext_resource type="Texture2D" uid="uid://cdxsyih3q7r18" path="res://art/scene02_windmill/scene02_windmill.png" id="11_windmill"]
+[ext_resource type="Script" path="res://scenes/chapter1/scene_parallax_controller.gd" id="12_parallax_controller"]
 
-[node name="Scene02" type="Node2D"]
+[node name="Scene02" type="Node2D" unique_id=452223919]
+script = ExtResource("12_parallax_controller")
+stop_at_end_point = true
 
-[node name="Background" type="Node2D" parent="."]
+[node name="Background" type="Node2D" parent="." unique_id=1286594058]
 
-[node name="Sky" type="Sprite2D" parent="Background"]
+[node name="SkyParallax" type="Parallax2D" parent="Background"]
+scroll_scale = Vector2(1, 1)
+
+[node name="Sky" type="Sprite2D" parent="Background/SkyParallax" unique_id=1595197639]
+z_index = -100
+scale = Vector2(3, 1)
 texture = ExtResource("1_sky")
 centered = false
-z_index = -100
 
-[node name="LargeMist" type="Sprite2D" parent="Background"]
+[node name="LargeMistParallax" type="Parallax2D" parent="Background"]
+scroll_scale = Vector2(0.08, 0.08)
+
+[node name="LargeMist" type="Sprite2D" parent="Background/LargeMistParallax" unique_id=1334896017]
+z_index = -90
 texture = ExtResource("3_cloud_mist")
 centered = false
-z_index = -90
 
-[node name="Sun" type="Sprite2D" parent="Background"]
+[node name="SunParallax" type="Parallax2D" parent="Background"]
+scroll_scale = Vector2(0.04, 0.03)
+
+[node name="Sun" type="Sprite2D" parent="Background/SunParallax" unique_id=2024913086]
+z_index = -85
 texture = ExtResource("2_sun")
 centered = false
-z_index = -85
 
-[node name="DistantMountains" type="Sprite2D" parent="Background"]
+[node name="DistantMountainsParallax" type="Parallax2D" parent="Background"]
+scroll_scale = Vector2(0.15, 0.15)
+
+[node name="DistantMountains" type="Sprite2D" parent="Background/DistantMountainsParallax" unique_id=973007999]
+z_index = -70
 texture = ExtResource("4_distant_mountains")
 centered = false
-z_index = -70
 
-[node name="NearMountains" type="Sprite2D" parent="Background"]
+[node name="NearMountainsParallax" type="Parallax2D" parent="Background"]
+scroll_scale = Vector2(0.3, 0.3)
+
+[node name="NearMountains" type="Sprite2D" parent="Background/NearMountainsParallax" unique_id=1547700975]
+z_index = -65
 texture = ExtResource("5_distant_mountains_2")
 centered = false
-z_index = -65
 
-[node name="Windmills" type="Node2D" parent="."]
+[node name="Windmills" type="Node2D" parent="." unique_id=480361413]
 
-[node name="WindmillBody" type="Sprite2D" parent="Windmills"]
+[node name="WindmillBodyParallax" type="Parallax2D" parent="Windmills"]
+
+[node name="WindmillBody" type="Sprite2D" parent="Windmills/WindmillBodyParallax" unique_id=1889330147]
+z_index = -30
 texture = ExtResource("10_windmill_body")
 centered = false
-z_index = 1
 
-[node name="WindmillBlades" type="Sprite2D" parent="Windmills"]
+[node name="WindmillBladesParallax" type="Parallax2D" parent="Windmills"]
+
+[node name="WindmillBlades" type="Sprite2D" parent="Windmills/WindmillBladesParallax" unique_id=1476153975]
+z_index = 1
 texture = ExtResource("11_windmill")
 centered = false
-z_index = 1
 
-[node name="Environment" type="Node2D" parent="."]
+[node name="Environment" type="Node2D" parent="." unique_id=1858790980]
 
-[node name="FarTrees" type="Sprite2D" parent="Environment"]
+[node name="FarTreesParallax" type="Parallax2D" parent="Environment"]
+scroll_scale = Vector2(0.45, 0.45)
+
+[node name="FarTrees" type="Sprite2D" parent="Environment/FarTreesParallax" unique_id=1210765719]
+z_index = -55
 texture = ExtResource("6_far_trees")
 centered = false
-z_index = -55
 
-[node name="Ground" type="Sprite2D" parent="Environment"]
+[node name="GroundParallax" type="Parallax2D" parent="Environment"]
+
+[node name="Ground" type="Sprite2D" parent="Environment/GroundParallax" unique_id=819307963]
+z_index = -20
 texture = ExtResource("8_ground")
 centered = false
-z_index = -20
 
-[node name="NearTrees" type="Sprite2D" parent="Environment"]
+[node name="NearTreesParallax" type="Parallax2D" parent="Environment"]
+scroll_scale = Vector2(0.8, 0.8)
+
+[node name="NearTrees" type="Sprite2D" parent="Environment/NearTreesParallax" unique_id=481649859]
+z_index = -10
 texture = ExtResource("7_near_trees")
 centered = false
-z_index = -10
 
-[node name="FrontMist" type="Sprite2D" parent="Environment"]
+[node name="FrontMistParallax" type="Parallax2D" parent="Environment"]
+scroll_scale = Vector2(1.1, 1.1)
+
+[node name="FrontMist" type="Sprite2D" parent="Environment/FrontMistParallax" unique_id=487975501]
+z_index = 1
 texture = ExtResource("9_front_mist")
 centered = false
-z_index = 1
 
-[node name="SceneMarkers" type="Node2D" parent="."]
+[node name="SceneMarkers" type="Node2D" parent="." unique_id=1543231715]
 
-[node name="StartPoint" type="Marker2D" parent="SceneMarkers"]
+[node name="StartPoint" type="Marker2D" parent="SceneMarkers" unique_id=1686198162]
 position = Vector2(120, 520)
 
-[node name="EndPoint" type="Marker2D" parent="SceneMarkers"]
-position = Vector2(2050, 520)
+[node name="EndPoint" type="Marker2D" parent="SceneMarkers" unique_id=1927957752]
+position = Vector2(5200, 520)
 
-[node name="PlayerStart" type="Marker2D" parent="SceneMarkers"]
+[node name="PlayerStart" type="Marker2D" parent="SceneMarkers" unique_id=2093634591]
 position = Vector2(180, 500)
