@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://lbnu0fwlbnn8"]
 
-[ext_resource type="Texture2D" uid="uid://b0gd5kqd2ycl0" path="res://art/scene02_windmill/scene02_sky.png" id="1_sky"]
+[ext_resource type="Texture2D" path="res://art/scene02_windmill/scene02_shared_sky.png" id="1_sky"]
 [ext_resource type="Texture2D" uid="uid://cotqg1f1f5thv" path="res://art/scene02_windmill/scene02_sun.png" id="2_sun"]
 [ext_resource type="Texture2D" uid="uid://7kjsfisuvru2" path="res://art/scene02_windmill/scene02_cloud_mist.png" id="3_cloud_mist"]
 [ext_resource type="Texture2D" uid="uid://begc4x01akdx0" path="res://art/scene02_windmill/scene02_distant_mountains.png" id="4_distant_mountains"]
@@ -21,10 +21,11 @@ stop_at_end_point = true
 
 [node name="SkyParallax" type="Parallax2D" parent="Background"]
 scroll_scale = Vector2(1, 1)
+repeat_size = Vector2(4340, 0)
+repeat_times = 2
 
 [node name="Sky" type="Sprite2D" parent="Background/SkyParallax" unique_id=1595197639]
 z_index = -100
-scale = Vector2(3, 1)
 texture = ExtResource("1_sky")
 centered = false
 

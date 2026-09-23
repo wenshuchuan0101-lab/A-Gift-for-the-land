@@ -1,136 +1,140 @@
-[gd_scene load_steps=16 format=3]
+[gd_scene format=3 uid="uid://byxhcp87rlibm"]
 
-[ext_resource type="Texture2D" path="res://art/scene01_hills/scene01_sky.png" id="1_sky"]
-[ext_resource type="Texture2D" path="res://art/scene01_hills/scene01_atmosphere.png" id="2_atmosphere"]
-[ext_resource type="Texture2D" path="res://art/scene01_hills/scene01_sun.png" id="3_sun"]
-[ext_resource type="Texture2D" path="res://art/scene01_hills/scene01_cloud_mist.png" id="4_cloud_mist"]
-[ext_resource type="Texture2D" path="res://art/scene01_hills/scene01_far_mountains.png" id="5_far_mountains"]
-[ext_resource type="Texture2D" path="res://art/scene01_hills/scene01_mid_mountains.png" id="6_mid_mountains"]
-[ext_resource type="Texture2D" path="res://art/scene01_hills/scene01_near_mountains.png" id="7_near_mountains"]
-[ext_resource type="Texture2D" path="res://art/scene01_hills/scene01_trees.png" id="8_trees"]
-[ext_resource type="Texture2D" path="res://art/scene01_hills/scene01_ground.png" id="9_ground"]
-[ext_resource type="Texture2D" path="res://art/scene01_hills/scene01_front_mist.png" id="10_front_mist"]
-[ext_resource type="Texture2D" path="res://art/scene01_hills/scene01_tumbleweed.png" id="11_tumbleweed"]
-[ext_resource type="Texture2D" path="res://art/scene01_hills/scene01_tumbleweed_1.png" id="12_tumbleweed_1"]
-[ext_resource type="Texture2D" path="res://art/scene01_hills/scene01_tumbleweed_2.png" id="13_tumbleweed_2"]
-[ext_resource type="Texture2D" path="res://art/scene01_hills/scene01_tumbleweed_3.png" id="14_tumbleweed_3"]
-[ext_resource type="Texture2D" path="res://art/scene01_hills/scene01_tumbleweed_4.png" id="15_tumbleweed_4"]
-[ext_resource type="Script" path="res://scenes/chapter1/scene_parallax_controller.gd" id="16_parallax_controller"]
+[ext_resource type="Texture2D" uid="uid://dqpngl35g1bpt" path="res://art/scene01_hills/scene01_sky.png" id="1_sky"]
+[ext_resource type="Texture2D" uid="uid://b05k1vphlcyrf" path="res://art/scene01_hills/scene01_atmosphere.png" id="2_atmosphere"]
+[ext_resource type="Texture2D" uid="uid://d2dft8dvkav15" path="res://art/scene01_hills/scene01_sun.png" id="3_sun"]
+[ext_resource type="Texture2D" uid="uid://1yqcw4vipe30" path="res://art/scene01_hills/scene01_cloud_mist.png" id="4_cloud_mist"]
+[ext_resource type="Texture2D" uid="uid://dnbceikiunthj" path="res://art/scene01_hills/scene01_far_mountains.png" id="5_far_mountains"]
+[ext_resource type="Texture2D" uid="uid://c16873xb14v1d" path="res://art/scene01_hills/scene01_mid_mountains.png" id="6_mid_mountains"]
+[ext_resource type="Texture2D" uid="uid://b87ph5n8lbuoq" path="res://art/scene01_hills/scene01_near_mountains.png" id="7_near_mountains"]
+[ext_resource type="Texture2D" uid="uid://7fx3dywc3wl5" path="res://art/scene01_hills/scene01_trees.png" id="8_trees"]
+[ext_resource type="Texture2D" uid="uid://dav22y8trurt2" path="res://art/scene01_hills/scene01_ground.png" id="9_ground"]
+[ext_resource type="Texture2D" uid="uid://ceti5vssf64i1" path="res://art/scene01_hills/scene01_front_mist.png" id="10_front_mist"]
+[ext_resource type="Texture2D" uid="uid://g7g1gkho5ey" path="res://art/scene01_hills/scene01_tumbleweed.png" id="11_tumbleweed"]
+[ext_resource type="Texture2D" uid="uid://bgff0gqelwlxx" path="res://art/scene01_hills/scene01_tumbleweed_1.png" id="12_tumbleweed_1"]
+[ext_resource type="Texture2D" uid="uid://bvjcfpkec187s" path="res://art/scene01_hills/scene01_tumbleweed_2.png" id="13_tumbleweed_2"]
+[ext_resource type="Texture2D" uid="uid://dbce75fnr0asf" path="res://art/scene01_hills/scene01_tumbleweed_3.png" id="14_tumbleweed_3"]
+[ext_resource type="Texture2D" uid="uid://ccfw3l45fcpql" path="res://art/scene01_hills/scene01_tumbleweed_4.png" id="15_tumbleweed_4"]
+[ext_resource type="Script" uid="uid://ca3t02tusixb4" path="res://scenes/chapter1/scene_parallax_controller.gd" id="16_parallax_controller"]
 
-[node name="Scene01" type="Node2D"]
+[node name="Scene01" type="Node2D" unique_id=1940922954]
 script = ExtResource("16_parallax_controller")
-stop_at_end_point = true
 
-[node name="SkyParallax" type="Parallax2D" parent="."]
-scroll_scale = Vector2(1, 1)
+[node name="Background" type="Node2D" parent="." unique_id=85563982]
 
-[node name="Sky" type="Sprite2D" parent="SkyParallax"]
+[node name="SkyParallax" type="Parallax2D" parent="Background" unique_id=981712653]
 z_index = -100
+repeat_size = Vector2(4340, 0)
+repeat_times = 5
+
+[node name="Sky" type="Sprite2D" parent="Background/SkyParallax" unique_id=1906822771]
 texture = ExtResource("1_sky")
 centered = false
 
-[node name="AtmosphereParallax" type="Parallax2D" parent="."]
+[node name="AtmosphereParallax" type="Parallax2D" parent="Background" unique_id=1560606128]
+z_index = -95
 scroll_scale = Vector2(0.02, 0.02)
 
-[node name="Atmosphere" type="Sprite2D" parent="AtmosphereParallax"]
-z_index = -95
+[node name="Atmosphere" type="Sprite2D" parent="Background/AtmosphereParallax" unique_id=1621586889]
+z_index = 1
+z_as_relative = false
 texture = ExtResource("2_atmosphere")
 centered = false
 
-[node name="SunParallax" type="Parallax2D" parent="."]
+[node name="SunParallax" type="Parallax2D" parent="Background" unique_id=1173331651]
+z_index = -80
 scroll_scale = Vector2(0.04, 0.03)
 
-[node name="Sun" type="Sprite2D" parent="SunParallax"]
-z_index = -90
+[node name="Sun" type="Sprite2D" parent="Background/SunParallax" unique_id=1742105397]
 texture = ExtResource("3_sun")
 centered = false
 
-[node name="CloudMistParallax" type="Parallax2D" parent="."]
+[node name="CloudMistParallax" type="Parallax2D" parent="Background" unique_id=1971419617]
+z_index = -85
 scroll_scale = Vector2(0.08, 0.08)
 
-[node name="CloudMist" type="Sprite2D" parent="CloudMistParallax"]
-z_index = -85
+[node name="CloudMist" type="Sprite2D" parent="Background/CloudMistParallax" unique_id=1676536941]
 texture = ExtResource("4_cloud_mist")
 centered = false
 
-[node name="FarMountainsParallax" type="Parallax2D" parent="."]
+[node name="FarMountainsParallax" type="Parallax2D" parent="Background" unique_id=1826291857]
+z_index = -70
 scroll_scale = Vector2(0.15, 0.15)
 
-[node name="FarMountains" type="Sprite2D" parent="FarMountainsParallax"]
-z_index = -70
+[node name="FarMountains" type="Sprite2D" parent="Background/FarMountainsParallax" unique_id=1799107948]
 texture = ExtResource("5_far_mountains")
 centered = false
 
-[node name="MidMountainsParallax" type="Parallax2D" parent="."]
+[node name="MidMountainsParallax" type="Parallax2D" parent="Background" unique_id=1021935901]
+z_index = -60
 scroll_scale = Vector2(0.3, 0.3)
 
-[node name="MidMountains" type="Sprite2D" parent="MidMountainsParallax"]
-z_index = -60
+[node name="MidMountains" type="Sprite2D" parent="Background/MidMountainsParallax" unique_id=477800438]
 texture = ExtResource("6_mid_mountains")
 centered = false
 
-[node name="TreesParallax" type="Parallax2D" parent="."]
+[node name="TreesParallax" type="Parallax2D" parent="Background" unique_id=1128709258]
+z_index = -50
 scroll_scale = Vector2(0.45, 0.45)
 
-[node name="Trees" type="Sprite2D" parent="TreesParallax"]
-z_index = -45
+[node name="Trees" type="Sprite2D" parent="Background/TreesParallax" unique_id=1632176514]
+z_index = 10
+z_as_relative = false
 texture = ExtResource("8_trees")
 centered = false
 
-[node name="NearMountainsParallax" type="Parallax2D" parent="."]
+[node name="NearMountainsParallax" type="Parallax2D" parent="Background" unique_id=1524474909]
+z_index = -40
 scroll_scale = Vector2(0.6, 0.6)
 
-[node name="NearMountains" type="Sprite2D" parent="NearMountainsParallax"]
-z_index = -35
+[node name="NearMountains" type="Sprite2D" parent="Background/NearMountainsParallax" unique_id=80741339]
 texture = ExtResource("7_near_mountains")
 centered = false
 
-[node name="GroundParallax" type="Parallax2D" parent="."]
-
-[node name="Ground" type="Sprite2D" parent="GroundParallax"]
+[node name="GroundParallax" type="Parallax2D" parent="Background" unique_id=2122907863]
 z_index = -20
+
+[node name="Ground" type="Sprite2D" parent="Background/GroundParallax" unique_id=515018186]
+z_as_relative = false
 texture = ExtResource("9_ground")
 centered = false
 
-[node name="FrontMistParallax" type="Parallax2D" parent="."]
+[node name="FrontMistParallax" type="Parallax2D" parent="Background" unique_id=2029149382]
+z_index = 1
 scroll_scale = Vector2(1.1, 1.1)
 
-[node name="FrontMist" type="Sprite2D" parent="FrontMistParallax"]
-z_index = 1
+[node name="FrontMist" type="Sprite2D" parent="Background/FrontMistParallax" unique_id=22121399]
+z_index = -70
 texture = ExtResource("10_front_mist")
 centered = false
 
-[node name="Tumbleweeds" type="Node2D" parent="."]
+[node name="Tumbleweeds" type="Node2D" parent="." unique_id=918054297]
 
-[node name="Tumbleweed" type="Sprite2D" parent="Tumbleweeds"]
-z_index = 0
+[node name="Tumbleweed" type="Sprite2D" parent="Tumbleweeds" unique_id=1925814922]
 texture = ExtResource("11_tumbleweed")
 centered = false
 
-[node name="Tumbleweed1" type="Sprite2D" parent="Tumbleweeds"]
-z_index = 0
+[node name="Tumbleweed1" type="Sprite2D" parent="Tumbleweeds" unique_id=310086310]
 texture = ExtResource("12_tumbleweed_1")
 centered = false
 
-[node name="Tumbleweed2" type="Sprite2D" parent="Tumbleweeds"]
-z_index = 0
+[node name="Tumbleweed2" type="Sprite2D" parent="Tumbleweeds" unique_id=246160781]
 texture = ExtResource("13_tumbleweed_2")
 centered = false
 
-[node name="Tumbleweed3" type="Sprite2D" parent="Tumbleweeds"]
-z_index = 0
+[node name="Tumbleweed3" type="Sprite2D" parent="Tumbleweeds" unique_id=2130757419]
 texture = ExtResource("14_tumbleweed_3")
 centered = false
 
-[node name="Tumbleweed4" type="Sprite2D" parent="Tumbleweeds"]
-z_index = 0
+[node name="Tumbleweed4" type="Sprite2D" parent="Tumbleweeds" unique_id=1251322114]
+z_index = 10
 texture = ExtResource("15_tumbleweed_4")
 centered = false
 
-[node name="SceneMarkers" type="Node2D" parent="."]
+[node name="SceneMarkers" type="Node2D" parent="." unique_id=1703841658]
 
-[node name="StartPoint" type="Marker2D" parent="SceneMarkers"]
+[node name="StartPoint" type="Marker2D" parent="SceneMarkers" unique_id=715217161]
 position = Vector2(0, 520)
 
-[node name="EndPoint" type="Marker2D" parent="SceneMarkers"]
-position = Vector2(2170, 520)
+[node name="EndPoint" type="Marker2D" parent="SceneMarkers" unique_id=311680605]
+position = Vector2(9000, 520)

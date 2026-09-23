@@ -1,7 +1,7 @@
 extends Area2D
 
-const NORMAL_ZONE_COLOR := Color(0.28, 0.55, 0.68, 0.18)
-const REDUCED_ZONE_COLOR := Color(0.24, 0.5, 0.34, 0.14)
+const NORMAL_ZONE_COLOR := Color(0.28, 0.55, 0.68, 0.0)
+const REDUCED_ZONE_COLOR := Color(0.24, 0.5, 0.34, 0.0)
 const NORMAL_DIRECTION_TEXT := "<<<<        <<<<        <<<<"
 const REDUCED_DIRECTION_TEXT := "<<          <<          <<"
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3]
+[gd_scene load_steps=32 format=3]
 
 [ext_resource type="PackedScene" path="res://Player.tscn" id="1_player"]
 [ext_resource type="PackedScene" path="res://Seed.tscn" id="2_seed"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" path="res://scenes/chapter1/scene02.tscn" id="19_scene02"]
 [ext_resource type="PackedScene" path="res://scenes/chapter1/scene06.tscn" id="20_scene06"]
 [ext_resource type="PackedScene" path="res://scenes/chapter1/scene01.tscn" id="21_scene01"]
+[ext_resource type="Script" path="res://scene_transition.gd" id="22_scene_transition"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
 size = Vector2(32000, 80)
@@ -45,6 +46,9 @@ size = Vector2(32, 220)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gate_hint"]
 size = Vector2(120, 220)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_scene_transition"]
+size = Vector2(80, 220)
 
 [node name="Demo_Level" type="Control"]
 layout_mode = 3
@@ -75,10 +79,46 @@ scale = Vector2(1.08, 1.08)
 [node name="Scene02" parent="." instance=ExtResource("19_scene02")]
 position = Vector2(3170, 0)
 scale = Vector2(1.08, 1.08)
+visible = false
 
 [node name="Scene06" parent="." instance=ExtResource("20_scene06")]
 position = Vector2(10721, -24)
 scale = Vector2(1.13485, 1.13485)
+
+[node name="SceneTransition" type="Area2D" parent="."]
+position = Vector2(9000, 470)
+collision_layer = 0
+collision_mask = 1
+monitoring = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SceneTransition"]
+shape = SubResource("RectangleShape2D_scene_transition")
+
+[node name="PortalVisual" type="Polygon2D" parent="SceneTransition"]
+z_index = 4
+polygon = PackedVector2Array(-10, -110, 10, -110, 22, -80, 22, 80, 10, 110, -10, 110, -22, 80, -22, -80)
+color = Color(0.35, 0.75, 0.82, 0.55)
+
+[node name="TransitionController" type="Node" parent="."]
+script = ExtResource("22_scene_transition")
+player_path = NodePath("../PlayerSpawn/Player")
+first_scene_path = NodePath("../Scene01")
+next_scene_path = NodePath("../Scene02")
+trigger_path = NodePath("../SceneTransition")
+overlay_path = NodePath("../TransitionOverlay/Fade")
+
+[node name="TransitionOverlay" type="CanvasLayer" parent="."]
+layer = 100
+
+[node name="Fade" type="ColorRect" parent="TransitionOverlay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.01, 0.02, 0.025, 1)
 
 [node name="Ground" type="StaticBody2D" parent="."]
 position = Vector2(576, 600)

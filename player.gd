@@ -6,6 +6,7 @@ const DEFEND_MOVE_MULTIPLIER := 0.5
 const DEFEND_WIND_MULTIPLIER := 0.3
 const RESPAWN_SETTLE_FRAMES := 2
 const RUN_ANIMATION_SPEED_MULTIPLIER := 1.5
+const JUMP_ANIMATION_FPS := 48.0
 
 @export var move_speed: float = 220.0
 @export var jump_velocity: float = -420.0
@@ -47,13 +48,13 @@ func _setup_jump_animation() -> void:
 				frames.add_frame(&"default", texture)
 	if frames.get_frame_count(&"default") == 0:
 		return
-	frames.set_animation_speed(&"default", 24.0)
+	frames.set_animation_speed(&"default", JUMP_ANIMATION_FPS)
 	frames.set_animation_loop(&"default", false)
 	var jump_frames := frames.get_frame_count(&"default")
 	animated_sprite.sprite_frames.add_animation(&"jump")
 	for index in jump_frames:
 		animated_sprite.sprite_frames.add_frame(&"jump", frames.get_frame_texture(&"default", index))
-	animated_sprite.sprite_frames.set_animation_speed(&"jump", 24.0)
+		animated_sprite.sprite_frames.set_animation_speed(&"jump", JUMP_ANIMATION_FPS)
 	animated_sprite.sprite_frames.set_animation_loop(&"jump", false)
 	jump_animation_ready = true
 

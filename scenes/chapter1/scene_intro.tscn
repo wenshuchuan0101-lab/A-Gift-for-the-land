@@ -1,0 +1,68 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Texture2D" path="res://art/scene_intro/cover.jpg" id="1_cover"]
+[ext_resource type="Script" path="res://scenes/chapter1/scene_intro.gd" id="2_intro"]
+
+[node name="SceneIntro" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_intro")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+modulate = Color(1, 1, 1, 0.7)
+texture = ExtResource("1_cover")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="TextContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 72.0
+offset_bottom = 386.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_constants/separation = 18
+alignment = 1
+
+[node name="Title" type="Label" parent="TextContainer"]
+custom_minimum_size = Vector2(1040, 82)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 64
+text = "荒原低语"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Divider" type="ColorRect" parent="TextContainer"]
+custom_minimum_size = Vector2(940, 2)
+layout_mode = 2
+size_flags_horizontal = 4
+mouse_filter = 2
+color = Color(1, 1, 1, 1)
+
+[node name="Description" type="Label" parent="TextContainer"]
+custom_minimum_size = Vector2(1040, 112)
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_font_sizes/font_size = 28
+text = "旧日的歌谣已经被黄沙掩埋，旅人啊，循着风声，找到它遗落的最后一节。"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="AnimationController" type="Node" parent="."]

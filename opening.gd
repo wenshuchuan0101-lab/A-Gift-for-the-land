@@ -1,6 +1,6 @@
 extends Control
 
-const NEXT_SCENE_PATH := "res://Demo_Level.tscn"
+const NEXT_SCENE_PATH := "res://scenes/chapter1/scene_intro.tscn"
 
 var is_transitioning := false
 
