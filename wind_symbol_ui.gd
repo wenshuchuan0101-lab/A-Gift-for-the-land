@@ -1,8 +1,8 @@
 extends CanvasLayer
 
 const SYMBOL_TEXTURE: Texture2D = preload("res://art/ui/wind_symbol.png")
-const WIDTH_RATIO := 0.30
-const MAX_WIDTH := 560.0
+const WIDTH_RATIO := 0.15
+const MAX_WIDTH := 280.0
 
 var symbol_rect: TextureRect
 
