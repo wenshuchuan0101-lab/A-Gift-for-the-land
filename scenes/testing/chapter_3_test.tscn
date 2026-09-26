@@ -12,7 +12,7 @@ script = ExtResource("3_script")
 
 
 [node name="Map" parent="." instance=ExtResource("1_map")]
-position = Vector2(0, 0)
+position = Vector2(180, 500)
 
 [node name="Ground" type="StaticBody2D" parent="."]
 position = Vector2(1000, 590)
@@ -21,6 +21,8 @@ position = Vector2(1000, 590)
 shape = SubResource("GroundShape")
 
 [node name="Player" parent="." instance=ExtResource("2_player")]
-position = Vector2(0, 0)
+position = Vector2(180, 500)
+
+
 
 
