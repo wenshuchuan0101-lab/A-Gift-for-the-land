@@ -9,7 +9,7 @@ size = Vector2(4000, 80)
 
 [node name="Chapter2Map" type="Node2D"]
 script = ExtResource("3_script")
-map_title = "Scene 2"`r`nplayer_start = Vector2(180, 500)
+
 
 [node name="Map" parent="." instance=ExtResource("1_map")]
 position = Vector2(0, 0)
@@ -22,4 +22,5 @@ shape = SubResource("GroundShape")
 
 [node name="Player" parent="." instance=ExtResource("2_player")]
 position = Vector2(180, 500)
+
 
