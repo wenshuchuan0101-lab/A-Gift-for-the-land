@@ -16,6 +16,9 @@ func _unhandled_input(event: InputEvent) -> void:
 	if is_transitioning:
 		return
 
+	if event is InputEventMouseButton or event is InputEventScreenTouch:
+		return
+
 	if not _is_transition_input(event):
 		return
 
@@ -39,3 +42,4 @@ func _is_transition_input(event: InputEvent) -> bool:
 	if event is InputEventScreenTouch:
 		return event.pressed
 	return false
+

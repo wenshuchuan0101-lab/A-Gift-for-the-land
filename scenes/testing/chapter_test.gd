@@ -1,7 +1,7 @@
-extends Control
+extends Node
 
 const CHAPTER_SELECTION_PATH := "res://scenes/ui/chapter_selection.tscn"
-
+@export var map_title := "Scene"
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):
