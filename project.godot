@@ -18,6 +18,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 WindSymbolUI="*res://wind_symbol_ui.gd"
+SaveManager="*res://save_manager.gd"
 
 [display]
 
@@ -75,3 +76,4 @@ pointing/emulate_touch_from_mouse=true
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+
