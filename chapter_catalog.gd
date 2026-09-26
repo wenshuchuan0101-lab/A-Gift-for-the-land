@@ -3,7 +3,7 @@ extends RefCounted
 const CHAPTERS := [
 	{
 		"display_name": "Scene 1",
-		"scene_path": "res://Demo_Level.tscn",
+		"scene_path": "res://scenes/chapter1/scene_intro.tscn",
 		"is_test": false,
 	},
 	{
@@ -21,3 +21,4 @@ const CHAPTERS := [
 
 static func is_chapter_unlocked(_chapter_index: int) -> bool:
 	return true
+

@@ -3,7 +3,7 @@ extends SceneTree
 const SELECTOR_PATH := "res://scenes/ui/chapter_selection.tscn"
 const MENU_PATH := "res://Opening.tscn"
 const CHAPTER_PATHS := [
-	"res://Demo_Level.tscn",
+	"res://scenes/chapter1/scene_intro.tscn",
 	"res://scenes/testing/chapter_2_test.tscn",
 	"res://scenes/testing/chapter_3_test.tscn",
 ]
@@ -100,3 +100,4 @@ func _assert(condition: bool, description: String) -> void:
 	else:
 		failure_count += 1
 		printerr("FAIL: " + description)
+
