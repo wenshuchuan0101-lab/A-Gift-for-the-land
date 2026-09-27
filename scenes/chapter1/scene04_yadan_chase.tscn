@@ -1,0 +1,1607 @@
+[gd_scene format=3 uid="uid://cm32myjnl37pv"]
+
+[ext_resource type="Script" uid="uid://c0umc0vt03llg" path="res://scene4_controller.gd" id="1_ctrl"]
+[ext_resource type="Script" uid="uid://cql36ex18m4l7" path="res://scene4_player.gd" id="2_player"]
+[ext_resource type="Script" uid="uid://cj7hjnc8kvql7" path="res://scene4_pursuer.gd" id="3_pursuer"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_ground"]
+albedo_color = Color(0.25, 0.16, 0.12, 1)
+roughness = 0.95
+
+[sub_resource type="BoxMesh" id="BoxMesh_ground"]
+size = Vector3(45.40869, 1, 520)
+
+[sub_resource type="BoxShape3D" id="BoxShape_ground"]
+size = Vector3(46, 1, 520)
+
+[sub_resource type="BoxShape3D" id="BoxShape_wind_boundary"]
+size = Vector3(1, 8, 520)
+
+[sub_resource type="StandardMaterial3D" id="Mat_rock_near"]
+albedo_color = Color(0.42, 0.22, 0.14, 1)
+roughness = 0.9
+
+[sub_resource type="BoxMesh" id="BoxMesh_rock"]
+size = Vector3(1, 1.0281982, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape_rock"]
+
+[sub_resource type="StandardMaterial3D" id="Mat_rock_mid"]
+albedo_color = Color(0.31, 0.2, 0.18, 1)
+roughness = 0.92
+
+[sub_resource type="FogMaterial" id="FogMaterial_inner"]
+density = 0.012
+albedo = Color(0.36, 0.42, 0.56, 1)
+height_falloff = 0.18
+
+[sub_resource type="FogMaterial" id="FogMaterial_outer"]
+density = 0.028
+albedo = Color(0.25, 0.31, 0.48, 1)
+height_falloff = 0.12
+
+[sub_resource type="FogMaterial" id="FogMaterial_far"]
+density = 0.045
+albedo = Color(0.18, 0.24, 0.4, 1)
+height_falloff = 0.08
+
+[sub_resource type="StandardMaterial3D" id="Mat_rock_far"]
+albedo_color = Color(0.19, 0.18, 0.22, 1)
+roughness = 0.96
+
+[sub_resource type="StandardMaterial3D" id="Mat_marker"]
+albedo_color = Color(1, 0.55, 0.15, 1)
+emission_enabled = true
+emission = Color(1, 0.22, 0.04, 1)
+emission_energy_multiplier = 2.2
+
+[sub_resource type="CapsuleShape3D" id="Capsule_player"]
+radius = 0.42
+height = 1.8
+
+[sub_resource type="StandardMaterial3D" id="Mat_pursuer"]
+albedo_color = Color(0.04, 0.015, 0.02, 1)
+emission_enabled = true
+emission = Color(0.32, 0.015, 0.02, 1)
+emission_energy_multiplier = 2.5
+
+[sub_resource type="CapsuleMesh" id="Capsule_pursuer"]
+radius = 0.75
+height = 2.8
+radial_segments = 12
+rings = 4
+
+[sub_resource type="CapsuleShape3D" id="Capsule_pursuer_shape"]
+radius = 0.75
+height = 2.8
+
+[sub_resource type="Environment" id="Environment_scene4"]
+background_mode = 1
+background_color = Color(0.8, 0.48, 0.32, 1)
+ambient_light_source = 3
+ambient_light_color = Color(1, 0.78, 0.58, 1)
+ambient_light_energy = 1.05
+reflected_light_source = 2
+tonemap_mode = 2
+fog_enabled = true
+fog_light_color = Color(0.78, 0.45, 0.34, 1)
+fog_density = 0.006
+fog_sky_affect = 0.55
+
+[sub_resource type="BoxShape3D" id="BoxShape_trigger"]
+size = Vector3(12, 4, 8)
+
+[sub_resource type="StandardMaterial3D" id="Mat_exit"]
+albedo_color = Color(0.2, 0.52, 0.75, 1)
+emission_enabled = true
+emission = Color(0.12, 0.55, 1, 1)
+emission_energy_multiplier = 5.0
+
+[sub_resource type="BoxShape3D" id="BoxShape_exit"]
+size = Vector3(14, 5, 10)
+
+[node name="Scene04_YadanChase" type="Node3D" unique_id=199125632]
+script = ExtResource("1_ctrl")
+
+[node name="Terrain" type="Node3D" parent="." unique_id=696131653]
+
+[node name="Ground" type="StaticBody3D" parent="Terrain" unique_id=1551730567]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -240)
+
+[node name="Mesh" type="MeshInstance3D" parent="Terrain/Ground" unique_id=1274220599]
+transform = Transform3D(2.9771357, 0, 0, 0, 1, 0, 0, 0, 1, -0.16859138, 0.34223938, -0.12261963)
+material_override = SubResource("Mat_ground")
+mesh = SubResource("BoxMesh_ground")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Ground" unique_id=1103353135]
+shape = SubResource("BoxShape_ground")
+
+[node name="Boundaries" type="Node3D" parent="Terrain" unique_id=880434282]
+
+[node name="LeftGroundBoundary" type="StaticBody3D" parent="Terrain/Boundaries" unique_id=1603128865]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.8, 4, -240)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Boundaries/LeftGroundBoundary" unique_id=30725770]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7275963, 0, 0)
+shape = SubResource("BoxShape_wind_boundary")
+
+[node name="RightGroundBoundary" type="StaticBody3D" parent="Terrain/Boundaries" unique_id=2059511087]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.8, 4, -240)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Boundaries/RightGroundBoundary" unique_id=2129004821]
+shape = SubResource("BoxShape_wind_boundary")
+
+[node name="WindFields" type="Node3D" parent="." unique_id=241580570]
+
+[node name="CentralClearRoute" type="Marker3D" parent="WindFields" unique_id=1235106112]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -240)
+
+[node name="LeftWindZone" type="Area3D" parent="WindFields" unique_id=329817462]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 3, -240)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WindFields/LeftWindZone" unique_id=71690634]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 1, -5.025776, -0.014144897, 1.2255249)
+shape = SubResource("BoxShape_wind_boundary")
+
+[node name="RightWindZone" type="Area3D" parent="WindFields" unique_id=1826935619]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 3, -240)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WindFields/RightWindZone" unique_id=1606475246]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 1, 22.740227, 0, 0)
+shape = SubResource("BoxShape_wind_boundary")
+
+[node name="Rocks_Near" type="Node3D" parent="." unique_id=402207338]
+
+[node name="Near_01" type="StaticBody3D" parent="Rocks_Near" unique_id=432429248]
+transform = Transform3D(2.934443, 0, 0.6237351, 0, 8, 0, -0.6237351, 0, 2.934443, -6, 4, -28)
+
+[node name="Mesh" type="MeshInstance3D" parent="Rocks_Near/Near_01" unique_id=1001464829]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.22923326, 0, 1.0784578)
+material_override = SubResource("Mat_rock_near")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh2" type="MeshInstance3D" parent="Rocks_Near/Near_01" unique_id=1706370357]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8112969, 0, 8.521482)
+material_override = SubResource("Mat_rock_near")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rocks_Near/Near_01" unique_id=1376776031]
+shape = SubResource("BoxShape_rock")
+
+[node name="Near_02" type="StaticBody3D" parent="Rocks_Near" unique_id=1304250405]
+transform = Transform3D(3.8042262, 0, -0.9888544, 0, 10, 0, 1.236068, 0, 3.043381, 7, 5, -42)
+
+[node name="Mesh" type="MeshInstance3D" parent="Rocks_Near/Near_02" unique_id=376569308]
+material_override = SubResource("Mat_rock_near")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh3" type="MeshInstance3D" parent="Rocks_Near/Near_02" unique_id=1880235261]
+transform = Transform3D(0.8504741, 0, 0.52601725, 0, 1, 0, -0.52601707, 0, 0.8504744, -0.88462245, 0, 4.7725086)
+material_override = SubResource("Mat_rock_near")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh2" type="MeshInstance3D" parent="Rocks_Near/Near_02" unique_id=18698698]
+transform = Transform3D(1.0000001, 0, 1.4901161e-08, 0, 1, 0, 1.7881393e-07, 0, 1.0000006, -0.42149675, 0, 7.0026975)
+material_override = SubResource("Mat_rock_near")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rocks_Near/Near_02" unique_id=1461726704]
+shape = SubResource("BoxShape_rock")
+
+[node name="Near_03" type="StaticBody3D" parent="Rocks_Near" unique_id=1920850732]
+transform = Transform3D(3.0903165, 0, 1.4084147, 0, 12, 0, -1.6431506, 0, 2.6488428, -7, 6, -62)
+
+[node name="Mesh" type="MeshInstance3D" parent="Rocks_Near/Near_03" unique_id=875534784]
+material_override = SubResource("Mat_rock_near")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh2" type="MeshInstance3D" parent="Rocks_Near/Near_03" unique_id=932774603]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 5.9604645e-08, 0, 0.9999999, -0.78374386, 0, 2.4496346)
+material_override = SubResource("Mat_rock_near")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rocks_Near/Near_03" unique_id=256731273]
+shape = SubResource("BoxShape_rock")
+
+[node name="Near_04" type="StaticBody3D" parent="Rocks_Near" unique_id=2134172884]
+transform = Transform3D(2.3745346, 0, -1.8547175, 0, 9, 0, 1.483774, 0, 2.9681683, 6, 5, -78)
+
+[node name="Mesh" type="MeshInstance3D" parent="Rocks_Near/Near_04" unique_id=1732283698]
+material_override = SubResource("Mat_rock_near")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rocks_Near/Near_04" unique_id=104286977]
+shape = SubResource("BoxShape_rock")
+
+[node name="Near_05" type="StaticBody3D" parent="Rocks_Near" unique_id=1244360862]
+transform = Transform3D(2.883785, 0, 0.7717846, 0, 8, 0, -0.82691205, 0, 2.6915326, -5, 4, -104)
+
+[node name="Mesh" type="MeshInstance3D" parent="Rocks_Near/Near_05" unique_id=71121005]
+material_override = SubResource("Mat_rock_near")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rocks_Near/Near_05" unique_id=380404755]
+shape = SubResource("BoxShape_rock")
+
+[node name="Near_06" type="StaticBody3D" parent="Rocks_Near" unique_id=2093367392]
+transform = Transform3D(2.4257393, 0, -0.7257657, 0, 11, 0, 0.60480475, 0, 2.9108872, 5, 6, -128)
+
+[node name="Mesh" type="MeshInstance3D" parent="Rocks_Near/Near_06" unique_id=1013452873]
+material_override = SubResource("Mat_rock_near")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh2" type="MeshInstance3D" parent="Rocks_Near/Near_06" unique_id=922373457]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 2.9802322e-08, 0, 0.9999999, -7.860941, 0, -9.262516)
+material_override = SubResource("Mat_rock_near")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh3" type="MeshInstance3D" parent="Rocks_Near/Near_06" unique_id=1342927106]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 2.9802322e-08, 0, 0.9999999, -14.000774, 0, -28.491547)
+material_override = SubResource("Mat_rock_near")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh4" type="MeshInstance3D" parent="Rocks_Near/Near_06" unique_id=1560192999]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 2.9802322e-08, 0, 0.9999999, -18.523438, 0, -39.18924)
+material_override = SubResource("Mat_rock_near")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh6" type="MeshInstance3D" parent="Rocks_Near/Near_06" unique_id=151711122]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 2.9802322e-08, 0, 0.9999999, -17.155378, 0, -67.030426)
+material_override = SubResource("Mat_rock_near")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh8" type="MeshInstance3D" parent="Rocks_Near/Near_06" unique_id=1972449692]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 2.9802322e-08, 0, 0.9999999, -21.133299, 0, -74.38223)
+material_override = SubResource("Mat_rock_near")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh11" type="MeshInstance3D" parent="Rocks_Near/Near_06" unique_id=590026354]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 2.9802322e-08, 0, 0.9999999, -29.023232, 0, -100.75288)
+material_override = SubResource("Mat_rock_near")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh12" type="MeshInstance3D" parent="Rocks_Near/Near_06" unique_id=2079268093]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 2.9802322e-08, 0, 0.9999999, -28.293526, 0, -107.48173)
+material_override = SubResource("Mat_rock_near")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh9" type="MeshInstance3D" parent="Rocks_Near/Near_06" unique_id=743648325]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 2.9802322e-08, 0, 0.9999999, -28.329506, 0, -72.88705)
+material_override = SubResource("Mat_rock_near")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh10" type="MeshInstance3D" parent="Rocks_Near/Near_06" unique_id=1064058717]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 2.9802322e-08, 0, 0.9999999, -29.640842, 0, -83.71947)
+material_override = SubResource("Mat_rock_near")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh5" type="MeshInstance3D" parent="Rocks_Near/Near_06" unique_id=630344942]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 2.9802322e-08, 0, 0.9999999, -19.15113, 0, -48.629227)
+material_override = SubResource("Mat_rock_near")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh7" type="MeshInstance3D" parent="Rocks_Near/Near_06" unique_id=352461861]
+transform = Transform3D(0.9999999, 0, 0, 0, 0.9999999, 0, 2.9802322e-08, 0, 0.9999999, -25.121391, 0, -68.58375)
+material_override = SubResource("Mat_rock_near")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rocks_Near/Near_06" unique_id=1192191377]
+shape = SubResource("BoxShape_rock")
+
+[node name="Rocks_BoundaryLandmarks" type="Node3D" parent="." unique_id=1953682323]
+
+[node name="Landmark_L_Entrance" type="StaticBody3D" parent="Rocks_BoundaryLandmarks" unique_id=546436838]
+transform = Transform3D(3.043381, 0, 0.927051, 0, 10, 0, -0.9888544, 0, 2.8531697, -13, 5, -10)
+
+[node name="Mesh" type="MeshInstance3D" parent="Rocks_BoundaryLandmarks/Landmark_L_Entrance" unique_id=329830446]
+material_override = SubResource("Mat_rock_near")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rocks_BoundaryLandmarks/Landmark_L_Entrance" unique_id=1304579791]
+shape = SubResource("BoxShape_rock")
+
+[node name="Landmark_R_Turn" type="StaticBody3D" parent="Rocks_BoundaryLandmarks" unique_id=998868575]
+transform = Transform3D(3.2451434, 0, -1.1987411, 0, 14, 0, 1.311123, 0, 2.9669883, 13, 7, -52)
+
+[node name="Mesh" type="MeshInstance3D" parent="Rocks_BoundaryLandmarks/Landmark_R_Turn" unique_id=858227113]
+material_override = SubResource("Mat_rock_near")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh2" type="MeshInstance3D" parent="Rocks_BoundaryLandmarks/Landmark_R_Turn" unique_id=715030145]
+transform = Transform3D(1.0000001, 0, -2.9802322e-08, 0, 1, 0, 0, 0, 1, 1.1668258, 0, 3.1587439)
+material_override = SubResource("Mat_rock_near")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rocks_BoundaryLandmarks/Landmark_R_Turn" unique_id=2104219176]
+shape = SubResource("BoxShape_rock")
+
+[node name="Landmark_L_Night" type="StaticBody3D" parent="Rocks_BoundaryLandmarks" unique_id=955403288]
+transform = Transform3D(3.881183, 0, 0.91930324, 0, 16, 0, -0.9676876, 0, 3.6871238, -14, 8, -164)
+
+[node name="Mesh" type="MeshInstance3D" parent="Rocks_BoundaryLandmarks/Landmark_L_Night" unique_id=2025085309]
+material_override = SubResource("Mat_rock_near")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rocks_BoundaryLandmarks/Landmark_L_Night" unique_id=1533609951]
+shape = SubResource("BoxShape_rock")
+
+[node name="Landmark_R_Night" type="StaticBody3D" parent="Rocks_BoundaryLandmarks" unique_id=1346693174]
+transform = Transform3D(4.3256774, 0, -1.1025494, 0, 18, 0, 1.2403681, 0, 3.8450468, 14, 9, -288)
+
+[node name="Mesh" type="MeshInstance3D" parent="Rocks_BoundaryLandmarks/Landmark_R_Night" unique_id=774857762]
+material_override = SubResource("Mat_rock_near")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh2" type="MeshInstance3D" parent="Rocks_BoundaryLandmarks/Landmark_R_Night" unique_id=963179586]
+transform = Transform3D(1, 0, 2.9802322e-08, 0, 1, 0, -8.940697e-08, 0, 1, -6.3442087, 0, -1.8727875)
+material_override = SubResource("Mat_rock_near")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rocks_BoundaryLandmarks/Landmark_R_Night" unique_id=1497866286]
+shape = SubResource("BoxShape_rock")
+
+[node name="Rocks_Mid" type="Node3D" parent="." unique_id=2036920691]
+
+[node name="Mid_01" type="StaticBody3D" parent="Rocks_Mid" unique_id=1550032863]
+transform = Transform3D(4, 0, 0, 0, 14, 0, 0, 0, 4, 10, 7, -18)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rocks_Mid/Mid_01" unique_id=1862823847]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.0506916)
+shape = SubResource("BoxShape_rock")
+
+[node name="Mesh" type="MeshInstance3D" parent="Rocks_Mid" unique_id=1477900280]
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mid_02" type="StaticBody3D" parent="Rocks_Mid" unique_id=349929495]
+transform = Transform3D(4, 0, 0, 0, 12, 0, 0, 0, 4, -10, 6, -50)
+
+[node name="Mesh" type="MeshInstance3D" parent="Rocks_Mid/Mid_02" unique_id=212194376]
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh2" type="MeshInstance3D" parent="Rocks_Mid/Mid_02" unique_id=148291399]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6817422, 0, -0.31457615)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rocks_Mid/Mid_02" unique_id=1908208553]
+shape = SubResource("BoxShape_rock")
+
+[node name="Mid_03" type="StaticBody3D" parent="Rocks_Mid" unique_id=1650259511]
+transform = Transform3D(4, 0, 0, 0, 10, 0, 0, 0, 5, 9, 5, -72)
+
+[node name="Mesh" type="MeshInstance3D" parent="Rocks_Mid/Mid_03" unique_id=2104543262]
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh4" type="MeshInstance3D" parent="Rocks_Mid/Mid_03" unique_id=1948973224]
+transform = Transform3D(1, 0, 0, 0, 0.99999976, 0, 0, 0, 0.99999976, -3.9437137, 0, -1.4271173)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh3" type="MeshInstance3D" parent="Rocks_Mid/Mid_03" unique_id=1508517753]
+transform = Transform3D(1, 0, 0, 0, 0.9999998, 0, 0, 0, 0.9999998, -3.972528, 0, 5.6481695)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh2" type="MeshInstance3D" parent="Rocks_Mid/Mid_03" unique_id=1865419988]
+transform = Transform3D(1, 0, 0, 0, 0.99999976, 0, 0, 0, 0.99999976, -5.086079, 0, 2.381034)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rocks_Mid/Mid_03" unique_id=391263251]
+shape = SubResource("BoxShape_rock")
+
+[node name="Mid_04" type="StaticBody3D" parent="Rocks_Mid" unique_id=780139908]
+transform = Transform3D(4, 0, 0, 0, 10, 0, 0, 0, 4, -10, 5, -92)
+
+[node name="Mesh" type="MeshInstance3D" parent="Rocks_Mid/Mid_04" unique_id=1367900154]
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rocks_Mid/Mid_04" unique_id=421841794]
+shape = SubResource("BoxShape_rock")
+
+[node name="Mid_05" type="StaticBody3D" parent="Rocks_Mid" unique_id=12333710]
+transform = Transform3D(4, 0, 0, 0, 14, 0, 0, 0, 4, 10, 7, -118)
+
+[node name="Mesh" type="MeshInstance3D" parent="Rocks_Mid/Mid_05" unique_id=1794292834]
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh3" type="MeshInstance3D" parent="Rocks_Mid/Mid_05" unique_id=1712982595]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.4850516, 0, 0.8681526)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh2" type="MeshInstance3D" parent="Rocks_Mid/Mid_05" unique_id=925108447]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7798934, 0, 6.539768)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh4" type="MeshInstance3D" parent="Rocks_Mid/Mid_05" unique_id=2020426246]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8822064, 0, -2.7309952)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh6" type="MeshInstance3D" parent="Rocks_Mid/Mid_05" unique_id=623017845]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.8822064, 0, -8.782261)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh9" type="MeshInstance3D" parent="Rocks_Mid/Mid_05" unique_id=566413470]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2017598, 0, -15.878838)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh18" type="MeshInstance3D" parent="Rocks_Mid/Mid_05" unique_id=1621036686]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.285408, 0, -62.176003)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh26" type="MeshInstance3D" parent="Rocks_Mid/Mid_05" unique_id=1247452021]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.285408, -0.08198923, -77.72098)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh27" type="MeshInstance3D" parent="Rocks_Mid/Mid_05" unique_id=1554317896]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9902978, -0.0819892, -77.72098)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh28" type="MeshInstance3D" parent="Rocks_Mid/Mid_05" unique_id=1171301872]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.378724, -0.0819892, -70.6061)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh29" type="MeshInstance3D" parent="Rocks_Mid/Mid_05" unique_id=1392848690]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.378724, -0.0819892, -86.45983)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh11" type="MeshInstance3D" parent="Rocks_Mid/Mid_05" unique_id=1831260913]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.512698, 0, -22.747482)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh17" type="MeshInstance3D" parent="Rocks_Mid/Mid_05" unique_id=1965389109]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.4741898, 0, -48.950592)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh22" type="MeshInstance3D" parent="Rocks_Mid/Mid_05" unique_id=85580703]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.4741898, 0, -54.98822)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh23" type="MeshInstance3D" parent="Rocks_Mid/Mid_05" unique_id=1929098558]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.9201617, 0, -68.23899)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh25" type="MeshInstance3D" parent="Rocks_Mid/Mid_05" unique_id=1964223295]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9839873, 0, -73.977936)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh30" type="MeshInstance3D" parent="Rocks_Mid/Mid_05" unique_id=1292890873]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.9839873, 0, -85.83249)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh24" type="MeshInstance3D" parent="Rocks_Mid/Mid_05" unique_id=470503972]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.601357, 0, -68.23899)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh20" type="MeshInstance3D" parent="Rocks_Mid/Mid_05" unique_id=321259158]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.211472, 0, -45.635864)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh21" type="MeshInstance3D" parent="Rocks_Mid/Mid_05" unique_id=2046713293]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.098526, 0, -66.240715)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh19" type="MeshInstance3D" parent="Rocks_Mid/Mid_05" unique_id=744160504]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5098965, 0, -39.993263)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh14" type="MeshInstance3D" parent="Rocks_Mid/Mid_05" unique_id=1662809634]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.6665144, 0, -31.542583)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh15" type="MeshInstance3D" parent="Rocks_Mid/Mid_05" unique_id=1476227854]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.97444963, 0, -30.151878)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh16" type="MeshInstance3D" parent="Rocks_Mid/Mid_05" unique_id=769685551]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.97444963, 0, -42.55049)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh13" type="MeshInstance3D" parent="Rocks_Mid/Mid_05" unique_id=1061734251]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.9644446, 0, -28.652073)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh10" type="MeshInstance3D" parent="Rocks_Mid/Mid_05" unique_id=2038525306]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.1985073, 0, -24.60213)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh5" type="MeshInstance3D" parent="Rocks_Mid/Mid_05" unique_id=1237249292]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2793403, -0.3146215, 0.7670059)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh7" type="MeshInstance3D" parent="Rocks_Mid/Mid_05" unique_id=801703505]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6661406, -0.3146215, -9.585888)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh8" type="MeshInstance3D" parent="Rocks_Mid/Mid_05" unique_id=1833064364]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.6444736, -0.3146215, -15.442825)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh12" type="MeshInstance3D" parent="Rocks_Mid/Mid_05" unique_id=1349308729]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.765275, -0.3146215, -21.581818)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rocks_Mid/Mid_05" unique_id=2074486501]
+shape = SubResource("BoxShape_rock")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Rocks_Mid/Mid_05" unique_id=1803347392]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8328071, 0, 8.280855)
+shape = SubResource("BoxShape_rock")
+
+[node name="Mist_From_Center_Out" type="Node3D" parent="." unique_id=588670976]
+
+[node name="InnerLeftMist" type="FogVolume" parent="Mist_From_Center_Out" unique_id=1552775249]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.990147, 4, -240)
+size = Vector3(10, 10, 520)
+material = SubResource("FogMaterial_inner")
+
+[node name="InnerRightMist" type="FogVolume" parent="Mist_From_Center_Out" unique_id=1863234044]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.941048, 4, -240)
+size = Vector3(10, 10, 520)
+material = SubResource("FogMaterial_inner")
+
+[node name="OuterLeftMist" type="FogVolume" parent="Mist_From_Center_Out" unique_id=1779879390]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.726196, 6, -240)
+size = Vector3(6, 14, 520)
+material = SubResource("FogMaterial_outer")
+
+[node name="OuterRightMist" type="FogVolume" parent="Mist_From_Center_Out" unique_id=1240077976]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48.403877, 6, -240)
+size = Vector3(6, 14, 520)
+material = SubResource("FogMaterial_outer")
+
+[node name="FarRouteMist" type="FogVolume" parent="Mist_From_Center_Out" unique_id=1371234663]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, -390)
+size = Vector3(44, 16, 180)
+material = SubResource("FogMaterial_far")
+
+[node name="Rocks_Far" type="Node3D" parent="." unique_id=2027397014]
+
+[node name="Far_01" type="MeshInstance3D" parent="Rocks_Far" unique_id=141583634]
+transform = Transform3D(5, 0, 0, 0, 18, 0, 0, 0, 5, -11.316411, 9, -35)
+material_override = SubResource("Mat_rock_far")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Far_02" type="MeshInstance3D" parent="Rocks_Far" unique_id=1353716848]
+transform = Transform3D(5, 0, 0, 0, 16, 0, 0, 0, 5, 14, 8, -60)
+material_override = SubResource("Mat_rock_far")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Far_03" type="MeshInstance3D" parent="Rocks_Far" unique_id=2039030910]
+transform = Transform3D(6, 0, 0, 0, 20, 0, 0, 0, 6, -14, 10, -86)
+material_override = SubResource("Mat_rock_far")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Far_06" type="MeshInstance3D" parent="Rocks_Far" unique_id=1644406667]
+transform = Transform3D(6, 0, 0, 0, 20, 0, 0, 0, 6, 13.610899, 10, -110.58903)
+material_override = SubResource("Mat_rock_far")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Far_04" type="MeshInstance3D" parent="Rocks_Far" unique_id=1417875602]
+transform = Transform3D(7, 0, 0, 0, 20, 0, 0, 0, 7, 14, 10, -142)
+material_override = SubResource("Mat_rock_far")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Far_07" type="MeshInstance3D" parent="Rocks_Far" unique_id=2043262908]
+transform = Transform3D(7, 0, 0, 0, 20, 0, 0, 0, 7, 14, 10, -198.2246)
+material_override = SubResource("Mat_rock_far")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Far_05" type="MeshInstance3D" parent="Rocks_Far" unique_id=432162781]
+transform = Transform3D(7, 0, 0, 0, 20, 0, 0, 0, 7, -8.018391, 10, -138.2981)
+material_override = SubResource("Mat_rock_far")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Markers" type="Node3D" parent="." unique_id=1929301125]
+
+[node name="EntranceMarker" type="MeshInstance3D" parent="Markers" unique_id=747928717]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0.6, -6)
+material_override = SubResource("Mat_marker")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="TurnOneMarker" type="MeshInstance3D" parent="Markers" unique_id=1934210129]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, -44)
+material_override = SubResource("Mat_marker")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="TurnTwoMarker" type="MeshInstance3D" parent="Markers" unique_id=1869017585]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, -86)
+material_override = SubResource("Mat_marker")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="BlockCliffs" type="Node3D" parent="." unique_id=1573836310]
+
+[node name="Cliff_L_01" type="StaticBody3D" parent="BlockCliffs" unique_id=289945685]
+transform = Transform3D(5.35934, 1.0230141, -0.93560266, -0.47935656, 11.954336, 0, 1.139163, 0.21744835, 4.4016643, -15, 5.65, -22)
+
+[node name="Mesh" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_01" unique_id=849186234]
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh2" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_01" unique_id=840631849]
+transform = Transform3D(0.99999976, -5.6810677e-08, 1.4901161e-08, 6.9849193e-10, 0.9999998, 9.313226e-10, -5.9604645e-08, -1.1175871e-08, 0.99999964, 5.354211, 0.21469837, 3.5024276)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh3" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_01" unique_id=1329421022]
+transform = Transform3D(0.9427894, 0.012895921, -0.00066001713, -0.012896036, 0.9426274, 0.0035913042, 0.0006595403, -0.0033329688, 1.0131483, 2.865603, -0.15388958, 1.6201034)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlockCliffs/Cliff_L_01" unique_id=24951631]
+shape = SubResource("BoxShape_rock")
+
+[node name="Cliff_L_02" type="StaticBody3D" parent="BlockCliffs" unique_id=175691792]
+transform = Transform3D(4.7946005, -1.2069759, 1.1025494, 0.34878236, 17.956154, 0, -1.3748298, 0.34609482, 3.8450468, -14, 8.65, -37)
+
+[node name="Mesh" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_02" unique_id=1454603827]
+transform = Transform3D(1, -2.0489097e-08, 1.4901161e-08, -9.313226e-10, 1, 0, 2.9802322e-08, -7.450581e-09, 1.0000001, -0.5303376, 0.010301352, -0.19055367)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh2" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_02" unique_id=820380890]
+transform = Transform3D(1, -3.5390258e-08, 2.9802322e-08, -5.820766e-09, 1, 6.0535967e-09, 1.4901161e-07, -1.4901161e-08, 1.0000005, 2.9720328, -0.08276081, 7.596471)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh3" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_02" unique_id=1290160614]
+transform = Transform3D(0.8273841, -8.940697e-08, 2.9802322e-08, -4.4237822e-09, 1.0120708, 1.21071935e-08, 1.1920929e-07, -2.2351742e-08, 1.6034547, 6.469996, -0.15070564, 8.853315)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh4" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_02" unique_id=545321985]
+transform = Transform3D(1.2575667, -1.17346644e-07, 5.9604645e-08, -5.5879354e-09, 0.97527504, 1.5366822e-08, 1.7881393e-07, -2.9802322e-08, 1.8430943, -3.8713093, 0.050165117, 5.137613)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh5" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_02" unique_id=1521646113]
+transform = Transform3D(1.2575668, -2.1234155e-07, 8.940697e-08, -5.820766e-09, 0.97527504, 1.5832484e-08, 1.7881393e-07, -4.4703484e-08, 1.8430946, -3.072004, 0.034639418, -3.7245407)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh6" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_02" unique_id=2025664019]
+transform = Transform3D(1.2575668, -2.5890768e-07, 8.940697e-08, -7.683411e-09, 0.97527504, 1.6298145e-08, 1.7881393e-07, -5.2154064e-08, 1.8430948, 8.09277, -0.18222639, 0.2870407)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh7" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_02" unique_id=1976903138]
+transform = Transform3D(1.2575668, -3.3527613e-07, 8.940697e-08, -9.546056e-09, 0.97527504, 1.8626451e-08, 1.7881393e-07, -5.9604645e-08, 1.8430952, 12.107168, -0.26020247, -13.920106)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh8" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_02" unique_id=417199631]
+transform = Transform3D(1.2575668, -3.8184226e-07, 1.1920929e-07, -9.546056e-09, 0.97527504, 1.9557774e-08, 1.7881393e-07, -6.7055225e-08, 1.8430953, 0.5530672, -0.03577432, -18.071575)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh12" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_02" unique_id=359370274]
+transform = Transform3D(1.2575668, -5.699694e-07, 8.940697e-08, -9.546056e-09, 0.97527504, 2.3283064e-08, 1.7881393e-07, -9.685755e-08, 1.8430958, 17.346376, -0.3619694, -35.46261)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh9" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_02" unique_id=721562817]
+transform = Transform3D(1.2575668, -4.3027103e-07, 1.1920929e-07, -9.546056e-09, 0.97527504, 2.0489097e-08, 1.7881393e-07, -7.4505806e-08, 1.8430954, 1.5748482, -0.055621505, -22.53667)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh10" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_02" unique_id=1329741409]
+transform = Transform3D(1.2575668, -4.7683716e-07, 8.940697e-08, -9.546056e-09, 0.97527504, 2.188608e-08, 1.7881393e-07, -8.195639e-08, 1.8430955, 13.9448185, -0.29589713, -18.092056)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh14" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_02" unique_id=1021555515]
+transform = Transform3D(1.2575668, -5.699694e-07, 8.940697e-08, -9.546056e-09, 0.97527504, 2.3283064e-08, 1.7881393e-07, -9.685755e-08, 1.8430958, 15.2248955, -0.32076135, -14.131629)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh11" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_02" unique_id=1227934699]
+transform = Transform3D(1.2575668, -5.699694e-07, 8.940697e-08, -9.546056e-09, 0.97527504, 2.3283064e-08, 1.7881393e-07, -9.685755e-08, 1.8430958, 17.05337, -0.35627785, -25.418137)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh13" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_02" unique_id=1398519739]
+transform = Transform3D(1.2575668, -6.649643e-07, 8.940697e-08, -9.546056e-09, 0.97527504, 2.4680048e-08, 1.7881393e-07, -1.1175871e-07, 1.843096, 15.313322, -0.32247895, -29.26556)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlockCliffs/Cliff_L_02" unique_id=1739889081]
+shape = SubResource("BoxShape_rock")
+
+[node name="Cap_L_01" type="StaticBody3D" parent="BlockCliffs" unique_id=1735209051]
+transform = Transform3D(7.5899186, 0.23219821, -1.545085, -0.55805176, 3.4914742, 0, 2.466114, 0.07544578, 4.755283, -9, 1.4, -50)
+
+[node name="Mesh" type="MeshInstance3D" parent="BlockCliffs/Cap_L_01" unique_id=1887324046]
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlockCliffs/Cap_L_01" unique_id=1231049486]
+shape = SubResource("BoxShape_rock")
+
+[node name="Cliff_R_01" type="StaticBody3D" parent="BlockCliffs" unique_id=876148113]
+transform = Transform3D(5.307392, -1.4199294, 1.0886486, 0.5749065, 13.923306, 0, -1.3232815, 0.35402817, 4.3663306, 15, 6.65, -30)
+
+[node name="Mesh" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_01" unique_id=628704336]
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlockCliffs/Cliff_R_01" unique_id=39809185]
+shape = SubResource("BoxShape_rock")
+
+[node name="Cliff_R_02" type="StaticBody3D" parent="BlockCliffs" unique_id=116653828]
+transform = Transform3D(4.905301, 1.7166328, -0.6945927, -0.43577868, 19.923895, 0, 0.864937, 0.30268872, 3.939231, 14, 9.65, -46)
+
+[node name="Mesh" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_02" unique_id=1564314064]
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh2" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_02" unique_id=1605466234]
+transform = Transform3D(0.9999999, -1.238659e-07, -2.9802322e-08, -1.7462298e-10, 1, -2.3283064e-10, 1.4901161e-08, -7.450581e-09, 0.9999998, -1.1902096, -0.026032537, 3.4941273)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh3" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_02" unique_id=1447360720]
+transform = Transform3D(1.1092073, -1.7508864e-07, -4.4703484e-08, 7.566996e-10, 1.0095544, -4.656613e-10, 4.4703484e-08, -7.450581e-09, 1.6217111, 3.6594467, 0.08003986, 2.421136)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh4" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_02" unique_id=458161438]
+transform = Transform3D(1.1092073, -1.7601997e-07, -4.4703484e-08, 9.895302e-10, 1.0095544, -4.656613e-10, 1.1920929e-07, -7.450581e-09, 1.6217111, -9.923056, -0.21703902, -1.6146011)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh5" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_02" unique_id=1897653877]
+transform = Transform3D(1.1092073, -1.7601997e-07, -4.4703484e-08, 1.0477379e-09, 1.0095544, -4.656613e-10, 1.3411045e-07, -7.450581e-09, 1.6217111, 2.6854267, 0.058735788, -4.404236)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh6" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_02" unique_id=1051667214]
+transform = Transform3D(1.1092073, -1.7601997e-07, -4.4703484e-08, 1.1059456e-09, 1.0095544, -4.656613e-10, 1.4901161e-07, -7.450581e-09, 1.6217111, 1.5936632, 0.034856558, -12.173422)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh7" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_02" unique_id=2048412161]
+transform = Transform3D(1.1092073, -1.7601997e-07, -4.4703484e-08, 1.1059456e-09, 1.0095544, -4.656613e-10, 1.6391277e-07, -7.450581e-09, 1.6217111, 0.20609236, 0.004507363, -22.047625)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh8" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_02" unique_id=1937229509]
+transform = Transform3D(1.1092073, -1.7601997e-07, -4.4703484e-08, 1.1641532e-09, 1.0095544, -4.656613e-10, 1.7881393e-07, -7.450581e-09, 1.6217111, -1.3670359, -0.029900402, -33.242287)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh10" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_02" unique_id=2005434649]
+transform = Transform3D(1.1092073, -1.7601997e-07, -4.4703484e-08, 1.2223609e-09, 1.0095544, -4.656613e-10, 1.937151e-07, -7.450581e-09, 1.6217111, 1.0152593, 0.022205472, -33.76937)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh9" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_02" unique_id=217839221]
+transform = Transform3D(1.1092073, -1.7601997e-07, -4.4703484e-08, 1.2223609e-09, 1.0095544, -4.656613e-10, 1.937151e-07, -7.450581e-09, 1.6217111, -14.306271, -0.31290948, -30.379473)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlockCliffs/Cliff_R_02" unique_id=635020077]
+shape = SubResource("BoxShape_rock")
+
+[node name="Cap_R_01" type="StaticBody3D" parent="BlockCliffs" unique_id=1012114848]
+transform = Transform3D(7.4889345, -0.28664863, 1.7101007, 0.6972459, 3.4866815, 0, -2.7257493, 0.10433156, 4.698463, 9, 1.4, -61)
+
+[node name="Mesh" type="MeshInstance3D" parent="BlockCliffs/Cap_R_01" unique_id=119710176]
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh2" type="MeshInstance3D" parent="BlockCliffs/Cap_R_01" unique_id=391343487]
+transform = Transform3D(1, -2.7939677e-09, 0, -6.146729e-08, 1, -3.7252903e-09, -1.1920929e-07, 1.3038516e-08, 0.9999999, -2.5436013, 0.5086542, 2.0821848)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlockCliffs/Cap_R_01" unique_id=1338965315]
+shape = SubResource("BoxShape_rock")
+
+[node name="Cliff_L_03" type="StaticBody3D" parent="BlockCliffs" unique_id=1830328251]
+transform = Transform3D(5.3867707, 1.647047, 0.7814168, -0.5749065, 15.912351, 0, -0.94983304, -0.29041883, 4.431635, -15, 7.65, -78)
+
+[node name="Mesh" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=1582904340]
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh3" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=1916162404]
+transform = Transform3D(3.187266, 3.3527613e-08, -1.4901161e-08, -3.8184226e-08, 1.2298907, -4.656613e-09, -5.9604645e-08, -2.2351742e-08, 1.3877985, -0.56791115, -0.020518363, 1.15135)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh4" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=2051303402]
+transform = Transform3D(2.711342, 8.754432e-08, -5.9604645e-08, -3.282912e-08, 1.210588, -1.7695129e-08, -5.9604645e-08, -2.9802322e-08, 2.5695126, 8.45854, 0.3056035, 3.1073627)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh47" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=267985418]
+transform = Transform3D(2.711342, 8.568168e-08, -5.9604645e-08, -3.282912e-08, 1.2105877, -2.0489097e-08, -5.9604645e-08, -3.7252903e-08, 2.5695126, 10.548821, 0.3811245, 12.560579)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh39" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=511912467]
+transform = Transform3D(2.711342, 1.1641532e-07, -5.9604645e-08, -3.282912e-08, 1.2105876, -2.142042e-08, -5.9604645e-08, -4.4703484e-08, 2.5695126, 12.453845, 0.44995224, -2.4103718)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh5" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=1865858647]
+transform = Transform3D(2.711342, 8.568168e-08, -5.9604645e-08, -3.282912e-08, 1.2105877, -2.0489097e-08, -5.9604645e-08, -3.7252903e-08, 2.5695126, -3.899698, -0.14089435, -2.5020466)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh6" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=1461677302]
+transform = Transform3D(1.6436305, -0.017223656, -2.0432272, -0.038576007, 1.2099652, -0.073820956, 2.156007, 0.034779694, 1.5563319, -1.9904592, -0.071914315, -15.808956)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh18" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=106165015]
+transform = Transform3D(1.6436305, -0.017223656, -2.0432272, -0.038576007, 1.2099651, -0.073820956, 2.1560068, 0.034779686, 1.5563319, 3.670676, 0.13262016, -55.26564)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh15" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=1504925208]
+transform = Transform3D(1.6436305, -0.017223626, -2.0432272, -0.038576003, 1.2099649, -0.073820956, 2.1560066, 0.034779675, 1.5563319, -6.979186, -0.2521548, -14.728588)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh16" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=1303799739]
+transform = Transform3D(1.6436305, -0.017223597, -2.0432272, -0.038575996, 1.2099648, -0.073820956, 2.1560066, 0.034779668, 1.5563319, -8.500566, -0.30712155, -4.124958)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh17" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=806472921]
+transform = Transform3D(1.530094, -0.03654232, -2.1951408, -0.0359113, 2.5671237, -0.07930954, 2.0070767, 0.07379032, 1.672045, -10.129897, -0.36598855, 7.2310734)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh43" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=603912837]
+transform = Transform3D(1.5300939, -0.03654232, -2.1951408, -0.0359113, 2.5671234, -0.07930952, 2.0070767, 0.073790304, 1.672045, -11.560228, -0.41766578, 17.200123)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh44" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=1412429803]
+transform = Transform3D(1.5300937, -0.03654226, -2.1951408, -0.035911307, 2.5671232, -0.07930951, 2.0070765, 0.0737903, 1.672045, 11.99178, 0.4332584, 22.303791)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh45" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=1961013467]
+transform = Transform3D(1.5300937, -0.03654214, -2.1951408, -0.035911314, 2.567123, -0.07930949, 2.0070763, 0.07379029, 1.672045, 13.4029875, 0.4842447, 12.468036)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh46" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=2111392071]
+transform = Transform3D(1.5300937, -0.036542077, -2.1951408, -0.03591132, 2.5671227, -0.07930948, 2.0070763, 0.073790275, 1.672045, 14.880718, 0.53763455, 2.1686192)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh42" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=1033531415]
+transform = Transform3D(1.5300939, -0.03654232, -2.1951408, -0.0359113, 2.5671234, -0.07930952, 2.0070767, 0.073790304, 1.672045, -23.120918, -0.8353486, 97.775215)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh9" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=2111336719]
+transform = Transform3D(1.6436305, -0.017223656, -2.0432272, -0.038576007, 1.2099651, -0.073820956, 2.1560068, 0.034779686, 1.5563319, 13.378443, 0.48335767, -12.47855)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh10" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=369262107]
+transform = Transform3D(1.5566795, -0.033385344, -2.1608624, -0.03653529, 2.345337, -0.07807108, 2.0419502, 0.06741519, 1.6459352, 17.189543, 0.62105113, -39.040955)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh19" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=242297948]
+transform = Transform3D(1.5748109, -0.028933704, -2.1353092, -0.03696081, 2.0326028, -0.07714784, 2.0657332, 0.058425866, 1.626471, 19.191528, 1.1898217, -54.04071)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh26" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=721246314]
+transform = Transform3D(1.5748109, -0.028933704, -2.1353092, -0.036960818, 2.0326028, -0.07714784, 2.0657332, 0.058425866, 1.626471, 20.646458, 1.2423878, -64.181206)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh27" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=994912099]
+transform = Transform3D(1.5748109, -0.028933704, -2.1353092, -0.036960833, 2.0326028, -0.07714784, 2.0657332, 0.058425866, 1.626471, 21.040958, 1.2566409, -66.930786)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh35" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=1108867758]
+transform = Transform3D(1.5748109, -0.028933704, -2.1353092, -0.036960848, 2.0326028, -0.07714784, 2.0657332, 0.058425866, 1.626471, 23.298317, 1.3381984, -82.66401)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh36" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=2110872891]
+transform = Transform3D(1.5748109, -0.028933704, -2.1353092, -0.036960877, 2.0326028, -0.07714784, 2.0657332, 0.058425866, 1.626471, 25.924656, 1.4330869, -75.95788)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh28" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=1387291923]
+transform = Transform3D(1.5748109, -0.028933704, -2.1353092, -0.036960863, 2.0326028, -0.07714784, 2.0657332, 0.058425866, 1.626471, 24.92261, 1.3968832, -55.00357)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh29" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=1588501924]
+transform = Transform3D(1.5748109, -0.028933704, -2.1353092, -0.036960877, 2.0326028, -0.07714784, 2.0657332, 0.058425866, 1.626471, 22.856213, 1.3222253, -40.60132)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh30" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=1971263277]
+transform = Transform3D(1.5748109, -0.028933704, -2.1353092, -0.036960892, 2.0326028, -0.07714784, 2.0657332, 0.058425866, 1.626471, -4.7297335, 0.32555676, -46.579132)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh31" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=706632827]
+transform = Transform3D(1.5748109, -0.028933704, -2.1353092, -0.036960907, 2.0326028, -0.07714784, 2.0657332, 0.058425866, 1.626471, -3.3421142, 0.37569094, -56.25049)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh32" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=1685446801]
+transform = Transform3D(1.5748109, -0.028933704, -2.1353092, -0.036960922, 2.0326028, -0.07714784, 2.0657332, 0.058425866, 1.626471, -1.4426544, 0.44431776, -69.48924)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh33" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=813742638]
+transform = Transform3D(1.5748107, -0.028933704, -2.1353092, -0.036960937, 2.0326028, -0.07714784, 2.065733, 0.058425866, 1.626471, -0.08067584, 0.49352556, -78.98189)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh34" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=1131720380]
+transform = Transform3D(1.5748107, -0.028933704, -2.1353092, -0.036960937, 2.0326028, -0.07714784, 2.065733, 0.058425866, 1.626471, 7.802292, 0.77833396, -77.27367)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh37" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=911373978]
+transform = Transform3D(1.5748107, -0.028933704, -2.1353092, -0.036960937, 2.0326028, -0.07714784, 2.065733, 0.058425866, 1.626471, 5.8184814, 0.70665985, -84.266914)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh38" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=1893864264]
+transform = Transform3D(1.5748107, -0.028933704, -2.1353092, -0.036960937, 2.0326028, -0.07714784, 2.065733, 0.058425866, 1.626471, 6.524295, 0.7321606, -89.186264)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh25" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=774152444]
+transform = Transform3D(1.5021931, -0.04128985, -2.2324727, -0.03525646, 2.9006388, -0.080658324, 1.970478, 0.08337698, 1.7004808, 4.417039, 0.15958613, -69.872185)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh20" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=1736074965]
+transform = Transform3D(1.6436305, -0.017223597, -2.0432272, -0.038575996, 1.2099648, -0.073820956, 2.1560066, 0.034779668, 1.5563319, 22.055216, 0.79684585, -72.9535)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh11" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=887496062]
+transform = Transform3D(1.6436305, -0.017223597, -2.0432272, -0.038575996, 1.2099648, -0.073820956, 2.1560066, 0.034779668, 1.5563319, 2.5567749, 0.09237534, -42.21184)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh12" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=984633951]
+transform = Transform3D(1.5533888, -0.03257861, -2.1639721, -0.036458038, 2.2886686, -0.07818342, 2.0376334, 0.06578631, 1.6483035, -2.0977967, -0.07579222, -36.68781)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh13" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=1474039974]
+transform = Transform3D(1.6436305, -0.017223505, -2.0432272, -0.038575996, 1.2099643, -0.073820956, 2.1560066, 0.034779638, 1.5563319, -5.1038256, -0.18439877, -26.602966)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh7" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=1592852016]
+transform = Transform3D(1.6436305, -0.017223656, -2.0432272, -0.038576007, 1.2099651, -0.073820956, 2.1560068, 0.034779686, 1.5563319, -0.102112055, -0.0036891103, -28.970257)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh8" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=1091585697]
+transform = Transform3D(1.5695218, -0.029833522, -2.1423857, -0.03683667, 2.0958238, -0.077403516, 2.0587955, 0.060243107, 1.6318614, 14.631734, 0.52863866, -31.82251)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh21" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=1086188586]
+transform = Transform3D(1.5716606, -0.029469566, -2.1395237, -0.036886882, 2.0702555, -0.07730012, 2.0616012, 0.059508152, 1.6296816, 16.846935, 0.6086728, -47.2619)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh22" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=1189717397]
+transform = Transform3D(1.5284714, -0.036818366, -2.1973119, -0.035873227, 2.5865195, -0.07938798, 2.0049481, 0.074347824, 1.6736989, -0.19610476, -0.0070849657, -50.955093)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh23" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=1988419178]
+transform = Transform3D(1.5016116, -0.041388653, -2.2332509, -0.035242826, 2.907587, -0.08068643, 1.9697154, 0.083576694, 1.7010734, 1.5799267, 0.057082355, -63.33358)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh24" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=1227252925]
+transform = Transform3D(1.5875859, -0.026759788, -2.1182158, -0.03726064, 1.8798928, -0.07653026, 2.082491, 0.054036282, 1.613451, 3.330541, 0.12033135, -75.53492)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh14" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=154767533]
+transform = Transform3D(1.5644139, -0.03070262, -2.1492202, -0.036716793, 2.1568792, -0.07765044, 2.0520954, 0.06199809, 1.6370672, 17.412369, 0.6291017, -24.374344)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh40" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=1440406985]
+transform = Transform3D(1.5644139, -0.03070262, -2.14922, -0.036716808, 2.1568792, -0.077650435, 2.0520952, 0.061998084, 1.6370673, 16.419353, 0.59322447, -17.453278)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh41" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=636376757]
+transform = Transform3D(1.5644139, -0.03070262, -2.14922, -0.036716815, 2.1568792, -0.077650435, 2.052095, 0.061998077, 1.6370673, 14.909546, 0.53867584, -6.9303017)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh2" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_03" unique_id=1159487484]
+transform = Transform3D(0.9999998, 4.377216e-08, 0, 0, 1, -9.313226e-10, 1.4901161e-08, -7.450581e-09, 0.9999999, -0.68701816, -0.024821639, 5.5569506)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlockCliffs/Cliff_L_03" unique_id=1889299012]
+shape = SubResource("BoxShape_rock")
+
+[node name="Cliff_R_03" type="StaticBody3D" parent="BlockCliffs" unique_id=1229775985]
+transform = Transform3D(5.292376, -1.5153475, -1.1646857, 0.47935656, 17.931505, 0, 1.418088, -0.40603614, 4.3466663, 15, 8.65, -88)
+
+[node name="Mesh" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_03" unique_id=1701103062]
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh2" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_03" unique_id=1493069905]
+transform = Transform3D(1.0000001, 1.4901161e-08, 0, -1.5133992e-09, 1.0000002, -9.313226e-10, 8.940697e-08, -1.4901161e-08, 1.0000004, -3.3119273, 0.08853674, -0.2650795)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlockCliffs/Cliff_R_03" unique_id=184758243]
+shape = SubResource("BoxShape_rock")
+
+[node name="Cap_L_02" type="StaticBody3D" parent="BlockCliffs" unique_id=535841433]
+transform = Transform3D(6.7827616, 0.15234408, 1.2096095, -0.36635172, 2.9958885, 0, -1.6911324, -0.037983645, 4.8514786, -10, 1.15, -104)
+
+[node name="Mesh" type="MeshInstance3D" parent="BlockCliffs/Cap_L_02" unique_id=1381369801]
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlockCliffs/Cap_L_02" unique_id=1228700251]
+shape = SubResource("BoxShape_rock")
+
+[node name="Cap_R_02" type="StaticBody3D" parent="BlockCliffs" unique_id=1182579288]
+transform = Transform3D(7.5899186, -0.23219821, -1.545085, 0.55805176, 3.4914742, 0, 2.466114, -0.07544578, 4.755283, 10, 1.4, -126)
+
+[node name="Mesh" type="MeshInstance3D" parent="BlockCliffs/Cap_R_02" unique_id=649027763]
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlockCliffs/Cap_R_02" unique_id=1892886498]
+shape = SubResource("BoxShape_rock")
+
+[node name="Cliff_L_04" type="StaticBody3D" parent="BlockCliffs" unique_id=1772335097]
+transform = Transform3D(4.8788247, 1.3646425, -0.8316468, -0.34878236, 19.951283, 0, 1.0370262, 0.29006374, 3.9125905, -14, 9.65, -148)
+
+[node name="Mesh" type="MeshInstance3D" parent="BlockCliffs/Cliff_L_04" unique_id=1755805742]
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlockCliffs/Cliff_L_04" unique_id=19310929]
+shape = SubResource("BoxShape_rock")
+
+[node name="Cliff_R_04" type="StaticBody3D" parent="BlockCliffs" unique_id=1442447410]
+transform = Transform3D(4.863946, -2.249374, 0.8316468, 0.5226423, 21.879482, 0, -1.0338638, 0.47811916, 3.9125905, 14, 10.65, -172)
+
+[node name="Mesh" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_04" unique_id=408217075]
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh4" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_04" unique_id=1644504533]
+transform = Transform3D(1, 7.0780516e-08, 0, -3.4924597e-10, 1, 0, 5.9604645e-08, -1.4901161e-08, 1, -0.5002022, 0.011948511, -9.754765)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh5" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_04" unique_id=1155972886]
+transform = Transform3D(1, 7.264316e-08, 0, -2.3283064e-10, 1, 0, 8.940697e-08, -2.9802322e-08, 1, 1.3036203, -0.031139985, -20.421093)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh6" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_04" unique_id=341332174]
+transform = Transform3D(1, 1.73226e-07, 0, 1.1641532e-10, 1, 0, 1.7881393e-07, -6.7055225e-08, 1, 3.0457907, -0.072755784, -19.228405)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh11" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_04" unique_id=1352541772]
+transform = Transform3D(1, 2.3469329e-07, 0, 2.3283064e-10, 1, 0, 2.0861626e-07, -7.4505806e-08, 1, 5.8770723, -0.14038752, -35.97028)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh7" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_04" unique_id=1700038883]
+transform = Transform3D(1, 2.3469329e-07, 0, 2.3283064e-10, 1, 0, 2.0861626e-07, -7.4505806e-08, 1, 4.357564, -0.10409056, -26.985165)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh10" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_04" unique_id=1144793986]
+transform = Transform3D(1, 3.3155084e-07, 0, 4.656613e-10, 1, 0, 2.682209e-07, -8.940697e-08, 1, 4.6577435, -0.111260965, -40.12566)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh13" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_04" unique_id=1816404312]
+transform = Transform3D(1, 3.9488077e-07, 0, 5.820766e-10, 1, 0, 2.9802322e-07, -9.685755e-08, 1, 7.2128344, -0.17229523, -55.23437)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh17" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_04" unique_id=320889422]
+transform = Transform3D(1, 5.848706e-07, 0, -8.1490725e-10, 1, 0, 4.172325e-07, -1.1175871e-07, 1, 10.223386, -0.24420913, -60.47196)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh18" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_04" unique_id=80684953]
+transform = Transform3D(1, 7.4133277e-07, 0, -4.656613e-10, 1, 0, 5.066395e-07, -1.1920929e-07, 1, 5.9095078, -0.141162, -71.50394)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh22" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_04" unique_id=589136006]
+transform = Transform3D(1, 8.381903e-07, 0, -2.3283064e-10, 1, 0, 5.662441e-07, -1.3411045e-07, 1, 13.597541, -0.32480842, -64.95859)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh23" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_04" unique_id=1527195637]
+transform = Transform3D(1, 8.7171793e-07, 0, -1.1641532e-10, 1, 0, 5.9604645e-07, -1.4156103e-07, 1, 12.495414, -0.29848152, -58.44151)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh24" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_04" unique_id=115932390]
+transform = Transform3D(1, 9.685755e-07, 0, 2.3283064e-10, 1, 0, 6.854534e-07, -1.6391277e-07, 1, 12.326262, -0.29444093, -46.474865)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh25" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_04" unique_id=655075036]
+transform = Transform3D(1, 9.723008e-07, 0, 2.3283064e-10, 1, 0, 6.854534e-07, -1.8626451e-07, 1, -1.047143, 0.025013998, -50.047688)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh26" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_04" unique_id=2085071458]
+transform = Transform3D(1, 9.741634e-07, 0, 2.3283064e-10, 1, 0, 6.854534e-07, -2.0116568e-07, 1, -1.9350424, 0.046223566, -44.797375)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh12" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_04" unique_id=383716310]
+transform = Transform3D(1, 4.2840838e-07, 0, -1.1641532e-09, 1, 0, 3.2782555e-07, -1.0430813e-07, 1, 7.8617697, -0.18779655, -47.476376)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh16" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_04" unique_id=705183452]
+transform = Transform3D(1, 5.234033e-07, 0, -9.313226e-10, 1, 0, 3.874302e-07, -1.1175871e-07, 1, 6.1775427, -0.14756487, -65.70065)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh15" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_04" unique_id=65063844]
+transform = Transform3D(1, 5.234033e-07, 0, -9.313226e-10, 1, 0, 3.874302e-07, -1.1175871e-07, 1, 3.8557558, -0.092103496, -57.75967)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh2" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_04" unique_id=1931930057]
+transform = Transform3D(1, 3.7252903e-08, 0, -4.656613e-10, 1, 0, 2.9802322e-08, -7.450581e-09, 1, -6.379269, 0.15238367, -1.7042809)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh8" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_04" unique_id=647997363]
+transform = Transform3D(1, 7.0780516e-08, 0, -3.4924597e-10, 1, 0, 5.9604645e-08, -1.4901161e-08, 1, -1.9734259, 0.04713987, -27.756832)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh14" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_04" unique_id=524765651]
+transform = Transform3D(1, 2.3469329e-07, 0, 2.3283064e-10, 1, 0, 2.0861626e-07, -7.4505806e-08, 1, 6.388173, -0.1525956, -43.637447)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh9" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_04" unique_id=203040168]
+transform = Transform3D(1, 7.636845e-08, 0, -1.1641532e-10, 1, 0, 1.1920929e-07, -5.2154064e-08, 1, 0.37240314, -0.00889574, -36.37933)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh19" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_04" unique_id=801606245]
+transform = Transform3D(1, 2.3469329e-07, 0, 2.3283064e-10, 1, 0, 2.0861626e-07, -7.4505806e-08, 1, 7.794919, -0.18619977, -25.378712)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh20" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_04" unique_id=1060737193]
+transform = Transform3D(1, 2.9802322e-07, 0, 3.4924597e-10, 1, 0, 2.3841858e-07, -8.195639e-08, 1, 6.7082186, -0.16024138, -18.952858)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh21" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_04" unique_id=373510837]
+transform = Transform3D(1, 4.2840838e-07, 0, -1.1641532e-09, 1, 0, 3.2782555e-07, -1.0430813e-07, 1, 6.786975, -0.1621227, -9.654694)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh3" type="MeshInstance3D" parent="BlockCliffs/Cliff_R_04" unique_id=1633289609]
+transform = Transform3D(1, 7.0780516e-08, 0, -3.4924597e-10, 1, 0, 5.9604645e-08, -1.4901161e-08, 1, -7.016098, 0.16759582, 2.0614014)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlockCliffs/Cliff_R_04" unique_id=1068869960]
+shape = SubResource("BoxShape_rock")
+
+[node name="Cap_L_03" type="StaticBody3D" parent="BlockCliffs" unique_id=1848515675]
+transform = Transform3D(7.4073052, 0.19410023, 1.8730329, -0.41868767, 3.994518, 0, -2.9927454, -0.07842158, 4.6359196, -9, 1.65, -196)
+
+[node name="Mesh" type="MeshInstance3D" parent="BlockCliffs/Cap_L_03" unique_id=2087531514]
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh3" type="MeshInstance3D" parent="BlockCliffs/Cap_L_03" unique_id=563011969]
+transform = Transform3D(1.0000004, 9.313226e-10, 0, 1.4901161e-08, 1, -7.450581e-09, -5.9604645e-08, -1.8626451e-09, 1, 3.3805428, 0.3543334, -0.97838974)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh5" type="MeshInstance3D" parent="BlockCliffs/Cap_L_03" unique_id=1306061672]
+transform = Transform3D(0.9043966, -0.010020802, -0.4265766, -0.010020766, 0.9989499, -0.044711888, 0.42657658, 0.044711873, 0.9033457, 1.3408403, 0.14053917, -8.633362)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh2" type="MeshInstance3D" parent="BlockCliffs/Cap_L_03" unique_id=582481927]
+transform = Transform3D(1.0000002, 9.313226e-10, 0, 3.7252903e-09, 1, -3.7252903e-09, 0, -1.8626451e-09, 1, 1.7394533, 0.18232179, 2.8937569)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh4" type="MeshInstance3D" parent="BlockCliffs/Cap_L_03" unique_id=276023953]
+transform = Transform3D(1.0000005, 9.313226e-10, 0, 3.4458935e-08, 1, -1.4901161e-08, -1.1920929e-07, -1.8626451e-09, 1, 0.8962059, 0.09393716, -6.2460785)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlockCliffs/Cap_L_03" unique_id=432044829]
+shape = SubResource("BoxShape_rock")
+
+[node name="Cap_R_03" type="StaticBody3D" parent="BlockCliffs" unique_id=1513308281]
+transform = Transform3D(7.6608305, -0.29322815, -1.3781868, 0.6972459, 3.4866815, 0, 2.196708, -0.08408181, 4.8063083, 9, 1.4, -228)
+
+[node name="Mesh" type="MeshInstance3D" parent="BlockCliffs/Cap_R_03" unique_id=447103391]
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh2" type="MeshInstance3D" parent="BlockCliffs/Cap_R_03" unique_id=58389182]
+transform = Transform3D(1, 2.7939677e-09, -5.9604645e-08, -1.8626451e-09, 1, -1.1175871e-08, 1.1920929e-07, -1.8626451e-09, 1, -1.9613309, 0.3922155, -4.374962)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh4" type="MeshInstance3D" parent="BlockCliffs/Cap_R_03" unique_id=240296441]
+transform = Transform3D(1, 2.7939677e-09, -8.940697e-08, -1.8626451e-09, 1, -1.8626451e-08, 1.1920929e-07, -1.8626451e-09, 1, -6.9514947, 1.3901191, -17.216846)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh5" type="MeshInstance3D" parent="BlockCliffs/Cap_R_03" unique_id=359175778]
+transform = Transform3D(1, 2.7939677e-09, -8.940697e-08, -1.8626451e-09, 1, -2.9802322e-08, 1.1920929e-07, -1.8626451e-09, 1, -6.472221, 1.2942777, -24.789715)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh6" type="MeshInstance3D" parent="BlockCliffs/Cap_R_03" unique_id=1724184716]
+transform = Transform3D(1, 2.7939677e-09, -8.940697e-08, -1.8626451e-09, 1, -4.0978193e-08, 1.1920929e-07, -1.8626451e-09, 1, -6.1130853, 1.2224598, -35.485134)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh8" type="MeshInstance3D" parent="BlockCliffs/Cap_R_03" unique_id=610407874]
+transform = Transform3D(1, 2.7939677e-09, -8.940697e-08, -1.8626451e-09, 1, -4.8428774e-08, 1.1920929e-07, -1.8626451e-09, 1, -8.330765, 1.6659381, -45.304386)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh7" type="MeshInstance3D" parent="BlockCliffs/Cap_R_03" unique_id=1472093623]
+transform = Transform3D(1, 2.7939677e-09, -8.940697e-08, -1.8626451e-09, 1, -4.8428774e-08, 1.1920929e-07, -1.8626451e-09, 1, -8.878611, 1.7754936, -40.33704)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh3" type="MeshInstance3D" parent="BlockCliffs/Cap_R_03" unique_id=1001193196]
+transform = Transform3D(1, 2.7939677e-09, -8.940697e-08, -1.8626451e-09, 1, -1.8626451e-08, 1.1920929e-07, -1.8626451e-09, 1, -1.3360944, 0.26718473, -10.538414)
+material_override = SubResource("Mat_rock_mid")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlockCliffs/Cap_R_03" unique_id=471485130]
+shape = SubResource("BoxShape_rock")
+
+[node name="WideGroundPillars" type="Node3D" parent="." unique_id=2130579487]
+
+[node name="Pillar_L_01" type="StaticBody3D" parent="WideGroundPillars" unique_id=22915410]
+transform = Transform3D(2.715173, 0.406354, 0.7257657, -0.09771859, 11.99269, 0, -0.6769687, -0.101315424, 2.9108872, -19, 5.65, -18)
+
+[node name="Mesh" type="MeshInstance3D" parent="WideGroundPillars/Pillar_L_01" unique_id=1981951578]
+material_override = SubResource("Mat_rock_far")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WideGroundPillars/Pillar_L_01" unique_id=1980864167]
+shape = SubResource("BoxShape_rock")
+
+[node name="Pillar_R_01" type="StaticBody3D" parent="WideGroundPillars" unique_id=1935497268]
+transform = Transform3D(2.8492594, -0.7963913, -0.9888544, 0.15700787, 15.978072, 0, 0.92578053, -0.25876322, 3.043381, 19, 7.65, -36)
+
+[node name="Mesh" type="MeshInstance3D" parent="WideGroundPillars/Pillar_R_01" unique_id=568540185]
+material_override = SubResource("Mat_rock_far")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh3" type="MeshInstance3D" parent="WideGroundPillars/Pillar_R_01" unique_id=237581560]
+transform = Transform3D(1, 1.8626451e-09, -2.9802322e-08, 1.9790605e-09, 1.0000002, 0, 5.9604645e-08, -1.4901161e-08, 1, -0.09779501, 0.0009609759, 3.7854652)
+material_override = SubResource("Mat_rock_far")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh2" type="MeshInstance3D" parent="WideGroundPillars/Pillar_R_01" unique_id=761243625]
+transform = Transform3D(1, 4.8428774e-08, -2.9802322e-08, 4.656613e-09, 1.0000006, 0, 5.9604645e-08, -2.9802322e-08, 1, -8.486429, 0.08339158, 1.5497084)
+material_override = SubResource("Mat_rock_far")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WideGroundPillars/Pillar_R_01" unique_id=236911311]
+shape = SubResource("BoxShape_rock")
+
+[node name="Pillar_L_02" type="StaticBody3D" parent="WideGroundPillars" unique_id=524736497]
+transform = Transform3D(3.1437082, 0.68696713, -0.5904038, -0.2232207, 9.975641, 0, 0.5543206, 0.12113084, 3.3483465, -19, 4.65, -64)
+
+[node name="Mesh" type="MeshInstance3D" parent="WideGroundPillars/Pillar_L_02" unique_id=2025846939]
+material_override = SubResource("Mat_rock_far")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh2" type="MeshInstance3D" parent="WideGroundPillars/Pillar_L_02" unique_id=223490934]
+transform = Transform3D(1, 7.450581e-09, -1.4901161e-08, -7.566996e-10, 1, 0, -1.4901161e-08, -3.7252903e-09, 0.99999994, 1.0264902, 0.022969335, 5.4924555)
+material_override = SubResource("Mat_rock_far")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WideGroundPillars/Pillar_L_02" unique_id=1817067046]
+shape = SubResource("BoxShape_rock")
+
+[node name="Pillar_R_02" type="StaticBody3D" parent="WideGroundPillars" unique_id=2052914568]
+transform = Transform3D(2.6898932, -0.40257055, 0.82691205, 0.09771859, 11.99269, 0, -0.77131444, 0.11543526, 2.883785, 19, 5.65, -84)
+
+[node name="Mesh" type="MeshInstance3D" parent="WideGroundPillars/Pillar_R_02" unique_id=1206240232]
+material_override = SubResource("Mat_rock_far")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WideGroundPillars/Pillar_R_02" unique_id=1033752563]
+shape = SubResource("BoxShape_rock")
+
+[node name="Pillar_L_03" type="StaticBody3D" parent="WideGroundPillars" unique_id=746644744]
+transform = Transform3D(3.148105, 0.87345105, 1.3485837, -0.17794226, 17.97533, 0, -1.2719169, -0.3528971, 3.3378618, -19, 8.65, -118)
+
+[node name="Mesh" type="MeshInstance3D" parent="WideGroundPillars/Pillar_L_03" unique_id=1107840441]
+material_override = SubResource("Mat_rock_far")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh2" type="MeshInstance3D" parent="WideGroundPillars/Pillar_L_03" unique_id=1206828521]
+transform = Transform3D(0.9999999, -8.568168e-08, 5.9604645e-08, -3.4924597e-10, 1, 4.656613e-10, 1.1920929e-07, 3.7252903e-08, 0.99999976, 6.5151815, 0.064495325, 6.5314617)
+material_override = SubResource("Mat_rock_far")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh3" type="MeshInstance3D" parent="WideGroundPillars/Pillar_L_03" unique_id=319516454]
+transform = Transform3D(0.9999999, -1.1920929e-07, 5.9604645e-08, -3.4924597e-10, 1, 0, 1.1920929e-07, 2.9802322e-08, 0.99999976, -0.13021755, -0.0012891293, 5.576071)
+material_override = SubResource("Mat_rock_far")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh4" type="MeshInstance3D" parent="WideGroundPillars/Pillar_L_03" unique_id=1842964518]
+transform = Transform3D(0.9999999, -1.1920929e-07, 5.9604645e-08, -3.4924597e-10, 1, -2.3283064e-10, 1.1920929e-07, 2.9802322e-08, 0.99999976, 2.9560232, 0.029262364, -1.6481705)
+material_override = SubResource("Mat_rock_far")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh5" type="MeshInstance3D" parent="WideGroundPillars/Pillar_L_03" unique_id=1607244401]
+transform = Transform3D(0.9999999, -1.1920929e-07, 5.9604645e-08, -3.4924597e-10, 1, -1.1641532e-09, 1.1920929e-07, 2.9802322e-08, 0.99999976, 6.852496, 0.06783444, 1.9032211)
+material_override = SubResource("Mat_rock_far")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh7" type="MeshInstance3D" parent="WideGroundPillars/Pillar_L_03" unique_id=1884383]
+transform = Transform3D(0.9999999, -1.1920929e-07, 5.9604645e-08, -3.4924597e-10, 1, -1.6298145e-09, 1.1920929e-07, 2.9802322e-08, 0.99999976, 13.0362625, 0.12904906, -12.571674)
+material_override = SubResource("Mat_rock_far")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh13" type="MeshInstance3D" parent="WideGroundPillars/Pillar_L_03" unique_id=1264892869]
+transform = Transform3D(0.9999999, -1.1920929e-07, 5.9604645e-08, -3.4924597e-10, 1, -2.3283064e-09, 1.1920929e-07, 2.9802322e-08, 0.99999976, 25.93443, 0.2567311, -56.762337)
+material_override = SubResource("Mat_rock_far")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh6" type="MeshInstance3D" parent="WideGroundPillars/Pillar_L_03" unique_id=360808080]
+transform = Transform3D(0.9999999, -1.1920929e-07, 5.9604645e-08, -3.4924597e-10, 1, -1.6298145e-09, 1.1920929e-07, 2.9802322e-08, 0.99999976, 11.201727, 0.11088848, -8.227493)
+material_override = SubResource("Mat_rock_far")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh8" type="MeshInstance3D" parent="WideGroundPillars/Pillar_L_03" unique_id=715848116]
+transform = Transform3D(0.9999999, -1.1920929e-07, 5.9604645e-08, -3.4924597e-10, 1, -2.3283064e-09, 1.1920929e-07, 2.9802322e-08, 0.99999976, 15.579136, 0.15422136, -29.597366)
+material_override = SubResource("Mat_rock_far")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh14" type="MeshInstance3D" parent="WideGroundPillars/Pillar_L_03" unique_id=957898862]
+transform = Transform3D(0.9999999, -1.1920929e-07, 5.9604645e-08, -3.4924597e-10, 1, -2.3283064e-09, 1.1920929e-07, 2.9802322e-08, 0.99999976, 29.56041, 0.29262537, -45.84307)
+material_override = SubResource("Mat_rock_far")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh16" type="MeshInstance3D" parent="WideGroundPillars/Pillar_L_03" unique_id=2018045844]
+transform = Transform3D(0.9999999, -1.1920929e-07, 5.9604645e-08, -3.4924597e-10, 1, -2.3283064e-09, 1.1920929e-07, 2.9802322e-08, 0.99999976, 34.76934, 0.34418982, -60.50241)
+material_override = SubResource("Mat_rock_far")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh17" type="MeshInstance3D" parent="WideGroundPillars/Pillar_L_03" unique_id=849255430]
+transform = Transform3D(0.9999999, -1.1920929e-07, 5.9604645e-08, -3.4924597e-10, 1, -2.3283064e-09, 1.1920929e-07, 2.9802322e-08, 0.99999976, 43.58143, 0.43142277, -81.129654)
+material_override = SubResource("Mat_rock_far")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh10" type="MeshInstance3D" parent="WideGroundPillars/Pillar_L_03" unique_id=990913613]
+transform = Transform3D(0.9999999, -1.1920929e-07, 5.9604645e-08, -3.4924597e-10, 1, -2.3283064e-09, 1.1920929e-07, 2.9802322e-08, 0.99999976, 20.981659, 0.20770222, -42.243538)
+material_override = SubResource("Mat_rock_far")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh9" type="MeshInstance3D" parent="WideGroundPillars/Pillar_L_03" unique_id=2085639876]
+transform = Transform3D(0.9999999, -1.1920929e-07, 5.9604645e-08, -3.4924597e-10, 1, -2.3283064e-09, 1.1920929e-07, 2.9802322e-08, 0.99999976, 17.952747, 0.17771822, -24.157028)
+material_override = SubResource("Mat_rock_far")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh12" type="MeshInstance3D" parent="WideGroundPillars/Pillar_L_03" unique_id=339917551]
+transform = Transform3D(0.9999999, -1.1920929e-07, 5.9604645e-08, -3.4924597e-10, 1, -2.3283064e-09, 1.1920929e-07, 2.9802322e-08, 0.99999976, 24.592121, 0.24344295, -35.695)
+material_override = SubResource("Mat_rock_far")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh11" type="MeshInstance3D" parent="WideGroundPillars/Pillar_L_03" unique_id=75655009]
+transform = Transform3D(0.9999999, -1.1920929e-07, 5.9604645e-08, -3.4924597e-10, 1, -2.3283064e-09, 1.1920929e-07, 2.9802322e-08, 0.99999976, 18.392822, 0.18207467, -38.220734)
+material_override = SubResource("Mat_rock_far")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="Mesh15" type="MeshInstance3D" parent="WideGroundPillars/Pillar_L_03" unique_id=2096792464]
+transform = Transform3D(0.9999999, -1.1920929e-07, 5.9604645e-08, -3.4924597e-10, 1, -2.3283064e-09, 1.1920929e-07, 2.9802322e-08, 0.99999976, 29.235176, 0.28940576, -63.600403)
+material_override = SubResource("Mat_rock_far")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WideGroundPillars/Pillar_L_03" unique_id=1306919239]
+shape = SubResource("BoxShape_rock")
+
+[node name="Pillar_R_03" type="StaticBody3D" parent="WideGroundPillars" unique_id=1496674883]
+transform = Transform3D(2.9996917, -0.917695, -1.0944644, 0.2232207, 13.965897, 0, 1.0917984, -0.33401364, 3.0070164, 19, 6.65, -146)
+
+[node name="Mesh" type="MeshInstance3D" parent="WideGroundPillars/Pillar_R_03" unique_id=2076717855]
+material_override = SubResource("Mat_rock_far")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WideGroundPillars/Pillar_R_03" unique_id=661779373]
+shape = SubResource("BoxShape_rock")
+
+[node name="Pillar_L_04" type="StaticBody3D" parent="WideGroundPillars" unique_id=728754664]
+transform = Transform3D(2.9091141, 0.406354, -0.7741501, -0.10469849, 11.99269, 0, 0.72532356, 0.101315424, 3.1049464, -19, 5.65, -188)
+
+[node name="Mesh" type="MeshInstance3D" parent="WideGroundPillars/Pillar_L_04" unique_id=2037537284]
+material_override = SubResource("Mat_rock_far")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WideGroundPillars/Pillar_L_04" unique_id=264368650]
+shape = SubResource("BoxShape_rock")
+
+[node name="Pillar_R_04" type="StaticBody3D" parent="WideGroundPillars" unique_id=79672415]
+transform = Transform3D(3.321144, -0.8190767, 0.7068998, 0.17794226, 15.978072, 0, -0.705931, 0.17410013, 3.325702, 19, 7.65, -226)
+
+[node name="Mesh" type="MeshInstance3D" parent="WideGroundPillars/Pillar_R_04" unique_id=606966759]
+material_override = SubResource("Mat_rock_far")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WideGroundPillars/Pillar_R_04" unique_id=8790972]
+shape = SubResource("BoxShape_rock")
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=1703597058]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+script = ExtResource("2_player")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=374459069]
+shape = SubResource("Capsule_player")
+
+[node name="Head" type="Node3D" parent="Player" unique_id=1296205992]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Player/Head" unique_id=122913282]
+current = true
+fov = 78.0
+
+[node name="Pursuer" type="CharacterBody3D" parent="." unique_id=195105900]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -42)
+script = ExtResource("3_pursuer")
+
+[node name="Mesh" type="MeshInstance3D" parent="Pursuer" unique_id=396686167]
+material_override = SubResource("Mat_pursuer")
+mesh = SubResource("Capsule_pursuer")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pursuer" unique_id=2101532771]
+shape = SubResource("Capsule_pursuer_shape")
+
+[node name="Light" type="OmniLight3D" parent="Pursuer" unique_id=981398226]
+light_color = Color(1, 0.08, 0.02, 1)
+light_energy = 4.0
+omni_range = 9.0
+
+[node name="Lighting" type="Node3D" parent="." unique_id=655927141]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Lighting" unique_id=1363455162]
+environment = SubResource("Environment_scene4")
+
+[node name="Sun" type="DirectionalLight3D" parent="Lighting" unique_id=1081390883]
+transform = Transform3D(0.7880108, 0.34427354, -0.51040655, 0, 0.8290376, 0.5591929, 0.6156615, -0.44065002, 0.65329057, 0, 0, 0)
+light_color = Color(1, 0.82, 0.62, 1)
+light_energy = 1.4
+shadow_enabled = true
+
+[node name="NightFill" type="DirectionalLight3D" parent="Lighting" unique_id=2003348237]
+transform = Transform3D(-0.81915206, -0.46984634, 0.32898995, 0, 0.57357645, 0.81915206, -0.57357645, 0.6710101, -0.46984634, 0, 0, 0)
+light_color = Color(0.25, 0.38, 0.7, 1)
+light_energy = 0.18
+
+[node name="ExitGlow" type="OmniLight3D" parent="Lighting" unique_id=1433896617]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -476)
+light_color = Color(0.1, 0.55, 1, 1)
+light_energy = 6.0
+omni_range = 18.0
+
+[node name="Triggers" type="Node3D" parent="." unique_id=1816446017]
+
+[node name="ChaseStart" type="Area3D" parent="Triggers" unique_id=1686035784]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -24)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Triggers/ChaseStart" unique_id=1735117647]
+shape = SubResource("BoxShape_trigger")
+
+[node name="Exit" type="Node3D" parent="." unique_id=731843652]
+
+[node name="Gate" type="MeshInstance3D" parent="Exit" unique_id=1566174404]
+transform = Transform3D(7, 0, 0, 0, 5, 0, 0, 0, 0.8, 0, 5, -478)
+material_override = SubResource("Mat_exit")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="ExitTrigger" type="Area3D" parent="Exit" unique_id=1190950959]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -472)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Exit/ExitTrigger" unique_id=583934811]
+shape = SubResource("BoxShape_exit")
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=564213778]
+
+[node name="Status" type="Label" parent="HUD" unique_id=525762704]
+offset_left = 24.0
+offset_top = 22.0
+offset_right = 760.0
+offset_bottom = 60.0
+theme_override_colors/font_color = Color(1, 0.9, 0.72, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 22
+text = "榛勬槒鍏ュ彛 路 WASD 绉诲姩 / Shift 濂旇窇 路 榧犳爣杞悜"
+
+[node name="Progress" type="ProgressBar" parent="HUD" unique_id=179127518]
+offset_left = 24.0
+offset_top = 62.0
+offset_right = 360.0
+offset_bottom = 80.0
+show_percentage = false
+
+[node name="Crosshair" type="Label" parent="HUD" unique_id=287816997]
+offset_left = 570.0
+offset_top = 312.0
+offset_right = 590.0
+offset_bottom = 336.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.8)
+theme_override_font_sizes/font_size = 20
+text = "+"

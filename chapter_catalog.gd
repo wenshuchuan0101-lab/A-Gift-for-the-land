@@ -16,6 +16,11 @@ const CHAPTERS := [
 		"scene_path": "res://scenes/testing/chapter_3_test.tscn",
 		"is_test": true,
 	},
+	{
+		"display_name": "Scene 4 · 雅丹石林追逐",
+		"scene_path": "res://scenes/chapter1/scene04_yadan_chase_empty.tscn",
+		"is_test": false,
+	},
 ]
 
 
