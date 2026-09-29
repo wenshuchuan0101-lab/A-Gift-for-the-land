@@ -21,6 +21,11 @@ const CHAPTERS := [
 		"scene_path": "res://scenes/chapter1/scene04_yadan_chase_empty.tscn",
 		"is_test": false,
 	},
+	{
+		"display_name": "Scene 4 · 石柱演示版",
+		"scene_path": "res://scenes/chapter1/scene04_yadan_chase_stone_preview.tscn",
+		"is_test": true,
+	},
 ]
 
 

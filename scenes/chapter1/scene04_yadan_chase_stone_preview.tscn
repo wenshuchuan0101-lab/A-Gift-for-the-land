@@ -1,0 +1,2522 @@
+[gd_scene format=3 uid="uid://kobr2wsws2hf"]
+
+[ext_resource type="Script" uid="uid://cygknx0767uiy" path="res://scene4_controller_stone_preview.gd" id="1_ia3nt"]
+[ext_resource type="PackedScene" path="res://stone_preview_assets/stone_pillar_a/stone_pillar_a_stone_preview.tscn" id="2_8uyeo"]
+[ext_resource type="PackedScene" path="res://stone_preview_assets/stone_pillar_b/stone_pillar_b_stone_preview.tscn" id="3_f2630"]
+[ext_resource type="PackedScene" path="res://stone_preview_assets/stone_pillar_f/stone_pillar_f_stone_preview.tscn" id="4_exyop"]
+[ext_resource type="PackedScene" path="res://stone_preview_assets/stone_pillar_g/stone_pillar_g_stone_preview.tscn" id="5_nays2"]
+[ext_resource type="PackedScene" path="res://stone_preview_assets/stone_pillar_h/stone_pillar_h_stone_preview.tscn" id="6_711ap"]
+[ext_resource type="PackedScene" path="res://stone_preview_assets/stone_pillar_i/stone_pillar_i_stone_preview.tscn" id="7_uiix8"]
+[ext_resource type="PackedScene" path="res://stone_preview_assets/stone_pillar_c/stone_pillar_c_stone_preview.tscn" id="8_548p1"]
+[ext_resource type="PackedScene" path="res://stone_preview_assets/stone_pillar_k/stone_pillar_k_stone_preview.tscn" id="9_he20v"]
+[ext_resource type="PackedScene" path="res://stone_preview_assets/stone_pillar_e/stone_pillar_e_stone_preview.tscn" id="10_ki4s4"]
+[ext_resource type="PackedScene" path="res://stone_preview_assets/stone_pillar_d/stone_pillar_d_stone_preview.tscn" id="11_dcjna"]
+[ext_resource type="PackedScene" path="res://stone_preview_assets/stone_pillar_j/stone_pillar_j_stone_preview.tscn" id="12_xrlns"]
+[ext_resource type="Script" uid="uid://cql36ex18m4l7" path="res://scene4_player.gd" id="13_jc30c"]
+[ext_resource type="Script" uid="uid://cj7hjnc8kvql7" path="res://scene4_pursuer.gd" id="14_hgmkb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape_ground"]
+size = Vector3(46, 1, 520)
+
+[sub_resource type="BoxShape3D" id="BoxShape_wind_boundary"]
+size = Vector3(1, 8, 520)
+
+[sub_resource type="BoxShape3D" id="BoxShape_rock"]
+
+[sub_resource type="FogMaterial" id="FogMaterial_inner"]
+density = 0.012
+albedo = Color(0.36, 0.42, 0.56, 1)
+height_falloff = 0.18
+
+[sub_resource type="FogMaterial" id="FogMaterial_outer"]
+density = 0.028
+albedo = Color(0.25, 0.31, 0.48, 1)
+height_falloff = 0.12
+
+[sub_resource type="FogMaterial" id="FogMaterial_far"]
+density = 0.045
+albedo = Color(0.18, 0.24, 0.4, 1)
+height_falloff = 0.08
+
+[sub_resource type="StandardMaterial3D" id="Mat_marker"]
+albedo_color = Color(1, 0.55, 0.15, 1)
+emission_enabled = true
+emission = Color(1, 0.22, 0.04, 1)
+emission_energy_multiplier = 2.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_rock"]
+size = Vector3(1, 1.0281982, 1)
+
+[sub_resource type="CapsuleShape3D" id="Capsule_player"]
+radius = 0.42
+height = 1.8
+
+[sub_resource type="StandardMaterial3D" id="Mat_pursuer"]
+albedo_color = Color(0.04, 0.015, 0.02, 1)
+emission_enabled = true
+emission = Color(0.32, 0.015, 0.02, 1)
+emission_energy_multiplier = 2.5
+
+[sub_resource type="CapsuleMesh" id="Capsule_pursuer"]
+radius = 0.75
+height = 2.8
+radial_segments = 12
+rings = 4
+
+[sub_resource type="CapsuleShape3D" id="Capsule_pursuer_shape"]
+radius = 0.75
+height = 2.8
+
+[sub_resource type="Environment" id="Environment_scene4"]
+background_mode = 1
+background_color = Color(0.8, 0.48, 0.32, 1)
+ambient_light_source = 3
+ambient_light_color = Color(1, 0.78, 0.58, 1)
+ambient_light_energy = 1.05
+reflected_light_source = 2
+tonemap_mode = 2
+fog_enabled = true
+fog_light_color = Color(0.78, 0.45, 0.34, 1)
+fog_density = 0.006
+fog_sky_affect = 0.55
+
+[sub_resource type="BoxShape3D" id="BoxShape_trigger"]
+size = Vector3(12, 4, 8)
+
+[sub_resource type="StandardMaterial3D" id="Mat_exit"]
+albedo_color = Color(0.2, 0.52, 0.75, 1)
+emission_enabled = true
+emission = Color(0.12, 0.55, 1, 1)
+emission_energy_multiplier = 5.0
+
+[sub_resource type="BoxShape3D" id="BoxShape_exit"]
+size = Vector3(14, 5, 10)
+
+[node name="Scene04_YadanChase" type="Node3D" unique_id=199125632]
+script = ExtResource("1_ia3nt")
+
+[node name="Terrain" type="Node3D" parent="." unique_id=696131653]
+
+[node name="Ground" type="StaticBody3D" parent="Terrain" unique_id=1551730567]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -240)
+
+[node name="Mesh" type="Node3D" parent="Terrain/Ground" unique_id=1190245396]
+transform = Transform3D(-4.3732744e-08, 0, 1.0004885, 0, 1.0004885, 0, -1.0004885, 0, -4.3732744e-08, -0.16859138, -0.15776062, -240.12262)
+top_level = true
+metadata/whitebox_original_path = "Terrain/Ground/Mesh"
+metadata/uniform_scale = 1.0004885197850513
+
+[node name="StoneModel" parent="Terrain/Ground/Mesh" unique_id=1573456642 instance=ExtResource("8_548p1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Ground" unique_id=1103353135]
+shape = SubResource("BoxShape_ground")
+
+[node name="Boundaries" type="Node3D" parent="Terrain" unique_id=880434282]
+
+[node name="LeftGroundBoundary" type="StaticBody3D" parent="Terrain/Boundaries" unique_id=1603128865]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22.8, 4, -240)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Boundaries/LeftGroundBoundary" unique_id=30725770]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7275963, 0, 0)
+shape = SubResource("BoxShape_wind_boundary")
+
+[node name="RightGroundBoundary" type="StaticBody3D" parent="Terrain/Boundaries" unique_id=2059511087]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.8, 4, -240)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Terrain/Boundaries/RightGroundBoundary" unique_id=2129004821]
+shape = SubResource("BoxShape_wind_boundary")
+
+[node name="WindFields" type="Node3D" parent="." unique_id=241580570]
+
+[node name="CentralClearRoute" type="Marker3D" parent="WindFields" unique_id=1235106112]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, -240)
+
+[node name="LeftWindZone" type="Area3D" parent="WindFields" unique_id=329817462]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -17, 3, -240)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WindFields/LeftWindZone" unique_id=71690634]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 1, -5.025776, -0.014144897, 1.2255249)
+shape = SubResource("BoxShape_wind_boundary")
+
+[node name="RightWindZone" type="Area3D" parent="WindFields" unique_id=1826935619]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17, 3, -240)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WindFields/RightWindZone" unique_id=1606475246]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 1, 22.740227, 0, 0)
+shape = SubResource("BoxShape_wind_boundary")
+
+[node name="Rocks_Near" type="Node3D" parent="." unique_id=402207338]
+
+[node name="Near_01" type="StaticBody3D" parent="Rocks_Near" unique_id=432429248]
+transform = Transform3D(2.934443, 0, 0.6237351, 0, 8, 0, -0.6237351, 0, 2.934443, -6, 4, -28)
+
+[node name="Mesh" type="Node3D" parent="Rocks_Near/Near_01" unique_id=1945640596]
+transform = Transform3D(8.0497675, 0, 1.7110308, 0, 8.229605, 0, -1.7110308, 0, 8.0497675, -6, 4, -24.692347)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Near/Near_01/Mesh"
+metadata/uniform_scale = 8.229604298974108
+
+[node name="StoneModel" parent="Rocks_Near/Near_01/Mesh" unique_id=1042013032 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh2" type="Node3D" parent="Rocks_Near/Near_01" unique_id=398607506]
+transform = Transform3D(-1.7110312, 0, 8.0497675, 0, 8.229605, 0, -8.0497675, 0, -1.7110312, -6, 4, -1.8644257)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Near/Near_01/Mesh2"
+metadata/uniform_scale = 8.229604298974108
+
+[node name="StoneModel" parent="Rocks_Near/Near_01/Mesh2" unique_id=563194793 instance=ExtResource("3_f2630")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rocks_Near/Near_01" unique_id=1376776031]
+shape = SubResource("BoxShape_rock")
+
+[node name="Near_02" type="StaticBody3D" parent="Rocks_Near" unique_id=1304250405]
+transform = Transform3D(3.8042262, 0, -0.9888544, 0, 10, 0, 1.236068, 0, 3.043381, 7, 5, -42)
+
+[node name="Mesh" type="Node3D" parent="Rocks_Near/Near_02" unique_id=1484930707]
+transform = Transform3D(3.1788592, 0, 9.783524, 0, 10.287005, 0, -9.783524, 0, 3.1788592, 7, 5, -42)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Near/Near_02/Mesh"
+metadata/uniform_scale = 10.287005373717635
+
+[node name="StoneModel" parent="Rocks_Near/Near_02/Mesh" unique_id=960463059 instance=ExtResource("4_exyop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh3" type="Node3D" parent="Rocks_Near/Near_02" unique_id=861456293]
+transform = Transform3D(10.178578, 0, 1.4896395, 0, 10.287005, 0, -1.4896395, 0, 10.178577, -1.0846195, 5, -28.568892)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Near/Near_02/Mesh3"
+metadata/uniform_scale = 10.287005373717635
+
+[node name="StoneModel" parent="Rocks_Near/Near_02/Mesh3" unique_id=56589091 instance=ExtResource("5_nays2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh2" type="Node3D" parent="Rocks_Near/Near_02" unique_id=2033437518]
+transform = Transform3D(3.1788611, 0, 9.783524, 0, 10.287005, 0, -9.783524, 0, 3.178861, -1.5281172, 5, -21.209122)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Near/Near_02/Mesh2"
+metadata/uniform_scale = 10.287005373717635
+
+[node name="StoneModel" parent="Rocks_Near/Near_02/Mesh2" unique_id=1852417675 instance=ExtResource("4_exyop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rocks_Near/Near_02" unique_id=1461726704]
+shape = SubResource("BoxShape_rock")
+
+[node name="Near_03" type="StaticBody3D" parent="Rocks_Near" unique_id=1920850732]
+transform = Transform3D(3.0903165, 0, 1.4084147, 0, 12, 0, -1.6431506, 0, 2.6488428, -7, 6, -62)
+
+[node name="Mesh" type="Node3D" parent="Rocks_Near/Near_03" unique_id=436954017]
+transform = Transform3D(16.662586, 0, 8.859654, 0, 18.871546, 0, -8.859654, 0, 16.662584, -7, 6, -62)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Near/Near_03/Mesh"
+metadata/uniform_scale = 18.87154592979836
+
+[node name="StoneModel" parent="Rocks_Near/Near_03/Mesh" unique_id=1678628380 instance=ExtResource("9_he20v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3269043, 0)
+
+[node name="Mesh2" type="Node3D" parent="Rocks_Near/Near_03" unique_id=2097872025]
+transform = Transform3D(-5.795347, 0, 10.899462, 0, 12.344404, 0, -10.899463, 0, -5.7953467, -5.9719152, 6, -54.223495)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Near/Near_03/Mesh2"
+metadata/uniform_scale = 12.344404540180753
+
+[node name="StoneModel" parent="Rocks_Near/Near_03/Mesh2" unique_id=1851087118 instance=ExtResource("8_548p1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rocks_Near/Near_03" unique_id=256731273]
+shape = SubResource("BoxShape_rock")
+
+[node name="Near_04" type="StaticBody3D" parent="Rocks_Near" unique_id=2134172884]
+transform = Transform3D(2.3745346, 0, -1.8547175, 0, 9, 0, 1.483774, 0, 2.9681683, 6, 5, -78)
+
+[node name="Mesh" type="Node3D" parent="Rocks_Near/Near_04" unique_id=1387464637]
+transform = Transform3D(7.8514876, 0, -4.906154, 0, 9.258305, 0, 4.906154, 0, 7.851488, 6, 5, -78)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Near/Near_04/Mesh"
+metadata/uniform_scale = 9.258304836345872
+
+[node name="StoneModel" parent="Rocks_Near/Near_04/Mesh" unique_id=1978976235 instance=ExtResource("4_exyop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rocks_Near/Near_04" unique_id=104286977]
+shape = SubResource("BoxShape_rock")
+
+[node name="Near_05" type="StaticBody3D" parent="Rocks_Near" unique_id=1244360862]
+transform = Transform3D(2.883785, 0, 0.7717846, 0, 8, 0, -0.82691205, 0, 2.6915326, -5, 4, -104)
+
+[node name="Mesh" type="Node3D" parent="Rocks_Near/Near_05" unique_id=1502714550]
+transform = Transform3D(7.9108043, 0, 2.2683866, 0, 8.229605, 0, -2.2683866, 0, 7.9108043, -5, 4, -104)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Near/Near_05/Mesh"
+metadata/uniform_scale = 8.229604298974108
+
+[node name="StoneModel" parent="Rocks_Near/Near_05/Mesh" unique_id=539504210 instance=ExtResource("3_f2630")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rocks_Near/Near_05" unique_id=380404755]
+shape = SubResource("BoxShape_rock")
+
+[node name="Near_06" type="StaticBody3D" parent="Rocks_Near" unique_id=2093367392]
+transform = Transform3D(2.4257393, 0, -0.7257657, 0, 11, 0, 0.60480475, 0, 2.9108872, 5, 6, -128)
+
+[node name="Mesh" type="Node3D" parent="Rocks_Near/Near_06" unique_id=1060809061]
+transform = Transform3D(10.979582, 0, -2.737517, 0, 11.315706, 0, 2.737517, 0, 10.979581, 5, 6, -128)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Near/Near_06/Mesh"
+metadata/uniform_scale = 11.3157059110894
+
+[node name="StoneModel" parent="Rocks_Near/Near_06/Mesh" unique_id=123739668 instance=ExtResource("5_nays2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh2" type="Node3D" parent="Rocks_Near/Near_06" unique_id=1963558539]
+transform = Transform3D(16.785065, 0, -4.1849875, 0, 17.298916, 0, 4.184987, 0, 16.785065, -7.346178, 6, -159.71648)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Near/Near_06/Mesh2"
+metadata/uniform_scale = 17.29891564367065
+
+[node name="StoneModel" parent="Rocks_Near/Near_06/Mesh2" unique_id=982714800 instance=ExtResource("9_he20v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3269043, 0)
+
+[node name="Mesh3" type="Node3D" parent="Rocks_Near/Near_06" unique_id=702510943]
+transform = Transform3D(4.7772355, 0, 19.160444, 0, 19.747015, 0, -19.160444, 0, 4.777235, -8.284039, 6, -219.40341)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Near/Near_06/Mesh3"
+metadata/uniform_scale = 19.74701453271526
+
+[node name="StoneModel" parent="Rocks_Near/Near_06/Mesh3" unique_id=1391688938 instance=ExtResource("6_711ap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.28637695, 0)
+
+[node name="Mesh4" type="Node3D" parent="Rocks_Near/Near_06" unique_id=1560799780]
+transform = Transform3D(16.785065, 0, -4.1849875, 0, 17.298916, 0, 4.184987, 0, 16.785065, -11.490824, 6, -253.27852)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Near/Near_06/Mesh4"
+metadata/uniform_scale = 17.29891564367065
+
+[node name="StoneModel" parent="Rocks_Near/Near_06/Mesh4" unique_id=834266367 instance=ExtResource("9_he20v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3269043, 0)
+
+[node name="Mesh6" type="Node3D" parent="Rocks_Near/Near_06" unique_id=124784383]
+transform = Transform3D(2.7375169, 0, 10.979581, 0, 11.315705, 0, -10.979581, 0, 2.7375169, 12.033909, 6, -333.49365)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Near/Near_06/Mesh6"
+metadata/uniform_scale = 11.315704956949194
+
+[node name="StoneModel" parent="Rocks_Near/Near_06/Mesh6" unique_id=267084569 instance=ExtResource("11_dcjna")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh8" type="Node3D" parent="Rocks_Near/Near_06" unique_id=495217746]
+transform = Transform3D(10.979581, 0, -2.7375174, 0, 11.315705, 0, 2.7375174, 0, 10.979581, 7.7201996, 6, -357.2998)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Near/Near_06/Mesh8"
+metadata/uniform_scale = 11.315704956949194
+
+[node name="StoneModel" parent="Rocks_Near/Near_06/Mesh8" unique_id=285833780 instance=ExtResource("7_uiix8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh11" type="Node3D" parent="Rocks_Near/Near_06" unique_id=202747544]
+transform = Transform3D(10.979581, 0, -2.7375174, 0, 11.315705, 0, 2.7375174, 0, 10.979581, 7.720192, 6, -438.83365)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Near/Near_06/Mesh11"
+metadata/uniform_scale = 11.315704956949194
+
+[node name="StoneModel" parent="Rocks_Near/Near_06/Mesh11" unique_id=1178563813 instance=ExtResource("3_f2630")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh12" type="Node3D" parent="Rocks_Near/Near_06" unique_id=1017197275]
+transform = Transform3D(10.979581, 0, -2.7375174, 0, 11.315705, 0, 2.7375174, 0, 10.979581, 14.37384, 6, -457.97925)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Near/Near_06/Mesh12"
+metadata/uniform_scale = 11.315704956949194
+
+[node name="StoneModel" parent="Rocks_Near/Near_06/Mesh12" unique_id=482878425 instance=ExtResource("4_exyop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh9" type="Node3D" parent="Rocks_Near/Near_06" unique_id=606848765]
+transform = Transform3D(10.979581, 0, -2.7375174, 0, 11.315705, 0, 2.7375174, 0, 10.979581, -10.821075, 6, -357.2998)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Near/Near_06/Mesh9"
+metadata/uniform_scale = 11.315704956949194
+
+[node name="StoneModel" parent="Rocks_Near/Near_06/Mesh9" unique_id=11016068 instance=ExtResource("10_ki4s4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh10" type="Node3D" parent="Rocks_Near/Near_06" unique_id=1360460886]
+transform = Transform3D(2.7375169, 0, 10.979581, 0, 11.315705, 0, -10.979581, 0, 2.7375169, -6.140236, 6, -389.62485)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Near/Near_06/Mesh10"
+metadata/uniform_scale = 11.315704956949194
+
+[node name="StoneModel" parent="Rocks_Near/Near_06/Mesh10" unique_id=1164828624 instance=ExtResource("4_exyop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh5" type="Node3D" parent="Rocks_Near/Near_06" unique_id=581511397]
+transform = Transform3D(10.979581, 0, -2.7375174, 0, 11.315705, 0, 2.7375174, 0, 10.979581, -6.162224, 6, -281.1369)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Near/Near_06/Mesh5"
+metadata/uniform_scale = 11.315704956949194
+
+[node name="StoneModel" parent="Rocks_Near/Near_06/Mesh5" unique_id=67414384 instance=ExtResource("4_exyop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh7" type="Node3D" parent="Rocks_Near/Near_06" unique_id=2008203387]
+transform = Transform3D(2.7375169, 0, 10.979581, 0, 11.315705, 0, -10.979581, 0, 2.7375169, -6.1622124, 6, -342.8331)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Near/Near_06/Mesh7"
+metadata/uniform_scale = 11.315704956949194
+
+[node name="StoneModel" parent="Rocks_Near/Near_06/Mesh7" unique_id=791474328 instance=ExtResource("11_dcjna")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rocks_Near/Near_06" unique_id=1192191377]
+shape = SubResource("BoxShape_rock")
+
+[node name="Rocks_BoundaryLandmarks" type="Node3D" parent="." unique_id=1953682323]
+
+[node name="Landmark_L_Entrance" type="StaticBody3D" parent="Rocks_BoundaryLandmarks" unique_id=546436838]
+transform = Transform3D(3.043381, 0, 0.927051, 0, 10, 0, -0.9888544, 0, 2.8531697, -13, 5, -10)
+
+[node name="Mesh" type="Node3D" parent="Rocks_BoundaryLandmarks/Landmark_L_Entrance" unique_id=1813677035]
+transform = Transform3D(9.783524, 0, 3.1788592, 0, 10.287005, 0, -3.1788595, 0, 9.783524, -13, 5, -10)
+top_level = true
+metadata/whitebox_original_path = "Rocks_BoundaryLandmarks/Landmark_L_Entrance/Mesh"
+metadata/uniform_scale = 10.287005373717635
+
+[node name="StoneModel" parent="Rocks_BoundaryLandmarks/Landmark_L_Entrance/Mesh" unique_id=1178221581 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rocks_BoundaryLandmarks/Landmark_L_Entrance" unique_id=1304579791]
+shape = SubResource("BoxShape_rock")
+
+[node name="Landmark_R_Turn" type="StaticBody3D" parent="Rocks_BoundaryLandmarks" unique_id=998868575]
+transform = Transform3D(3.2451434, 0, -1.1987411, 0, 14, 0, 1.311123, 0, 2.9669883, 13, 7, -52)
+
+[node name="Mesh" type="Node3D" parent="Rocks_BoundaryLandmarks/Landmark_R_Turn" unique_id=300372630]
+transform = Transform3D(13.353124, 0, -5.395012, 0, 14.401808, 0, 5.3950124, 0, 13.353124, 13, 7, -52)
+top_level = true
+metadata/whitebox_original_path = "Rocks_BoundaryLandmarks/Landmark_R_Turn/Mesh"
+metadata/uniform_scale = 14.40180752320469
+
+[node name="StoneModel" parent="Rocks_BoundaryLandmarks/Landmark_R_Turn/Mesh" unique_id=1220239198 instance=ExtResource("3_f2630")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh2" type="Node3D" parent="Rocks_BoundaryLandmarks/Landmark_R_Turn" unique_id=1532127714]
+transform = Transform3D(5.395011, 0, 13.353124, 0, 14.401808, 0, -13.353124, 0, 5.395011, 13.000001, 7, -41.09819)
+top_level = true
+metadata/whitebox_original_path = "Rocks_BoundaryLandmarks/Landmark_R_Turn/Mesh2"
+metadata/uniform_scale = 14.40180752320469
+
+[node name="StoneModel" parent="Rocks_BoundaryLandmarks/Landmark_R_Turn/Mesh2" unique_id=1482891601 instance=ExtResource("10_ki4s4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rocks_BoundaryLandmarks/Landmark_R_Turn" unique_id=2104219176]
+shape = SubResource("BoxShape_rock")
+
+[node name="Landmark_L_Night" type="StaticBody3D" parent="Rocks_BoundaryLandmarks" unique_id=955403288]
+transform = Transform3D(3.881183, 0, 0.91930324, 0, 16, 0, -0.9676876, 0, 3.6871238, -14, 8, -164)
+
+[node name="Mesh" type="Node3D" parent="Rocks_BoundaryLandmarks/Landmark_L_Night" unique_id=129525894]
+transform = Transform3D(15.970301, 0, 3.981843, 0, 16.45921, 0, -3.9818432, 0, 15.970301, -14, 8, -164)
+top_level = true
+metadata/whitebox_original_path = "Rocks_BoundaryLandmarks/Landmark_L_Night/Mesh"
+metadata/uniform_scale = 16.459208597948216
+
+[node name="StoneModel" parent="Rocks_BoundaryLandmarks/Landmark_L_Night/Mesh" unique_id=237941280 instance=ExtResource("7_uiix8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rocks_BoundaryLandmarks/Landmark_L_Night" unique_id=1533609951]
+shape = SubResource("BoxShape_rock")
+
+[node name="Landmark_R_Night" type="StaticBody3D" parent="Rocks_BoundaryLandmarks" unique_id=1346693174]
+transform = Transform3D(4.3256774, 0, -1.1025494, 0, 18, 0, 1.2403681, 0, 3.8450468, 14, 9, -288)
+
+[node name="Mesh" type="Node3D" parent="Rocks_BoundaryLandmarks/Landmark_R_Night" unique_id=658123768]
+transform = Transform3D(17.799307, 0, -5.10387, 0, 18.51661, 0, 5.1038694, 0, 17.799307, 14, 9, -288)
+top_level = true
+metadata/whitebox_original_path = "Rocks_BoundaryLandmarks/Landmark_R_Night/Mesh"
+metadata/uniform_scale = 18.516609672691743
+
+[node name="StoneModel" parent="Rocks_BoundaryLandmarks/Landmark_R_Night/Mesh" unique_id=2025340777 instance=ExtResource("11_dcjna")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh2" type="Node3D" parent="Rocks_BoundaryLandmarks/Landmark_R_Night" unique_id=658909276]
+transform = Transform3D(5.1038675, 0, 17.799309, 0, 18.51661, 0, -17.799309, 0, 5.1038675, -11.37816, 9, -303.0701)
+top_level = true
+metadata/whitebox_original_path = "Rocks_BoundaryLandmarks/Landmark_R_Night/Mesh2"
+metadata/uniform_scale = 18.516609672691743
+
+[node name="StoneModel" parent="Rocks_BoundaryLandmarks/Landmark_R_Night/Mesh2" unique_id=331296176 instance=ExtResource("5_nays2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rocks_BoundaryLandmarks/Landmark_R_Night" unique_id=1497866286]
+shape = SubResource("BoxShape_rock")
+
+[node name="Rocks_Mid" type="Node3D" parent="." unique_id=2036920691]
+
+[node name="Mid_01" type="StaticBody3D" parent="Rocks_Mid" unique_id=1550032863]
+transform = Transform3D(4, 0, 0, 0, 14, 0, 0, 0, 4, 10, 7, -18)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rocks_Mid/Mid_01" unique_id=1862823847]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.0506916)
+shape = SubResource("BoxShape_rock")
+
+[node name="Mesh" type="Node3D" parent="Rocks_Mid" unique_id=1078758459]
+transform = Transform3D(-7.846995e-08, 0, 1.7951833, 0, 1.7951833, 0, -1.7951833, 0, -7.846995e-08, 0, 0, 0)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mesh"
+metadata/uniform_scale = 1.7951832907075873
+
+[node name="StoneModel" parent="Rocks_Mid/Mesh" unique_id=1651415088 instance=ExtResource("6_711ap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.28637695, 0)
+
+[node name="Mid_02" type="StaticBody3D" parent="Rocks_Mid" unique_id=349929495]
+transform = Transform3D(4, 0, 0, 0, 12, 0, 0, 0, 4, -10, 6, -50)
+
+[node name="Mesh" type="Node3D" parent="Rocks_Mid/Mid_02" unique_id=2122236629]
+transform = Transform3D(12.344406, 0, 0, 0, 12.344406, 0, 0, 0, 12.344406, -10, 6, -50)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mid_02/Mesh"
+metadata/uniform_scale = 12.344406448461164
+
+[node name="StoneModel" parent="Rocks_Mid/Mid_02/Mesh" unique_id=1961449245 instance=ExtResource("3_f2630")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh2" type="Node3D" parent="Rocks_Mid/Mid_02" unique_id=950281700]
+transform = Transform3D(-5.3959116e-07, 0, 12.344406, 0, 12.344406, 0, -12.344406, 0, -5.3959116e-07, 0.72696877, 6, -51.258305)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mid_02/Mesh2"
+metadata/uniform_scale = 12.344406448461164
+
+[node name="StoneModel" parent="Rocks_Mid/Mid_02/Mesh2" unique_id=1119925806 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rocks_Mid/Mid_02" unique_id=1908208553]
+shape = SubResource("BoxShape_rock")
+
+[node name="Mid_03" type="StaticBody3D" parent="Rocks_Mid" unique_id=1650259511]
+transform = Transform3D(4, 0, 0, 0, 10, 0, 0, 0, 5, 9, 5, -72)
+
+[node name="Mesh" type="Node3D" parent="Rocks_Mid/Mid_03" unique_id=1761446236]
+transform = Transform3D(-4.496593e-07, 0, 10.287005, 0, 10.287005, 0, -10.287005, 0, -4.496593e-07, 9, 5, -72)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mid_03/Mesh"
+metadata/uniform_scale = 10.287005373717635
+
+[node name="StoneModel" parent="Rocks_Mid/Mid_03/Mesh" unique_id=1250284915 instance=ExtResource("7_uiix8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh4" type="Node3D" parent="Rocks_Mid/Mid_03" unique_id=738744547]
+transform = Transform3D(-4.496592e-07, 0, 10.2870035, 0, 10.2870035, 0, -10.2870035, 0, -4.496592e-07, -6.7748547, 5, -79.13559)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mid_03/Mesh4"
+metadata/uniform_scale = 10.287003465437223
+
+[node name="StoneModel" parent="Rocks_Mid/Mid_03/Mesh4" unique_id=235020202 instance=ExtResource("5_nays2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh3" type="Node3D" parent="Rocks_Mid/Mid_03" unique_id=1916951931]
+transform = Transform3D(-4.496592e-07, 0, 10.2870035, 0, 10.2870035, 0, -10.2870035, 0, -4.496592e-07, -6.890112, 5, -43.75915)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mid_03/Mesh3"
+metadata/uniform_scale = 10.287003465437223
+
+[node name="StoneModel" parent="Rocks_Mid/Mid_03/Mesh3" unique_id=1557153799 instance=ExtResource("5_nays2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh2" type="Node3D" parent="Rocks_Mid/Mid_03" unique_id=1219593115]
+transform = Transform3D(-4.496592e-07, 0, 10.2870035, 0, 10.2870035, 0, -10.2870035, 0, -4.496592e-07, -11.3443165, 5, -60.09483)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mid_03/Mesh2"
+metadata/uniform_scale = 10.287003465437223
+
+[node name="StoneModel" parent="Rocks_Mid/Mid_03/Mesh2" unique_id=647663049 instance=ExtResource("7_uiix8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rocks_Mid/Mid_03" unique_id=391263251]
+shape = SubResource("BoxShape_rock")
+
+[node name="Mid_04" type="StaticBody3D" parent="Rocks_Mid" unique_id=780139908]
+transform = Transform3D(4, 0, 0, 0, 10, 0, 0, 0, 4, -10, 5, -92)
+
+[node name="Mesh" type="Node3D" parent="Rocks_Mid/Mid_04" unique_id=1439619898]
+transform = Transform3D(-4.496593e-07, 0, 10.287005, 0, 10.287005, 0, -10.287005, 0, -4.496593e-07, -10, 5, -92)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mid_04/Mesh"
+metadata/uniform_scale = 10.287005373717635
+
+[node name="StoneModel" parent="Rocks_Mid/Mid_04/Mesh" unique_id=842795849 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rocks_Mid/Mid_04" unique_id=421841794]
+shape = SubResource("BoxShape_rock")
+
+[node name="Mid_05" type="StaticBody3D" parent="Rocks_Mid" unique_id=12333710]
+transform = Transform3D(4, 0, 0, 0, 14, 0, 0, 0, 4, 10, 7, -118)
+
+[node name="Mesh" type="Node3D" parent="Rocks_Mid/Mid_05" unique_id=1950653287]
+transform = Transform3D(-6.29523e-07, 0, 14.401808, 0, 14.401808, 0, -14.401808, 0, -6.29523e-07, 10, 7, -118)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mid_05/Mesh"
+metadata/uniform_scale = 14.40180752320469
+
+[node name="StoneModel" parent="Rocks_Mid/Mid_05/Mesh" unique_id=1306305537 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh3" type="Node3D" parent="Rocks_Mid/Mid_05" unique_id=440207021]
+transform = Transform3D(-6.29523e-07, 0, 14.401808, 0, 14.401808, 0, -14.401808, 0, -6.29523e-07, -11.940207, 7, -114.52739)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mid_05/Mesh3"
+metadata/uniform_scale = 14.40180752320469
+
+[node name="StoneModel" parent="Rocks_Mid/Mid_05/Mesh3" unique_id=944998621 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh2" type="Node3D" parent="Rocks_Mid/Mid_05" unique_id=1774242139]
+transform = Transform3D(14.401808, 0, 0, 0, 14.401808, 0, 0, 0, 14.401808, 6.8804264, 7, -91.84093)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mid_05/Mesh2"
+metadata/uniform_scale = 14.40180752320469
+
+[node name="StoneModel" parent="Rocks_Mid/Mid_05/Mesh2" unique_id=1518165435 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.4229874, 0)
+
+[node name="Mesh4" type="Node3D" parent="Rocks_Mid/Mid_05" unique_id=1477672029]
+transform = Transform3D(14.401808, 0, 0, 0, 14.401808, 0, 0, 0, 14.401808, -5.5288258, 7, -128.92398)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mid_05/Mesh4"
+metadata/uniform_scale = 14.40180752320469
+
+[node name="StoneModel" parent="Rocks_Mid/Mid_05/Mesh4" unique_id=1420162204 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh6" type="Node3D" parent="Rocks_Mid/Mid_05" unique_id=340715696]
+transform = Transform3D(-6.29523e-07, 0, 14.401808, 0, 14.401808, 0, -14.401808, 0, -6.29523e-07, -5.5288258, 7, -153.12904)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mid_05/Mesh6"
+metadata/uniform_scale = 14.40180752320469
+
+[node name="StoneModel" parent="Rocks_Mid/Mid_05/Mesh6" unique_id=1784367027 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh9" type="Node3D" parent="Rocks_Mid/Mid_05" unique_id=287229065]
+transform = Transform3D(-6.29523e-07, 0, 14.401808, 0, 14.401808, 0, -14.401808, 0, -6.29523e-07, -2.8070393, 7, -181.51535)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mid_05/Mesh9"
+metadata/uniform_scale = 14.40180752320469
+
+[node name="StoneModel" parent="Rocks_Mid/Mid_05/Mesh9" unique_id=2096254065 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh18" type="Node3D" parent="Rocks_Mid/Mid_05" unique_id=1854406203]
+transform = Transform3D(-6.29523e-07, 0, 14.401808, 0, 14.401808, 0, -14.401808, 0, -6.29523e-07, -15.141632, 7, -366.704)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mid_05/Mesh18"
+metadata/uniform_scale = 14.40180752320469
+
+[node name="StoneModel" parent="Rocks_Mid/Mid_05/Mesh18" unique_id=1812132241 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh26" type="Node3D" parent="Rocks_Mid/Mid_05" unique_id=618657864]
+transform = Transform3D(14.401808, 0, 0, 0, 14.401808, 0, 0, 0, 14.401808, -15.141632, 5.852151, -428.8839)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mid_05/Mesh26"
+metadata/uniform_scale = 14.40180752320469
+
+[node name="StoneModel" parent="Rocks_Mid/Mid_05/Mesh26" unique_id=1184613852 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh27" type="Node3D" parent="Rocks_Mid/Mid_05" unique_id=559948331]
+transform = Transform3D(-6.29523e-07, 0, 14.401808, 0, 14.401808, 0, -14.401808, 0, -6.29523e-07, 6.038809, 5.852151, -428.8839)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mid_05/Mesh27"
+metadata/uniform_scale = 14.40180752320469
+
+[node name="StoneModel" parent="Rocks_Mid/Mid_05/Mesh27" unique_id=1176621000 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh28" type="Node3D" parent="Rocks_Mid/Mid_05" unique_id=1327468725]
+transform = Transform3D(-6.29523e-07, 0, 14.401808, 0, 14.401808, 0, -14.401808, 0, -6.29523e-07, -7.5148964, 5.852151, -400.4244)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mid_05/Mesh28"
+metadata/uniform_scale = 14.40180752320469
+
+[node name="StoneModel" parent="Rocks_Mid/Mid_05/Mesh28" unique_id=351123525 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh29" type="Node3D" parent="Rocks_Mid/Mid_05" unique_id=1306362603]
+transform = Transform3D(14.401808, 0, 0, 0, 14.401808, 0, 0, 0, 14.401808, -7.5148964, 5.852151, -463.83932)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mid_05/Mesh29"
+metadata/uniform_scale = 14.40180752320469
+
+[node name="StoneModel" parent="Rocks_Mid/Mid_05/Mesh29" unique_id=236116895 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh11" type="Node3D" parent="Rocks_Mid/Mid_05" unique_id=480146427]
+transform = Transform3D(-6.29523e-07, 0, 14.401808, 0, 14.401808, 0, -14.401808, 0, -6.29523e-07, -12.050793, 7, -208.98993)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mid_05/Mesh11"
+metadata/uniform_scale = 14.40180752320469
+
+[node name="StoneModel" parent="Rocks_Mid/Mid_05/Mesh11" unique_id=318007769 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh17" type="Node3D" parent="Rocks_Mid/Mid_05" unique_id=1876919479]
+transform = Transform3D(14.401808, 0, 0, 0, 14.401808, 0, 0, 0, 14.401808, -7.896759, 7, -313.80237)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mid_05/Mesh17"
+metadata/uniform_scale = 14.40180752320469
+
+[node name="StoneModel" parent="Rocks_Mid/Mid_05/Mesh17" unique_id=283283535 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh22" type="Node3D" parent="Rocks_Mid/Mid_05" unique_id=1546513420]
+transform = Transform3D(14.401808, 0, 0, 0, 14.401808, 0, 0, 0, 14.401808, -7.896759, 7, -337.95288)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mid_05/Mesh22"
+metadata/uniform_scale = 14.40180752320469
+
+[node name="StoneModel" parent="Rocks_Mid/Mid_05/Mesh22" unique_id=1441647853 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh23" type="Node3D" parent="Rocks_Mid/Mid_05" unique_id=210160630]
+transform = Transform3D(-6.29523e-07, 0, 14.401808, 0, 14.401808, 0, -14.401808, 0, -6.29523e-07, -13.680647, 7, -390.95596)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mid_05/Mesh23"
+metadata/uniform_scale = 14.40180752320469
+
+[node name="StoneModel" parent="Rocks_Mid/Mid_05/Mesh23" unique_id=2131594167 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh25" type="Node3D" parent="Rocks_Mid/Mid_05" unique_id=722694172]
+transform = Transform3D(14.401808, 0, 0, 0, 14.401808, 0, 0, 0, 14.401808, -9.935949, 7, -413.91174)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mid_05/Mesh25"
+metadata/uniform_scale = 14.40180752320469
+
+[node name="StoneModel" parent="Rocks_Mid/Mid_05/Mesh25" unique_id=553151769 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh30" type="Node3D" parent="Rocks_Mid/Mid_05" unique_id=526499746]
+transform = Transform3D(-6.29523e-07, 0, 14.401808, 0, 14.401808, 0, -14.401808, 0, -6.29523e-07, -9.935949, 7, -461.32996)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mid_05/Mesh30"
+metadata/uniform_scale = 14.40180752320469
+
+[node name="StoneModel" parent="Rocks_Mid/Mid_05/Mesh30" unique_id=480172905 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh24" type="Node3D" parent="Rocks_Mid/Mid_05" unique_id=654578691]
+transform = Transform3D(14.401808, 0, 0, 0, 14.401808, 0, 0, 0, 14.401808, 16.405428, 7, -390.95596)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mid_05/Mesh24"
+metadata/uniform_scale = 14.40180752320469
+
+[node name="StoneModel" parent="Rocks_Mid/Mid_05/Mesh24" unique_id=1832317095 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh20" type="Node3D" parent="Rocks_Mid/Mid_05" unique_id=1746652348]
+transform = Transform3D(-6.29523e-07, 0, 14.401808, 0, 14.401808, 0, -14.401808, 0, -6.29523e-07, 1.1541119, 7, -300.54346)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mid_05/Mesh20"
+metadata/uniform_scale = 14.40180752320469
+
+[node name="StoneModel" parent="Rocks_Mid/Mid_05/Mesh20" unique_id=1076095906 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh21" type="Node3D" parent="Rocks_Mid/Mid_05" unique_id=534887182]
+transform = Transform3D(14.401808, 0, 0, 0, 14.401808, 0, 0, 0, 14.401808, 10.394104, 7, -382.96286)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mid_05/Mesh21"
+metadata/uniform_scale = 14.40180752320469
+
+[node name="StoneModel" parent="Rocks_Mid/Mid_05/Mesh21" unique_id=855812947 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh19" type="Node3D" parent="Rocks_Mid/Mid_05" unique_id=1436134079]
+transform = Transform3D(14.401808, 0, 0, 0, 14.401808, 0, 0, 0, 14.401808, 3.960414, 7, -277.97305)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mid_05/Mesh19"
+metadata/uniform_scale = 14.40180752320469
+
+[node name="StoneModel" parent="Rocks_Mid/Mid_05/Mesh19" unique_id=490453144 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh14" type="Node3D" parent="Rocks_Mid/Mid_05" unique_id=721333536]
+transform = Transform3D(-6.29523e-07, 0, 14.401808, 0, 14.401808, 0, -14.401808, 0, -6.29523e-07, -16.666058, 7, -244.17033)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mid_05/Mesh14"
+metadata/uniform_scale = 14.40180752320469
+
+[node name="StoneModel" parent="Rocks_Mid/Mid_05/Mesh14" unique_id=941416480 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh15" type="Node3D" parent="Rocks_Mid/Mid_05" unique_id=1573772883]
+transform = Transform3D(14.401808, 0, 0, 0, 14.401808, 0, 0, 0, 14.401808, 6.1022015, 7, -238.60751)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mid_05/Mesh15"
+metadata/uniform_scale = 14.40180752320469
+
+[node name="StoneModel" parent="Rocks_Mid/Mid_05/Mesh15" unique_id=1509234432 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh16" type="Node3D" parent="Rocks_Mid/Mid_05" unique_id=1028169846]
+transform = Transform3D(-6.29523e-07, 0, 14.401808, 0, 14.401808, 0, -14.401808, 0, -6.29523e-07, 6.1022015, 7, -288.20197)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mid_05/Mesh16"
+metadata/uniform_scale = 14.40180752320469
+
+[node name="StoneModel" parent="Rocks_Mid/Mid_05/Mesh16" unique_id=560344129 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh13" type="Node3D" parent="Rocks_Mid/Mid_05" unique_id=1340867938]
+transform = Transform3D(14.401808, 0, 0, 0, 14.401808, 0, 0, 0, 14.401808, -17.857779, 7, -232.60829)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mid_05/Mesh13"
+metadata/uniform_scale = 14.40180752320469
+
+[node name="StoneModel" parent="Rocks_Mid/Mid_05/Mesh13" unique_id=1041479182 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh10" type="Node3D" parent="Rocks_Mid/Mid_05" unique_id=575471452]
+transform = Transform3D(14.401808, 0, 0, 0, 14.401808, 0, 0, 0, 14.401808, -18.79403, 7, -216.40852)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mid_05/Mesh10"
+metadata/uniform_scale = 14.40180752320469
+
+[node name="StoneModel" parent="Rocks_Mid/Mid_05/Mesh10" unique_id=1723776539 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh5" type="Node3D" parent="Rocks_Mid/Mid_05" unique_id=109334759]
+transform = Transform3D(-6.29523e-07, 0, 14.401808, 0, 14.401808, 0, -14.401808, 0, -6.29523e-07, -7.117361, 2.5952988, -114.93198)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mid_05/Mesh5"
+metadata/uniform_scale = 14.40180752320469
+
+[node name="StoneModel" parent="Rocks_Mid/Mid_05/Mesh5" unique_id=1053897772 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh7" type="Node3D" parent="Rocks_Mid/Mid_05" unique_id=1454432326]
+transform = Transform3D(14.401808, 0, 0, 0, 14.401808, 0, 0, 0, 14.401808, 16.664562, 2.5952988, -156.34355)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mid_05/Mesh7"
+metadata/uniform_scale = 14.40180752320469
+
+[node name="StoneModel" parent="Rocks_Mid/Mid_05/Mesh7" unique_id=372151155 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh8" type="Node3D" parent="Rocks_Mid/Mid_05" unique_id=1685270228]
+transform = Transform3D(-6.29523e-07, 0, 14.401808, 0, 14.401808, 0, -14.401808, 0, -6.29523e-07, -12.577894, 2.5952988, -179.7713)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mid_05/Mesh8"
+metadata/uniform_scale = 14.40180752320469
+
+[node name="StoneModel" parent="Rocks_Mid/Mid_05/Mesh8" unique_id=1761884520 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh12" type="Node3D" parent="Rocks_Mid/Mid_05" unique_id=1692596966]
+transform = Transform3D(14.401808, 0, 0, 0, 14.401808, 0, 0, 0, 14.401808, -17.0611, 2.5952988, -204.32727)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Mid/Mid_05/Mesh12"
+metadata/uniform_scale = 14.40180752320469
+
+[node name="StoneModel" parent="Rocks_Mid/Mid_05/Mesh12" unique_id=530566588 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Rocks_Mid/Mid_05" unique_id=2074486501]
+shape = SubResource("BoxShape_rock")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Rocks_Mid/Mid_05" unique_id=1803347392]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8328071, 0, 8.280855)
+shape = SubResource("BoxShape_rock")
+
+[node name="Mist_From_Center_Out" type="Node3D" parent="." unique_id=588670976]
+
+[node name="InnerLeftMist" type="FogVolume" parent="Mist_From_Center_Out" unique_id=1552775249]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34.990147, 4, -240)
+size = Vector3(10, 10, 520)
+material = SubResource("FogMaterial_inner")
+
+[node name="InnerRightMist" type="FogVolume" parent="Mist_From_Center_Out" unique_id=1863234044]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.941048, 4, -240)
+size = Vector3(10, 10, 520)
+material = SubResource("FogMaterial_inner")
+
+[node name="OuterLeftMist" type="FogVolume" parent="Mist_From_Center_Out" unique_id=1779879390]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.726196, 6, -240)
+size = Vector3(6, 14, 520)
+material = SubResource("FogMaterial_outer")
+
+[node name="OuterRightMist" type="FogVolume" parent="Mist_From_Center_Out" unique_id=1240077976]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 48.403877, 6, -240)
+size = Vector3(6, 14, 520)
+material = SubResource("FogMaterial_outer")
+
+[node name="FarRouteMist" type="FogVolume" parent="Mist_From_Center_Out" unique_id=1371234663]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8, -390)
+size = Vector3(44, 16, 180)
+material = SubResource("FogMaterial_far")
+
+[node name="Rocks_Far" type="Node3D" parent="." unique_id=2027397014]
+
+[node name="Far_01" type="Node3D" parent="Rocks_Far" unique_id=1993244814]
+transform = Transform3D(-1.2373522e-06, 0, 28.30732, 0, 28.30732, 0, -28.30732, 0, -1.2373522e-06, -11.316411, 9, -35)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Far/Far_01"
+metadata/uniform_scale = 28.307318894697534
+
+[node name="StoneModel" parent="Rocks_Far/Far_01" unique_id=1389575458 instance=ExtResource("9_he20v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3269043, 0)
+
+[node name="Far_02" type="Node3D" parent="Rocks_Far" unique_id=1905049886]
+transform = Transform3D(-7.194549e-07, 0, 16.45921, 0, 16.45921, 0, -16.45921, 0, -7.194549e-07, 14, 8, -60)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Far/Far_02"
+metadata/uniform_scale = 16.459208597948216
+
+[node name="StoneModel" parent="Rocks_Far/Far_02" unique_id=1467807045 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Far_03" type="Node3D" parent="Rocks_Far" unique_id=1557146771]
+transform = Transform3D(-8.993186e-07, 0, 20.57401, 0, 20.57401, 0, -20.57401, 0, -8.993186e-07, -14, 10, -86)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Far/Far_03"
+metadata/uniform_scale = 20.57401074743527
+
+[node name="StoneModel" parent="Rocks_Far/Far_03" unique_id=1105992031 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Far_06" type="Node3D" parent="Rocks_Far" unique_id=1397836942]
+transform = Transform3D(-8.993186e-07, 0, 20.57401, 0, 20.57401, 0, -20.57401, 0, -8.993186e-07, 13.610899, 10, -110.58903)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Far/Far_06"
+metadata/uniform_scale = 20.57401074743527
+
+[node name="StoneModel" parent="Rocks_Far/Far_06" unique_id=616382646 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Far_04" type="Node3D" parent="Rocks_Far" unique_id=1640679742]
+transform = Transform3D(-8.993186e-07, 0, 20.57401, 0, 20.57401, 0, -20.57401, 0, -8.993186e-07, 14, 10, -142)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Far/Far_04"
+metadata/uniform_scale = 20.57401074743527
+
+[node name="StoneModel" parent="Rocks_Far/Far_04" unique_id=1798045209 instance=ExtResource("3_f2630")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Far_07" type="Node3D" parent="Rocks_Far" unique_id=302437655]
+transform = Transform3D(-8.993186e-07, 0, 20.57401, 0, 20.57401, 0, -20.57401, 0, -8.993186e-07, 14, 10, -198.2246)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Far/Far_07"
+metadata/uniform_scale = 20.57401074743527
+
+[node name="StoneModel" parent="Rocks_Far/Far_07" unique_id=1120787844 instance=ExtResource("3_f2630")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Far_05" type="Node3D" parent="Rocks_Far" unique_id=226726228]
+transform = Transform3D(20.57401, 0, 0, 0, 20.57401, 0, 0, 0, 20.57401, -8.018391, 10, -138.2981)
+top_level = true
+metadata/whitebox_original_path = "Rocks_Far/Far_05"
+metadata/uniform_scale = 20.57401074743527
+
+[node name="StoneModel" parent="Rocks_Far/Far_05" unique_id=143198797 instance=ExtResource("3_f2630")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Markers" type="Node3D" parent="." unique_id=1929301125]
+
+[node name="EntranceMarker" type="MeshInstance3D" parent="Markers" unique_id=747928717]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0.6, -6)
+material_override = SubResource("Mat_marker")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="TurnOneMarker" type="MeshInstance3D" parent="Markers" unique_id=1934210129]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, -44)
+material_override = SubResource("Mat_marker")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="TurnTwoMarker" type="MeshInstance3D" parent="Markers" unique_id=1869017585]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.5, -86)
+material_override = SubResource("Mat_marker")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="BlockCliffs" type="Node3D" parent="." unique_id=1573836310]
+
+[node name="Cliff_L_01" type="StaticBody3D" parent="BlockCliffs" unique_id=289945685]
+transform = Transform3D(5.35934, 1.0230141, -0.93560266, -0.47935656, 11.954336, 0, 1.139163, 0.21744835, 4.4016643, -15, 5.65, -22)
+
+[node name="Mesh" type="Node3D" parent="BlockCliffs/Cliff_L_01" unique_id=395354170]
+transform = Transform3D(12.028704, 1.0523751, -2.5665467, -1.0758858, 12.297432, 5.4971956e-08, 2.5567803, 0.22368921, 12.074652, -15, 5.65, -22)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_01/Mesh"
+metadata/uniform_scale = 12.344406448461164
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_01/Mesh" unique_id=515545881 instance=ExtResource("5_nays2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh2" type="Node3D" parent="BlockCliffs/Cliff_L_01" unique_id=2039420229]
+transform = Transform3D(2.5665452, 1.0523748, 12.028702, 7.68034e-08, 12.29743, -1.0758857, -12.07465, 0.22368918, 2.556779, 10.637796, 5.6500006, -0.43748474)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_01/Mesh2"
+metadata/uniform_scale = 12.344404540180753
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_01/Mesh2" unique_id=1963648456 instance=ExtResource("8_548p1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh3" type="Node3D" parent="BlockCliffs/Cliff_L_01" unique_id=1880286334]
+transform = Transform3D(11.302793, 1.3330073, -2.4240656, -1.3595327, 11.556709, 0.015949372, 2.409289, 0.267722, 11.381115, -1.3154631, 2.4367068, -11.637922)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_01/Mesh3"
+metadata/uniform_scale = 11.636413425134345
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_01/Mesh3" unique_id=559141787 instance=ExtResource("5_nays2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlockCliffs/Cliff_L_01" unique_id=24951631]
+shape = SubResource("BoxShape_rock")
+
+[node name="Cliff_L_02" type="StaticBody3D" parent="BlockCliffs" unique_id=175691792]
+transform = Transform3D(4.7946005, -1.2069759, 1.1025494, 0.34878236, 17.956154, 0, -1.3748298, 0.34609482, 3.8450468, -14, 8.65, -37)
+
+[node name="Mesh" type="Node3D" parent="BlockCliffs/Cliff_L_02" unique_id=471584287]
+transform = Transform3D(17.755949, -1.2416167, 5.10387, 1.2916532, 18.471504, 2.4058917e-08, -5.091437, 0.35602787, 17.799307, -16.765285, 8.65, -37)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_02/Mesh"
+metadata/uniform_scale = 18.516609672691743
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_02/Mesh" unique_id=2060970939 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh2" type="Node3D" parent="BlockCliffs/Cliff_L_02" unique_id=485554276]
+transform = Transform3D(-8.906751, -2.166743, 30.985874, 1.0872204e-07, 32.23459, 2.2540612, -31.06154, 0.6213035, -8.885055, 8.725086, 8.200526, -11.905895)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_02/Mesh2"
+metadata/uniform_scale = 32.313299232736576
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_02/Mesh2" unique_id=2067374229 instance=ExtResource("6_711ap")]
+transform = Transform3D(1, 0, 0, 1.8626451e-09, 1.0000001, -6.519258e-09, 0, 4.656613e-10, 1, -0.5004494, -0.4081212, 1.7410235)
+
+[node name="Mesh3" type="Node3D" parent="BlockCliffs/Cliff_L_02" unique_id=1563784191]
+transform = Transform3D(-5.165476, -1.256604, 17.970278, -5.832267e-08, 18.694471, 1.3072442, -18.01416, 0.36032528, -5.152893, 26.96416, 8.200526, -11.9058895)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_02/Mesh3"
+metadata/uniform_scale = 18.740120832315583
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_02/Mesh3" unique_id=1657889423 instance=ExtResource("12_xrlns")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh4" type="Node3D" parent="BlockCliffs/Cliff_L_02" unique_id=614055234]
+transform = Transform3D(17.316933, -1.2109177, 4.977675, 1.259717, 18.014797, -1.4398993e-08, -4.965549, 0.347225, 17.359219, -26.957458, 8.200528, -11.905884)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_02/Mesh4"
+metadata/uniform_scale = 18.058786486321445
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_02/Mesh4" unique_id=666538525 instance=ExtResource("4_exyop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh5" type="Node3D" parent="BlockCliffs/Cliff_L_02" unique_id=1720196994]
+transform = Transform3D(17.316935, -1.2109176, 4.9776745, 1.2597167, 18.014797, 7.967176e-08, -4.965549, 0.34722486, 17.359219, -32.87733, 8.200529, -47.085564)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_02/Mesh5"
+metadata/uniform_scale = 18.058786486321445
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_02/Mesh5" unique_id=1882756846 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh6" type="Node3D" parent="BlockCliffs/Cliff_L_02" unique_id=759554248]
+transform = Transform3D(17.316935, -1.2109176, 4.9776745, 1.2597167, 18.014797, 2.7329842e-08, -4.965549, 0.34722486, 17.35922, 25.338017, 8.20053, -47.085564)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_02/Mesh6"
+metadata/uniform_scale = 18.058786486321445
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_02/Mesh6" unique_id=150501575 instance=ExtResource("3_f2630")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh7" type="Node3D" parent="BlockCliffs/Cliff_L_02" unique_id=82790394]
+transform = Transform3D(17.316935, -1.2109175, 4.9776745, 1.2597166, 18.014797, 1.4578049e-07, -4.965549, 0.34722474, 17.35922, 29.015488, 8.200531, -107.258804)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_02/Mesh7"
+metadata/uniform_scale = 18.058786486321445
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_02/Mesh7" unique_id=319416274 instance=ExtResource("3_f2630")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh8" type="Node3D" parent="BlockCliffs/Cliff_L_02" unique_id=2032377512]
+transform = Transform3D(17.316935, -1.2109175, 4.9776745, 1.2597166, 18.014797, 1.1901239e-07, -4.965549, 0.34722474, 17.359219, -31.229889, 8.20053, -107.258804)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_02/Mesh8"
+metadata/uniform_scale = 18.058786486321445
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_02/Mesh8" unique_id=1758368374 instance=ExtResource("4_exyop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh12" type="Node3D" parent="BlockCliffs/Cliff_L_02" unique_id=90594157]
+transform = Transform3D(-4.9776745, -1.2109176, 17.316935, -2.9642518e-07, 18.014797, 1.2597166, -17.359219, 0.34722465, -4.9655495, 30.506557, 8.200531, -197.32898)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_02/Mesh12"
+metadata/uniform_scale = 18.058786486321445
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_02/Mesh12" unique_id=1152031218 instance=ExtResource("5_nays2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh9" type="Node3D" parent="BlockCliffs/Cliff_L_02" unique_id=65676404]
+transform = Transform3D(17.316935, -1.2109175, 4.977674, 1.2597166, 18.014797, 1.8034493e-07, -4.965549, 0.34722468, 17.359219, -31.229893, 8.200531, -125.83896)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_02/Mesh9"
+metadata/uniform_scale = 18.058786486321445
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_02/Mesh9" unique_id=1262409353 instance=ExtResource("3_f2630")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh10" type="Node3D" parent="BlockCliffs/Cliff_L_02" unique_id=1366139146]
+transform = Transform3D(-4.9776745, -1.2109176, 17.316935, -2.7139205e-07, 18.014797, 1.2597166, -17.359219, 0.34722468, -4.9655495, 33.269585, 8.200532, -125.83897)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_02/Mesh10"
+metadata/uniform_scale = 18.058786486321445
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_02/Mesh10" unique_id=1524893496 instance=ExtResource("5_nays2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh14" type="Node3D" parent="BlockCliffs/Cliff_L_02" unique_id=180876770]
+transform = Transform3D(17.316935, -1.2109176, 4.977674, 1.2597166, 18.014797, 2.4136122e-07, -4.965549, 0.34722465, 17.359219, 43.803627, 8.200535, -112.379425)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_02/Mesh14"
+metadata/uniform_scale = 18.058786486321445
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_02/Mesh14" unique_id=500278014 instance=ExtResource("4_exyop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh11" type="Node3D" parent="BlockCliffs/Cliff_L_02" unique_id=1513732792]
+transform = Transform3D(17.316935, -1.2109176, 4.977674, 1.2597166, 18.014797, 2.4136122e-07, -4.965549, 0.34722465, 17.359219, 40.169357, 8.200535, -158.3027)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_02/Mesh11"
+metadata/uniform_scale = 18.058786486321445
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_02/Mesh11" unique_id=1929167615 instance=ExtResource("4_exyop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh13" type="Node3D" parent="BlockCliffs/Cliff_L_02" unique_id=720760062]
+transform = Transform3D(17.316935, -1.2109176, 4.977674, 1.2597166, 18.014797, 2.663942e-07, -4.965549, 0.3472246, 17.359219, 27.543758, 8.200535, -170.69228)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_02/Mesh13"
+metadata/uniform_scale = 18.058786486321445
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_02/Mesh13" unique_id=196351636 instance=ExtResource("3_f2630")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlockCliffs/Cliff_L_02" unique_id=1739889081]
+shape = SubResource("BoxShape_rock")
+
+[node name="Cap_L_01" type="StaticBody3D" parent="BlockCliffs" unique_id=1735209051]
+transform = Transform3D(7.5899186, 0.23219821, -1.545085, -0.55805176, 3.4914742, 0, 2.466114, 0.07544578, 4.755283, -9, 1.4, -50)
+
+[node name="Mesh" type="Node3D" parent="BlockCliffs/Cap_L_01" unique_id=1844661758]
+transform = Transform3D(1.9415973, 0.41683832, 5.9610667, 3.672802e-08, 6.267836, -0.4382898, -5.975623, 0.135439, 1.9368678, -9, 1.4, -50)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cap_L_01/Mesh"
+metadata/uniform_scale = 6.2831415174765555
+
+[node name="StoneModel" parent="BlockCliffs/Cap_L_01/Mesh" unique_id=376369645 instance=ExtResource("6_711ap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.28637695, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlockCliffs/Cap_L_01" unique_id=1231049486]
+shape = SubResource("BoxShape_rock")
+
+[node name="Cliff_R_01" type="StaticBody3D" parent="BlockCliffs" unique_id=876148113]
+transform = Transform3D(5.307392, -1.4199294, 1.0886486, 0.5749065, 13.923306, 0, -1.3232815, 0.35402817, 4.3663306, 15, 6.65, -30)
+
+[node name="Mesh" type="Node3D" parent="BlockCliffs/Cliff_R_01" unique_id=177163682]
+transform = Transform3D(13.897462, -1.4606819, 3.4841127, 1.5053988, 14.322913, 2.3714227e-08, -3.4650266, 0.3641889, 13.974011, 15, 6.65, -30)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_01/Mesh"
+metadata/uniform_scale = 14.40180752320469
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_01/Mesh" unique_id=1726556863 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlockCliffs/Cliff_R_01" unique_id=39809185]
+shape = SubResource("BoxShape_rock")
+
+[node name="Cliff_R_02" type="StaticBody3D" parent="BlockCliffs" unique_id=116653828]
+transform = Transform3D(4.905301, 1.7166328, -0.6945927, -0.43577868, 19.923895, 0, 0.864937, 0.30268872, 3.939231, 14, 9.65, -46)
+
+[node name="Mesh" type="Node3D" parent="BlockCliffs/Cliff_R_02" unique_id=840401763]
+transform = Transform3D(30.85687, 2.6996267, -5.4616833, -2.7412724, 31.33289, 1.1667115e-08, 5.4408994, 0.4760171, 30.974741, 14, 9.65, -46)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_02/Mesh"
+metadata/uniform_scale = 31.452576549663927
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_02/Mesh" unique_id=81531782 instance=ExtResource("9_he20v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3269043, 0)
+
+[node name="Mesh2" type="Node3D" parent="BlockCliffs/Cliff_R_02" unique_id=1032393736]
+transform = Transform3D(30.856874, 2.6996262, -5.461683, -2.7412724, 31.33289, 4.2309846e-08, 5.4409, 0.47601694, 30.974741, 5.6899796, 9.649998, -33.273163)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_02/Mesh2"
+metadata/uniform_scale = 31.452576549663927
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_02/Mesh2" unique_id=2076768334 instance=ExtResource("9_he20v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.171446, -0.3269043, -5.9604645e-08)
+
+[node name="Mesh3" type="Node3D" parent="BlockCliffs/Cliff_R_02" unique_id=557707996]
+transform = Transform3D(20.377195, 1.7827731, -3.6067748, -1.8102754, 20.691545, 8.0200955e-08, 3.59305, 0.31435102, 20.455032, 30.406384, 9.649997, -33.27317)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_02/Mesh3"
+metadata/uniform_scale = 20.77058462078652
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_02/Mesh3" unique_id=1422796208 instance=ExtResource("11_dcjna")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh4" type="Node3D" parent="BlockCliffs/Cliff_R_02" unique_id=186856129]
+transform = Transform3D(20.377195, 1.7827731, -3.606776, -1.8102754, 20.691545, 1.800037e-07, 3.5930512, 0.31435102, 20.455032, -33.926662, 9.649993, -61.0088)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_02/Mesh4"
+metadata/uniform_scale = 20.77058462078652
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_02/Mesh4" unique_id=1084163763 instance=ExtResource("11_dcjna")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh5" type="Node3D" parent="BlockCliffs/Cliff_R_02" unique_id=704114158]
+transform = Transform3D(35.560204, 3.1111143, -6.294178, -3.1591082, 36.108776, 3.1412412e-07, 6.270227, 0.5485734, 35.696037, 30.332806, 9.649994, -61.008797)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_02/Mesh5"
+metadata/uniform_scale = 36.24670649509804
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_02/Mesh5" unique_id=1666567464 instance=ExtResource("6_711ap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.28637695, 0)
+
+[node name="Mesh6" type="Node3D" parent="BlockCliffs/Cliff_R_02" unique_id=26376488]
+transform = Transform3D(20.377195, 1.782773, -3.6067762, -1.8102754, 20.691545, 1.8950566e-07, 3.5930514, 0.31435102, 20.455032, 30.332804, 9.649994, -92.56495)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_02/Mesh6"
+metadata/uniform_scale = 20.77058462078652
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_02/Mesh6" unique_id=820067903 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh7" type="Node3D" parent="BlockCliffs/Cliff_R_02" unique_id=517102118]
+transform = Transform3D(20.377195, 1.782773, -3.6067765, -1.8102754, 20.691545, 2.2277325e-07, 3.593052, 0.31435102, 20.455032, 30.332802, 9.649993, -132.67107)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_02/Mesh7"
+metadata/uniform_scale = 20.77058462078652
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_02/Mesh7" unique_id=939040758 instance=ExtResource("10_ki4s4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh8" type="Node3D" parent="BlockCliffs/Cliff_R_02" unique_id=1876446387]
+transform = Transform3D(20.377195, 1.782773, -3.6067772, -1.8102754, 20.691545, 2.560408e-07, 3.5930521, 0.31435102, 20.455032, 30.332798, 9.649992, -178.1405)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_02/Mesh8"
+metadata/uniform_scale = 20.77058462078652
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_02/Mesh8" unique_id=821671209 instance=ExtResource("7_uiix8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh10" type="Node3D" parent="BlockCliffs/Cliff_R_02" unique_id=1883799372]
+transform = Transform3D(3.6067762, 1.782773, 20.377195, -1.7691116e-07, 20.691545, -1.8102754, -20.455032, 0.31435102, 3.5930512, 42.47423, 9.649991, -178.14049)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_02/Mesh10"
+metadata/uniform_scale = 20.77058462078652
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_02/Mesh10" unique_id=932237110 instance=ExtResource("5_nays2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh9" type="Node3D" parent="BlockCliffs/Cliff_R_02" unique_id=569357461]
+transform = Transform3D(35.560204, 3.111114, -6.2941804, -3.1591082, 36.108776, 4.4681636e-07, 6.270229, 0.5485734, 35.696037, -35.612354, 9.649992, -178.1405)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_02/Mesh9"
+metadata/uniform_scale = 36.24670649509804
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_02/Mesh9" unique_id=647605939 instance=ExtResource("6_711ap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.28637695, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlockCliffs/Cliff_R_02" unique_id=635020077]
+shape = SubResource("BoxShape_rock")
+
+[node name="Cap_R_01" type="StaticBody3D" parent="BlockCliffs" unique_id=1012114848]
+transform = Transform3D(7.4889345, -0.28664863, 1.7101007, 0.6972459, 3.4866815, 0, -2.7257493, 0.10433156, 4.698463, 9, 1.4, -61)
+
+[node name="Mesh" type="Node3D" parent="BlockCliffs/Cap_R_01" unique_id=1574635650]
+transform = Transform3D(5.881755, -0.51458687, 2.1489613, 0.5476119, 6.2592325, 3.171005e-08, -2.1407838, 0.18729427, 5.904222, 9, 1.4, -61)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cap_R_01/Mesh"
+metadata/uniform_scale = 6.2831419337436065
+
+[node name="StoneModel" parent="BlockCliffs/Cap_R_01/Mesh" unique_id=1548165471 instance=ExtResource("6_711ap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.28637695, 0)
+
+[node name="Mesh2" type="Node3D" parent="BlockCliffs/Cap_R_01" unique_id=1420032468]
+transform = Transform3D(5.1525755, -0.4507917, 1.882548, 0.47972256, 5.483256, -4.535178e-08, -1.8753844, 0.16407484, 5.1722574, -6.6339226, 1.3999995, -44.230644)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cap_R_01/Mesh2"
+metadata/uniform_scale = 5.504201260852315
+
+[node name="StoneModel" parent="BlockCliffs/Cap_R_01/Mesh2" unique_id=1588303221 instance=ExtResource("9_he20v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3269043, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlockCliffs/Cap_R_01" unique_id=1338965315]
+shape = SubResource("BoxShape_rock")
+
+[node name="Cliff_L_03" type="StaticBody3D" parent="BlockCliffs" unique_id=1830328251]
+transform = Transform3D(5.3867707, 1.647047, 0.7814168, -0.5749065, 15.912351, 0, -0.94983304, -0.29041883, 4.431635, -15, 7.65, -78)
+
+[node name="Mesh" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=1572368994]
+transform = Transform3D(-2.8581126, 1.6943183, 16.120361, 9.7991766e-08, 16.369045, -1.7204558, -16.209156, -0.29875404, -2.8424554, -15, 7.65, -78)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh"
+metadata/uniform_scale = 16.459208597948216
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh" unique_id=80997591 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh3" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=825412430]
+transform = Transform3D(-3.5151663, 2.0838265, 19.826284, 6.5804535e-08, 20.132133, -2.1159732, -19.935492, -0.36743492, -3.4959102, -17.193317, 7.6500006, -72.35226)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh3"
+metadata/uniform_scale = 20.24302905166097
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh3" unique_id=796385619 instance=ExtResource("4_exyop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh4" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=812683462]
+transform = Transform3D(19.515114, 2.051122, 3.459996, -2.0827634, 19.816168, 8.3438e-08, -3.4410417, -0.36166826, 19.62261, 33.495705, 7.6500006, -72.35226)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh4"
+metadata/uniform_scale = 19.925319446140698
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh4" unique_id=1917543366 instance=ExtResource("8_548p1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh47" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=1177566546]
+transform = Transform3D(-3.4599962, 2.0511215, 19.51511, -6.900964e-08, 19.816164, -2.0827632, -19.622606, -0.36166826, -3.441042, 52.26686, 7.6500006, -32.4664)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh47"
+metadata/uniform_scale = 19.92531562957987
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh47" unique_id=628558328 instance=ExtResource("7_uiix8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh39" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=42134048]
+transform = Transform3D(-3.459996, 2.0511212, 19.515108, -4.3472255e-08, 19.816162, -2.082763, -19.622604, -0.3616682, -3.4410415, 50.94359, 7.650001, -100.64163)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh39"
+metadata/uniform_scale = 19.925313721299464
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh39" unique_id=1608978598 instance=ExtResource("10_ki4s4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh5" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=145113988]
+transform = Transform3D(-3.4599962, 2.0511215, 19.51511, -6.900964e-08, 19.816164, -2.0827632, -19.622606, -0.36166826, -3.441042, -38.193977, 7.6500015, -85.34318)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh5"
+metadata/uniform_scale = 19.92531562957987
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh5" unique_id=211842061 instance=ExtResource("11_dcjna")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh6" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=851258281]
+transform = Transform3D(11.938373, 2.6752992, 15.715069, -1.3435929, 19.732496, -2.3385212, -15.884438, 0.34160942, 12.008884, -38.193977, 7.6500025, -146.14804)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh6"
+metadata/uniform_scale = 19.915959330727897
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh6" unique_id=1632727904 instance=ExtResource("12_xrlns")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh18" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=1548938249]
+transform = Transform3D(11.938372, 2.675299, 15.715067, -1.3435928, 19.732494, -2.338521, -15.884437, 0.34160924, 12.0088825, -38.193977, 7.650003, -326.4422)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh18"
+metadata/uniform_scale = 19.915957422447484
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh18" unique_id=1475843366 instance=ExtResource("8_548p1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh15" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=842277317]
+transform = Transform3D(15.715066, 2.675299, -11.93837, -2.3385205, 19.732492, 1.3435931, 12.00888, 0.34160927, 15.884435, -64.51975, 7.6500044, -136.56943)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh15"
+metadata/uniform_scale = 19.915953605886664
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh15" unique_id=1797367054 instance=ExtResource("8_548p1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh16" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=1846555516]
+transform = Transform3D(11.938367, 2.6752987, 15.715064, -1.343593, 19.73249, -2.3385203, -15.884434, 0.341609, 12.008878, -64.51975, 7.650005, -88.117)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh16"
+metadata/uniform_scale = 19.915951697606253
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh16" unique_id=1801507199 instance=ExtResource("10_ki4s4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh17" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=1562592322]
+transform = Transform3D(33.34189, 5.676052, -25.329065, -4.9615254, 41.86547, 2.8506372, 25.47866, 0.7247751, 33.70123, -64.51975, 7.650006, -36.22652)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh17"
+metadata/uniform_scale = 42.25470963605276
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh17" unique_id=332051316 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh43" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=1891929515]
+transform = Transform3D(33.34189, 5.6760516, -25.329063, -4.9615254, 41.865467, 2.8506367, 25.478659, 0.7247751, 33.70123, -64.51975, 7.650007, 9.326248)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh43"
+metadata/uniform_scale = 42.25470581949194
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh43" unique_id=147121426 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh44" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=283782376]
+transform = Transform3D(25.329058, 5.6760526, 33.341885, -2.850637, 41.865463, -4.9615254, -33.701225, 0.72477514, 25.478653, 67.73913, 7.6500072, 9.326248)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh44"
+metadata/uniform_scale = 42.25470200293112
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh44" unique_id=947947981 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh45" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=1743552482]
+transform = Transform3D(33.341885, 5.676052, -25.329054, -4.961526, 41.865456, 2.8506362, 25.478651, 0.7247749, 33.701225, 67.73913, 7.650007, -35.617455)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh45"
+metadata/uniform_scale = 42.2546981863703
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh45" unique_id=1647037289 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh46" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=1322385618]
+transform = Transform3D(33.34188, 5.6760526, -25.32905, -4.961526, 41.865456, 2.8506374, 25.478651, 0.7247748, 33.70122, 67.73912, 7.6500077, -82.67981)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh46"
+metadata/uniform_scale = 42.25469436980948
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh46" unique_id=25293587 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh42" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=1669760794]
+transform = Transform3D(25.32906, 5.6760516, 33.34189, -2.8506365, 41.865467, -4.9615254, -33.70123, 0.7247751, 25.478657, -64.51976, 7.650007, 377.50766)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh42"
+metadata/uniform_scale = 42.25470581949194
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh42" unique_id=654005277 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh9" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=1453798885]
+transform = Transform3D(11.938372, 2.675299, 15.715067, -1.3435928, 19.732494, -2.338521, -15.884437, 0.34160924, 12.0088825, 48.11177, 7.6500025, -146.14804)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh9"
+metadata/uniform_scale = 19.915957422447484
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh9" unique_id=962824850 instance=ExtResource("7_uiix8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh10" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=813765120]
+transform = Transform3D(30.461313, 5.1856704, -23.140755, -4.532875, 38.2485, 2.604356, 23.277431, 0.66215914, 30.78961, 48.11177, 7.650003, -267.52283)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh10"
+metadata/uniform_scale = 38.60411196262824
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh10" unique_id=2085052222 instance=ExtResource("4_exyop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh19" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=1995193313]
+transform = Transform3D(20.055094, 4.4941964, 26.399517, -2.257082, 33.148335, -3.9284482, -26.684038, 0.5738646, 20.173546, 48.11174, 15.549526, -336.063)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh19"
+metadata/uniform_scale = 33.45652937225208
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh19" unique_id=1002364451 instance=ExtResource("3_f2630")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh26" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=1186852306]
+transform = Transform3D(26.399517, 4.494197, -20.055096, -3.928449, 33.148335, 2.2570822, 20.173548, 0.573865, 26.684038, 48.111736, 15.549526, -382.39917)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh26"
+metadata/uniform_scale = 33.45652937225208
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh26" unique_id=663341786 instance=ExtResource("8_548p1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh27" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=1745144514]
+transform = Transform3D(26.399517, 4.4941974, -20.055096, -3.9284494, 33.148335, 2.2570822, 20.173548, 0.5738653, 26.684038, 48.11173, 15.549526, -394.96313)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh27"
+metadata/uniform_scale = 33.45652937225208
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh27" unique_id=1480746336 instance=ExtResource("5_nays2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh35" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=1538046003]
+transform = Transform3D(20.055094, 4.494199, 26.399517, -2.2570827, 33.148335, -3.92845, -26.684038, 0.57386583, 20.173546, 48.111725, 15.549528, -466.85486)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh35"
+metadata/uniform_scale = 33.45652937225208
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh35" unique_id=1976269709 instance=ExtResource("3_f2630")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh36" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=819424837]
+transform = Transform3D(20.055094, 4.4941998, 26.399517, -2.2570825, 33.148335, -3.9284513, -26.684038, 0.5738666, 20.173546, 67.655785, 15.549528, -439.65787)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh36"
+metadata/uniform_scale = 33.45652937225208
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh36" unique_id=884335554 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh28" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=1632764990]
+transform = Transform3D(26.399517, 4.4941993, -20.055096, -3.9284506, 33.148335, 2.2570827, 20.173548, 0.5738661, 26.684038, 78.5724, 15.549524, -345.83374)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh28"
+metadata/uniform_scale = 33.45652937225208
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh28" unique_id=486300992 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh29" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=146149249]
+transform = Transform3D(20.055094, 4.4941998, 26.399517, -2.2570825, 33.148335, -3.9284513, -26.684038, 0.5738666, 20.173546, 78.57239, 15.549526, -280.0238)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh29"
+metadata/uniform_scale = 33.45652937225208
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh29" unique_id=657389530 instance=ExtResource("5_nays2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh30" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=310008446]
+transform = Transform3D(26.399517, 4.4942, -20.055096, -3.9284518, 33.148335, 2.2570832, 20.173548, 0.57386684, 26.684038, -76.3395, 15.549528, -280.0238)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh30"
+metadata/uniform_scale = 33.45652937225208
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh30" unique_id=1305545788 instance=ExtResource("3_f2630")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh31" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=210944868]
+transform = Transform3D(20.055094, 4.4942007, 26.399517, -2.2570827, 33.148335, -3.9284527, -26.684038, 0.5738674, 20.173546, -76.33949, 15.54953, -324.2163)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh31"
+metadata/uniform_scale = 33.45652937225208
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh31" unique_id=843202594 instance=ExtResource("4_exyop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh32" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=2075416793]
+transform = Transform3D(20.055094, 4.4942017, 26.399517, -2.2570827, 33.148335, -3.9284534, -26.684038, 0.5738678, 20.173548, -76.33949, 15.549532, -384.70972)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh32"
+metadata/uniform_scale = 33.45652937225208
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh32" unique_id=788801957 instance=ExtResource("5_nays2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh33" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=1402021194]
+transform = Transform3D(20.055094, 4.4942017, 26.399517, -2.2570832, 33.148335, -3.9284534, -26.684038, 0.57386774, 20.173546, -76.33949, 15.549533, -428.0856)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh33"
+metadata/uniform_scale = 33.45652937225208
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh33" unique_id=1123047888 instance=ExtResource("3_f2630")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh34" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=1878256201]
+transform = Transform3D(20.055094, 4.4942017, 26.399517, -2.2570832, 33.148335, -3.9284534, -26.684038, 0.57386774, 20.173546, -32.07183, 15.549535, -428.08557)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh34"
+metadata/uniform_scale = 33.45652937225208
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh34" unique_id=550959931 instance=ExtResource("3_f2630")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh37" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=2066154017]
+transform = Transform3D(20.055094, 4.4942017, 26.399517, -2.2570832, 33.148335, -3.9284534, -26.684038, 0.57386774, 20.173546, -48.340855, 15.549536, -457.172)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh37"
+metadata/uniform_scale = 33.45652937225208
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh37" unique_id=2117275208 instance=ExtResource("4_exyop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh38" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=382198330]
+transform = Transform3D(20.055094, 4.4942017, 26.399517, -2.2570832, 33.148335, -3.9284534, -26.684038, 0.57386774, 20.173546, -48.34086, 15.549537, -479.6506)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh38"
+metadata/uniform_scale = 33.45652937225208
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh38" unique_id=1893798899 instance=ExtResource("3_f2630")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh25" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=1002406272]
+transform = Transform3D(37.6736, 6.413473, -28.619755, -5.606117, 47.304546, 3.2209861, 28.788792, 0.8189362, 38.079628, -45.542877, 7.6500063, -391.8898)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh25"
+metadata/uniform_scale = 47.74435530654617
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh25" unique_id=860609928 instance=ExtResource("11_dcjna")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh20" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=1095387712]
+transform = Transform3D(15.715064, 2.6752987, -11.938369, -2.3385203, 19.73249, 1.3435931, 12.008879, 0.341609, 15.884434, 48.11174, 7.650003, -422.48346)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh20"
+metadata/uniform_scale = 19.915951697606253
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh20" unique_id=54855424 instance=ExtResource("4_exyop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh11" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=1187651376]
+transform = Transform3D(15.715064, 2.6752987, -11.938369, -2.3385203, 19.73249, 1.3435931, 12.008879, 0.341609, 15.884434, -34.060135, 7.6500025, -267.52283)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh11"
+metadata/uniform_scale = 19.915951697606253
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh11" unique_id=1515798182 instance=ExtResource("12_xrlns")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh12" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=558454025]
+transform = Transform3D(22.581625, 5.060374, 29.725311, -2.5414293, 37.324345, -4.423352, -30.045677, 0.6461596, 22.714998, -55.09365, 7.650005, -238.5724)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh12"
+metadata/uniform_scale = 37.67135976428921
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh12" unique_id=1166694587 instance=ExtResource("5_nays2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh13" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=1310024403]
+transform = Transform3D(15.715058, 2.675298, -11.938364, -2.3385193, 19.732483, 1.3435929, 12.008874, 0.3416086, 15.884427, -63.584854, 7.650005, -190.99329)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh13"
+metadata/uniform_scale = 19.915944064484613
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh13" unique_id=2146819968 instance=ExtResource("4_exyop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh7" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=1203922196]
+transform = Transform3D(11.938372, 2.675299, 15.715067, -1.3435928, 19.732494, -2.338521, -15.884437, 0.34160924, 12.0088825, -38.193974, 7.6500025, -206.28754)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh7"
+metadata/uniform_scale = 19.915957422447484
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh7" unique_id=1446210836 instance=ExtResource("3_f2630")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh8" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=674602786]
+transform = Transform3D(20.678879, 4.633982, 27.22063, -2.327287, 34.179363, -4.050636, -27.514002, 0.59171325, 20.801014, 39.821842, 7.650004, -233.07697)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh8"
+metadata/uniform_scale = 34.497137579384464
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh8" unique_id=812940238 instance=ExtResource("3_f2630")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh21" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=1060499073]
+transform = Transform3D(20.426605, 4.577449, 26.888548, -2.298894, 33.762383, -4.00122, -27.178337, 0.58449477, 20.547249, 39.821846, 7.650002, -303.62604)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh21"
+metadata/uniform_scale = 34.07628541768442
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh21" unique_id=454624562 instance=ExtResource("5_nays2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh22" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=652114041]
+transform = Transform3D(33.593803, 5.7189374, -25.52043, -4.9990125, 42.18178, 2.872174, 25.67116, 0.7302514, 33.95586, -55.885204, 7.6500034, -303.62604)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh22"
+metadata/uniform_scale = 42.5739611321446
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh22" unique_id=560438876 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh23" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=267153653]
+transform = Transform3D(37.763847, 6.428837, -28.688314, -5.6195464, 47.41786, 3.228701, 28.857754, 0.82089806, 38.170845, -55.8852, 7.6500044, -360.18854)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh23"
+metadata/uniform_scale = 47.858722368099656
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh23" unique_id=1062289890 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh24" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=904279581]
+transform = Transform3D(24.416111, 4.156547, -18.548353, -3.6333022, 30.65789, 2.0875084, 18.657904, 0.5307493, 24.679258, -55.8852, 7.650005, -415.9416)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh24"
+metadata/uniform_scale = 30.942929057767465
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh24" unique_id=528930212 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh14" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=1747380109]
+transform = Transform3D(28.01362, 4.7689795, -21.281296, -4.168639, 35.175076, 2.3950849, 21.406988, 0.6089511, 28.31554, 60.786087, 7.650002, -202.73975)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh14"
+metadata/uniform_scale = 35.50211055813386
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh14" unique_id=1037295200 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh40" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=260004457]
+transform = Transform3D(21.281292, 4.76898, 28.013622, -2.3950841, 35.175076, -4.16864, -28.31554, 0.60895145, 21.406984, 60.78608, 7.650003, -171.11449)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh40"
+metadata/uniform_scale = 35.50211055813386
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh40" unique_id=1035398168 instance=ExtResource("3_f2630")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh41" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=1685829548]
+transform = Transform3D(21.28129, 4.7689805, 28.013624, -2.3950844, 35.175076, -4.1686406, -28.315542, 0.60895157, 21.406984, 60.78608, 7.650004, -123.03059)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh41"
+metadata/uniform_scale = 35.50211055813386
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh41" unique_id=995729264 instance=ExtResource("3_f2630")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh2" type="Node3D" parent="BlockCliffs/Cliff_L_03" unique_id=1583729974]
+transform = Transform3D(16.120361, 1.6943183, 2.8581119, -1.7204559, 16.369045, 3.141569e-08, -2.8424547, -0.29875407, 16.209156, -14.399397, 7.6500006, -52.713863)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_03/Mesh2"
+metadata/uniform_scale = 16.459208597948216
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_03/Mesh2" unique_id=321462418 instance=ExtResource("2_8uyeo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlockCliffs/Cliff_L_03" unique_id=1889299012]
+shape = SubResource("BoxShape_rock")
+
+[node name="Cliff_R_03" type="StaticBody3D" parent="BlockCliffs" unique_id=1229775985]
+transform = Transform3D(5.292376, -1.5153475, -1.1646857, 0.47935656, 17.931505, 0, 1.418088, -0.40603614, 4.3466663, 15, 8.65, -88)
+
+[node name="Mesh" type="Node3D" parent="BlockCliffs/Cliff_R_03" unique_id=1556852703]
+transform = Transform3D(4.7924504, -1.5588391, 17.81761, -4.0001694e-08, 18.446148, 1.6138288, -17.885672, -0.41768962, 4.774214, 15, 8.65, -88)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_03/Mesh"
+metadata/uniform_scale = 18.516609672691743
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_03/Mesh" unique_id=740473620 instance=ExtResource("12_xrlns")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4901161e-08, -0.49975586, 0.91324687)
+
+[node name="Mesh2" type="Node3D" parent="BlockCliffs/Cliff_R_03" unique_id=544482086]
+transform = Transform3D(27.23873, -2.38308, -7.3264756, 2.467146, 28.199608, -4.900717e-08, 7.2985973, -0.63854444, 27.342775, -2.3533955, 8.6500025, -93.884766)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_03/Mesh2"
+metadata/uniform_scale = 28.307324729275575
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_03/Mesh2" unique_id=504020547 instance=ExtResource("9_he20v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.1859759, -0.3269043, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlockCliffs/Cliff_R_03" unique_id=184758243]
+shape = SubResource("BoxShape_rock")
+
+[node name="Cap_L_02" type="StaticBody3D" parent="BlockCliffs" unique_id=535841433]
+transform = Transform3D(6.7827616, 0.15234408, 1.2096095, -0.36635172, 2.9958885, 0, -1.6911324, -0.037983645, 4.8514786, -10, 1.15, -104)
+
+[node name="Mesh" type="Node3D" parent="BlockCliffs/Cap_L_02" unique_id=1106360029]
+transform = Transform3D(-1.3028827, 0.2734855, 5.2184143, 1.632745e-08, 5.378169, -0.2818579, -5.225576, -0.0681876, -1.3010972, -10, 1.15, -104)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cap_L_02/Mesh"
+metadata/uniform_scale = 5.3855494558557115
+
+[node name="StoneModel" parent="BlockCliffs/Cap_L_02/Mesh" unique_id=1365796019 instance=ExtResource("6_711ap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.28637695, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlockCliffs/Cap_L_02" unique_id=1228700251]
+shape = SubResource("BoxShape_rock")
+
+[node name="Cap_R_02" type="StaticBody3D" parent="BlockCliffs" unique_id=1182579288]
+transform = Transform3D(7.5899186, -0.23219821, -1.545085, 0.55805176, 3.4914742, 0, 2.466114, -0.07544578, 4.755283, 10, 1.4, -126)
+
+[node name="Mesh" type="Node3D" parent="BlockCliffs/Cap_R_02" unique_id=297518962]
+transform = Transform3D(1.9415973, -0.41683832, 5.9610667, -3.672802e-08, 6.267836, 0.4382898, -5.975623, -0.135439, 1.9368678, 10, 1.4, -126)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cap_R_02/Mesh"
+metadata/uniform_scale = 6.2831415174765555
+
+[node name="StoneModel" parent="BlockCliffs/Cap_R_02/Mesh" unique_id=1024689710 instance=ExtResource("6_711ap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.28637695, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlockCliffs/Cap_R_02" unique_id=1892886498]
+shape = SubResource("BoxShape_rock")
+
+[node name="Cliff_L_04" type="StaticBody3D" parent="BlockCliffs" unique_id=1772335097]
+transform = Transform3D(4.8788247, 1.3646425, -0.8316468, -0.34878236, 19.951283, 0, 1.0370262, 0.29006374, 3.9125905, -14, 9.65, -148)
+
+[node name="Mesh" type="Node3D" parent="BlockCliffs/Cliff_L_04" unique_id=481124037]
+transform = Transform3D(4.277577, 1.4038084, 20.0754, 8.4118994e-08, 20.523895, -1.4351704, -20.124422, 0.2983887, 4.2671566, -14, 9.65, -148)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_L_04/Mesh"
+metadata/uniform_scale = 20.57401265571568
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_L_04/Mesh" unique_id=1543327176 instance=ExtResource("8_548p1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlockCliffs/Cliff_L_04" unique_id=19310929]
+shape = SubResource("BoxShape_rock")
+
+[node name="Cliff_R_04" type="StaticBody3D" parent="BlockCliffs" unique_id=1442447410]
+transform = Transform3D(4.863946, -2.249374, 0.8316468, 0.5226423, 21.879482, 0, -1.0338638, 0.47811916, 3.9125905, 14, 10.65, -172)
+
+[node name="Mesh" type="Node3D" parent="BlockCliffs/Cliff_R_04" unique_id=1942110316]
+transform = Transform3D(-4.705337, -2.3139324, 22.015593, -2.5775273e-07, 22.507435, 2.3656268, -22.136862, 0.49184147, -4.6795607, 14, 10.65, -172)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_04/Mesh"
+metadata/uniform_scale = 22.6314118221788
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_04/Mesh" unique_id=1220995916 instance=ExtResource("11_dcjna")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, -2.6171849)
+
+[node name="Mesh4" type="Node3D" parent="BlockCliffs/Cliff_R_04" unique_id=1768698530]
+transform = Transform3D(33.6564, -3.5374308, 7.1932945, 3.6164587, 34.408306, 1.3838196e-07, -7.153888, 0.75190395, 33.84179, 3.4276485, 10.65, -209.64355)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_04/Mesh4"
+metadata/uniform_scale = 34.597834204630324
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_04/Mesh4" unique_id=291198050 instance=ExtResource("9_he20v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.347618, -0.32690433, 2.9802322e-08)
+
+[node name="Mesh5" type="Node3D" parent="BlockCliffs/Cliff_R_04" unique_id=543522767]
+transform = Transform3D(22.015593, -2.3139324, 4.7053347, 2.3656268, 22.507435, 1.0386507e-07, -4.679558, 0.49184135, 22.136862, 3.4276466, 10.65, -253.26202)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_04/Mesh5"
+metadata/uniform_scale = 22.6314118221788
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_04/Mesh5" unique_id=240097733 instance=ExtResource("3_f2630")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh6" type="Node3D" parent="BlockCliffs/Cliff_R_04" unique_id=2078687117]
+transform = Transform3D(-4.7053337, -2.3139324, 22.015593, -1.14863695e-07, 22.507435, 2.3656268, -22.136862, 0.49184126, -4.6795573, 12.986975, 10.65, -250.4166)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_04/Mesh6"
+metadata/uniform_scale = 22.6314118221788
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_04/Mesh6" unique_id=1726084729 instance=ExtResource("5_nays2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh11" type="Node3D" parent="BlockCliffs/Cliff_R_04" unique_id=869580045]
+transform = Transform3D(-4.705333, -2.3139324, 22.015593, -7.96131e-08, 22.507435, 2.3656268, -22.136862, 0.49184126, -4.679557, 12.986979, 10.65, -318.8802)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_04/Mesh11"
+metadata/uniform_scale = 22.6314118221788
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_04/Mesh11" unique_id=2089823955 instance=ExtResource("8_548p1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh7" type="Node3D" parent="BlockCliffs/Cliff_R_04" unique_id=748385168]
+transform = Transform3D(-4.705333, -2.3139324, 22.015593, -7.96131e-08, 22.507435, 2.3656268, -22.136862, 0.49184126, -4.679557, 12.986969, 10.65, -282.13678)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_04/Mesh7"
+metadata/uniform_scale = 22.6314118221788
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_04/Mesh7" unique_id=920997472 instance=ExtResource("5_nays2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh10" type="Node3D" parent="BlockCliffs/Cliff_R_04" unique_id=2011310885]
+transform = Transform3D(-4.7053323, -2.3139324, 22.015593, -9.963144e-08, 22.507435, 2.3656268, -22.136864, 0.49184114, -4.6795554, 3.5349026, 10.650002, -333.86395)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_04/Mesh10"
+metadata/uniform_scale = 22.6314118221788
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_04/Mesh10" unique_id=636644141 instance=ExtResource("8_548p1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh13" type="Node3D" parent="BlockCliffs/Cliff_R_04" unique_id=1954354213]
+transform = Transform3D(-4.7053313, -2.3139324, 22.015596, -3.580305e-08, 22.507435, 2.3656268, -22.136864, 0.49184108, -4.6795554, 3.5349045, 10.650002, -395.64893)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_04/Mesh13"
+metadata/uniform_scale = 22.6314118221788
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_04/Mesh13" unique_id=2122305821 instance=ExtResource("7_uiix8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh17" type="Node3D" parent="BlockCliffs/Cliff_R_04" unique_id=1896360588]
+transform = Transform3D(22.015596, -2.3139324, 4.7053285, 2.3656268, 22.507435, -2.7243246e-07, -4.679552, 0.49184105, 22.136864, 13.984005, 10.650004, -419.28836)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_04/Mesh17"
+metadata/uniform_scale = 22.6314118221788
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_04/Mesh17" unique_id=498038690 instance=ExtResource("5_nays2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh18" type="Node3D" parent="BlockCliffs/Cliff_R_04" unique_id=462360611]
+transform = Transform3D(-4.705328, -2.3139324, 22.015596, 2.6810662e-07, 22.507435, 2.3656268, -22.136864, 0.49184102, -4.6795516, -16.404966, 10.650007, -457.94275)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_04/Mesh18"
+metadata/uniform_scale = 22.6314118221788
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_04/Mesh18" unique_id=2093498601 instance=ExtResource("11_dcjna")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh22" type="Node3D" parent="BlockCliffs/Cliff_R_04" unique_id=1839994617]
+transform = Transform3D(33.656403, -3.5374308, 7.1932797, 3.6164587, 34.408306, -7.1941656e-07, -7.153874, 0.75190324, 33.841793, 26.845715, 10.65001, -440.36966)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_04/Mesh22"
+metadata/uniform_scale = 34.597834204630324
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_04/Mesh22" unique_id=1133785085 instance=ExtResource("9_he20v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3269043, 0)
+
+[node name="Mesh23" type="Node3D" parent="BlockCliffs/Cliff_R_04" unique_id=1159738198]
+transform = Transform3D(-4.7053266, -2.3139324, 22.015596, 4.0243623e-07, 22.507435, 2.3656268, -22.136866, 0.49184096, -4.6795497, 26.845718, 10.650011, -413.71896)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_04/Mesh23"
+metadata/uniform_scale = 22.6314118221788
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_04/Mesh23" unique_id=123311331 instance=ExtResource("8_548p1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh24" type="Node3D" parent="BlockCliffs/Cliff_R_04" unique_id=937720501]
+transform = Transform3D(-7.1932793, -3.537431, 33.656403, 5.2053196e-07, 34.408306, 3.6164587, -33.841793, 0.751903, -7.1538734, 35.965908, 10.650011, -366.72156)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_04/Mesh24"
+metadata/uniform_scale = 34.597834204630324
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_04/Mesh24" unique_id=1259622776 instance=ExtResource("9_he20v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3269043, 0)
+
+[node name="Mesh25" type="Node3D" parent="BlockCliffs/Cliff_R_04" unique_id=1237840447]
+transform = Transform3D(22.015596, -2.3139327, 4.705324, 2.3656268, 22.507435, -4.0197597e-07, -4.679548, 0.49184075, 22.136866, -32.77151, 10.650012, -366.72156)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_04/Mesh25"
+metadata/uniform_scale = 22.6314118221788
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_04/Mesh25" unique_id=1016200624 instance=ExtResource("11_dcjna")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh26" type="Node3D" parent="BlockCliffs/Cliff_R_04" unique_id=2080342053]
+transform = Transform3D(22.015596, -2.3139327, 4.705324, 2.3656268, 22.507435, -3.600526e-07, -4.679548, 0.49184072, 22.136866, -32.771507, 10.650012, -345.2511)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_04/Mesh26"
+metadata/uniform_scale = 22.6314118221788
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_04/Mesh26" unique_id=800952714 instance=ExtResource("10_ki4s4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh12" type="Node3D" parent="BlockCliffs/Cliff_R_04" unique_id=1675896994]
+transform = Transform3D(-4.705331, -2.3139324, 22.015596, -7.2252786e-09, 22.507435, 2.3656268, -22.136864, 0.49184105, -4.6795545, 13.17807, 10.650002, -365.9734)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_04/Mesh12"
+metadata/uniform_scale = 22.6314118221788
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_04/Mesh12" unique_id=1827661471 instance=ExtResource("12_xrlns")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh16" type="Node3D" parent="BlockCliffs/Cliff_R_04" unique_id=1108986198]
+transform = Transform3D(22.015596, -2.3139324, 4.705329, 2.3656268, 22.507435, -2.0193131e-07, -4.6795526, 0.49184105, 22.136864, -10.260574, 10.650002, -435.51706)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_04/Mesh16"
+metadata/uniform_scale = 22.6314118221788
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_04/Mesh16" unique_id=1251456438 instance=ExtResource("3_f2630")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh15" type="Node3D" parent="BlockCliffs/Cliff_R_04" unique_id=1093360857]
+transform = Transform3D(-4.70533, -2.3139324, 22.015596, 9.8526485e-08, 22.507435, 2.3656268, -22.136864, 0.49184105, -4.6795535, -15.074282, 10.650003, -402.02032)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_04/Mesh15"
+metadata/uniform_scale = 22.6314118221788
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_04/Mesh15" unique_id=1277707300 instance=ExtResource("10_ki4s4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh2" type="Node3D" parent="BlockCliffs/Cliff_R_04" unique_id=1182522854]
+transform = Transform3D(-4.7053366, -2.3139324, 22.015593, -1.8725157e-07, 22.507435, 2.3656268, -22.136862, 0.49184147, -4.67956, -18.788548, 10.65, -172)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_04/Mesh2"
+metadata/uniform_scale = 22.6314118221788
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_04/Mesh2" unique_id=314888969 instance=ExtResource("5_nays2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh8" type="Node3D" parent="BlockCliffs/Cliff_R_04" unique_id=1034567356]
+transform = Transform3D(-4.705336, -2.3139324, 22.015593, -1.9392435e-07, 22.507435, 2.3656268, -22.136862, 0.49184144, -4.6795597, -18.788551, 10.65, -278.53833)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_04/Mesh8"
+metadata/uniform_scale = 22.6314118221788
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_04/Mesh8" unique_id=773843504 instance=ExtResource("11_dcjna")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh14" type="Node3D" parent="BlockCliffs/Cliff_R_04" unique_id=59140050]
+transform = Transform3D(-4.705333, -2.3139324, 22.015593, -7.96131e-08, 22.507435, 2.3656268, -22.136862, 0.49184126, -4.679557, 9.124031, 10.650017, -349.4129)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_04/Mesh14"
+metadata/uniform_scale = 22.6314118221788
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_04/Mesh14" unique_id=813905919 instance=ExtResource("4_exyop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh9" type="Node3D" parent="BlockCliffs/Cliff_R_04" unique_id=751476594]
+transform = Transform3D(-4.7053347, -2.3139324, 22.015593, -1.7869209e-07, 22.507435, 2.3656268, -22.136862, 0.4918413, -4.6795583, -14.423395, 10.649999, -314.72668)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_04/Mesh9"
+metadata/uniform_scale = 22.6314118221788
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_04/Mesh9" unique_id=1877083364 instance=ExtResource("12_xrlns")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh19" type="Node3D" parent="BlockCliffs/Cliff_R_04" unique_id=1457511363]
+transform = Transform3D(-4.705333, -2.3139324, 22.015593, -7.96131e-08, 22.507435, 2.3656268, -22.136862, 0.49184126, -4.679557, 31.226776, 10.65, -279.44443)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_04/Mesh19"
+metadata/uniform_scale = 22.6314118221788
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_04/Mesh19" unique_id=1819346005 instance=ExtResource("10_ki4s4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh20" type="Node3D" parent="BlockCliffs/Cliff_R_04" unique_id=1469137298]
+transform = Transform3D(-4.705333, -2.3139324, 22.015593, -8.62859e-08, 22.507435, 2.3656268, -22.136864, 0.49184123, -4.6795564, 31.226772, 10.65, -253.16678)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_04/Mesh20"
+metadata/uniform_scale = 22.6314118221788
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_04/Mesh20" unique_id=1006472579 instance=ExtResource("12_xrlns")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh21" type="Node3D" parent="BlockCliffs/Cliff_R_04" unique_id=657207638]
+transform = Transform3D(22.015596, -2.3139324, 4.70533, 2.3656268, 22.507435, -9.617955e-08, -4.6795535, 0.49184105, 22.136864, 39.346855, 10.65, -216.86919)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_04/Mesh21"
+metadata/uniform_scale = 22.6314118221788
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_04/Mesh21" unique_id=665042712 instance=ExtResource("11_dcjna")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh3" type="Node3D" parent="BlockCliffs/Cliff_R_04" unique_id=534076035]
+transform = Transform3D(38.41937, -4.038039, 8.211271, 4.1282506, 39.277683, 1.5796543e-07, -8.166288, 0.85831153, 38.630997, -18.788551, 10.65, -156.60075)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cliff_R_04/Mesh3"
+metadata/uniform_scale = 39.494032395566926
+
+[node name="StoneModel" parent="BlockCliffs/Cliff_R_04/Mesh3" unique_id=1790816932 instance=ExtResource("6_711ap")]
+transform = Transform3D(0.05299036, 0, -0.998595, 0, 1, 0, 0.998595, 0, 0.05299036, 1.8491145, -0.28637695, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlockCliffs/Cliff_R_04" unique_id=1068869960]
+shape = SubResource("BoxShape_rock")
+
+[node name="Cap_L_03" type="StaticBody3D" parent="BlockCliffs" unique_id=1848515675]
+transform = Transform3D(7.4073052, 0.19410023, 1.8730329, -0.41868767, 3.994518, 0, -2.9927454, -0.07842158, 4.6359196, -9, 1.65, -196)
+
+[node name="Mesh" type="Node3D" parent="BlockCliffs/Cap_L_03" unique_id=814673289]
+transform = Transform3D(5.8244715, 0.30524763, 2.3564684, -0.32922018, 6.281894, -7.84922e-09, -2.353239, -0.12332804, 5.832464, -9, 1.65, -196)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cap_L_03/Mesh"
+metadata/uniform_scale = 6.290515309932785
+
+[node name="StoneModel" parent="BlockCliffs/Cap_L_03/Mesh" unique_id=1569847738 instance=ExtResource("9_he20v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3269043, 0)
+
+[node name="Mesh3" type="Node3D" parent="BlockCliffs/Cap_L_03" unique_id=133182153]
+transform = Transform3D(6.6487355, 0.34844545, 2.6899502, -0.3758105, 7.1708922, -7.2345823e-09, -2.6862636, -0.14078109, 6.6578593, 14.276934, 1.6499996, -210.68063)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cap_L_03/Mesh3"
+metadata/uniform_scale = 7.180733162830349
+
+[node name="StoneModel" parent="BlockCliffs/Cap_L_03/Mesh3" unique_id=102398815 instance=ExtResource("6_711ap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.28637695, 0)
+
+[node name="Mesh5" type="Node3D" parent="BlockCliffs/Cap_L_03" unique_id=747363344]
+transform = Transform3D(4.0921216, 0.24495558, 0.38766935, -0.22855899, 4.107327, -0.18268545, -0.397557, 0.1600311, 4.095374, -15.211278, 1.649993, -240.0474)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cap_L_03/Mesh5"
+metadata/uniform_scale = 4.117735653547875
+
+[node name="StoneModel" parent="BlockCliffs/Cap_L_03/Mesh5" unique_id=1984142916 instance=ExtResource("10_ki4s4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh2" type="Node3D" parent="BlockCliffs/Cap_L_03" unique_id=119460043]
+transform = Transform3D(-2.6899502, 0.3484455, 6.6487355, 4.0162993e-09, 7.1708922, -0.37581056, -6.6578593, -0.14078112, -2.6862636, 9.340153, 1.6500001, -187.80481)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cap_L_03/Mesh2"
+metadata/uniform_scale = 7.180733162830349
+
+[node name="StoneModel" parent="BlockCliffs/Cap_L_03/Mesh2" unique_id=1613170008 instance=ExtResource("6_711ap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.28637695, 0)
+
+[node name="Mesh4" type="Node3D" parent="BlockCliffs/Cap_L_03" unique_id=1053448045]
+transform = Transform3D(5.824471, 0.30524752, 2.3564687, -0.32922003, 6.281894, -1.4186906e-08, -2.3532393, -0.123328, 5.832464, -14.042407, 1.6500033, -227.6458)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cap_L_03/Mesh4"
+metadata/uniform_scale = 6.290515309932785
+
+[node name="StoneModel" parent="BlockCliffs/Cap_L_03/Mesh4" unique_id=1413609743 instance=ExtResource("9_he20v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3269043, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlockCliffs/Cap_L_03" unique_id=432044829]
+shape = SubResource("BoxShape_rock")
+
+[node name="Cap_R_03" type="StaticBody3D" parent="BlockCliffs" unique_id=1513308281]
+transform = Transform3D(7.6608305, -0.29322815, -1.3781868, 0.6972459, 3.4866815, 0, 2.196708, -0.08408181, 4.8063083, 9, 1.4, -228)
+
+[node name="Mesh" type="Node3D" parent="BlockCliffs/Cap_R_03" unique_id=810557582]
+transform = Transform3D(1.7318684, -0.5263983, 6.0167603, -1.460989e-08, 6.2592325, 0.54761183, -6.039743, -0.15094228, 1.7252783, 9, 1.4, -228)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cap_R_03/Mesh"
+metadata/uniform_scale = 6.2831415174765555
+
+[node name="StoneModel" parent="BlockCliffs/Cap_R_03/Mesh" unique_id=2020333580 instance=ExtResource("6_711ap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.28637695, 0)
+
+[node name="Mesh2" type="Node3D" parent="BlockCliffs/Cap_R_03" unique_id=1933902815]
+transform = Transform3D(6.0167603, -0.52639824, -1.731869, 0.54761183, 6.2592325, -9.789947e-09, 1.7252787, -0.15094228, 6.039743, -0.11091614, 1.4000006, -253.36887)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cap_R_03/Mesh2"
+metadata/uniform_scale = 6.2831415174765555
+
+[node name="StoneModel" parent="BlockCliffs/Cap_R_03/Mesh2" unique_id=1139195455 instance=ExtResource("6_711ap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.28637695, 0)
+
+[node name="Mesh4" type="Node3D" parent="BlockCliffs/Cap_R_03" unique_id=1430087251]
+transform = Transform3D(5.270844, -0.461139, -1.5171639, 0.47972268, 5.483256, -1.5928387e-08, 1.5113906, -0.1322295, 5.290977, -20.933815, 1.4000014, -326.13678)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cap_R_03/Mesh4"
+metadata/uniform_scale = 5.504200896191187
+
+[node name="StoneModel" parent="BlockCliffs/Cap_R_03/Mesh4" unique_id=154611252 instance=ExtResource("9_he20v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3269043, 0)
+
+[node name="Mesh5" type="Node3D" parent="BlockCliffs/Cap_R_03" unique_id=501783500]
+transform = Transform3D(1.731869, -0.52639824, 6.0167603, -3.4225909e-09, 6.2592325, 0.54761183, -6.039743, -0.15094228, 1.7252786, -6.797249, 1.4000043, -361.47342)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cap_R_03/Mesh5"
+metadata/uniform_scale = 6.2831415174765555
+
+[node name="StoneModel" parent="BlockCliffs/Cap_R_03/Mesh5" unique_id=778829876 instance=ExtResource("6_711ap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.28637695, 0)
+
+[node name="Mesh6" type="Node3D" parent="BlockCliffs/Cap_R_03" unique_id=1063616988]
+transform = Transform3D(5.270844, -0.461139, -1.5171639, 0.47972268, 5.483256, -2.0013731e-08, 1.5113906, -0.1322295, 5.290977, 10.715374, 1.4000043, -412.08392)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cap_R_03/Mesh6"
+metadata/uniform_scale = 5.504200896191187
+
+[node name="StoneModel" parent="BlockCliffs/Cap_R_03/Mesh6" unique_id=299798024 instance=ExtResource("9_he20v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3269043, 0)
+
+[node name="Mesh8" type="Node3D" parent="BlockCliffs/Cap_R_03" unique_id=1084447166]
+transform = Transform3D(5.270844, -0.461139, -1.5171639, 0.47972268, 5.483256, -1.5928396e-08, 1.5113906, -0.1322295, 5.290977, 7.128834, 1.4000043, -464.1872)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cap_R_03/Mesh8"
+metadata/uniform_scale = 5.504200896191187
+
+[node name="StoneModel" parent="BlockCliffs/Cap_R_03/Mesh8" unique_id=860703129 instance=ExtResource("9_he20v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3269043, 0)
+
+[node name="Mesh7" type="Node3D" parent="BlockCliffs/Cap_R_03" unique_id=430997240]
+transform = Transform3D(1.731869, -0.52639824, 6.0167603, -5.754332e-09, 6.2592325, 0.54761183, -6.039743, -0.15094228, 1.7252786, -3.9461784, 1.4000062, -441.52527)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cap_R_03/Mesh7"
+metadata/uniform_scale = 6.2831415174765555
+
+[node name="StoneModel" parent="BlockCliffs/Cap_R_03/Mesh7" unique_id=145837087 instance=ExtResource("6_711ap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.28637695, 0)
+
+[node name="Mesh3" type="Node3D" parent="BlockCliffs/Cap_R_03" unique_id=1036256017]
+transform = Transform3D(6.0167603, -0.52639824, -1.7318691, 0.54761183, 6.2592325, -1.8182533e-08, 1.7252787, -0.15094228, 6.039743, 13.209964, 1.4000018, -281.60834)
+top_level = true
+metadata/whitebox_original_path = "BlockCliffs/Cap_R_03/Mesh3"
+metadata/uniform_scale = 6.2831415174765555
+
+[node name="StoneModel" parent="BlockCliffs/Cap_R_03/Mesh3" unique_id=550974388 instance=ExtResource("6_711ap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.28637695, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BlockCliffs/Cap_R_03" unique_id=471485130]
+shape = SubResource("BoxShape_rock")
+
+[node name="WideGroundPillars" type="Node3D" parent="." unique_id=2130579487]
+
+[node name="Pillar_L_01" type="StaticBody3D" parent="WideGroundPillars" unique_id=22915410]
+transform = Transform3D(2.715173, 0.406354, 0.7257657, -0.09771859, 11.99269, 0, -0.6769687, -0.101315424, 2.9108872, -19, 5.65, -18)
+
+[node name="Mesh" type="Node3D" parent="WideGroundPillars/Pillar_L_01" unique_id=1963748846]
+transform = Transform3D(-2.986383, 0.41801655, 11.970429, 4.2710447e-08, 12.336886, -0.43081358, -11.977725, -0.104223214, -2.9845638, -19, 5.65, -18)
+top_level = true
+metadata/whitebox_original_path = "WideGroundPillars/Pillar_L_01/Mesh"
+metadata/uniform_scale = 12.344407402601368
+
+[node name="StoneModel" parent="WideGroundPillars/Pillar_L_01/Mesh" unique_id=246123210 instance=ExtResource("10_ki4s4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WideGroundPillars/Pillar_L_01" unique_id=1980864167]
+shape = SubResource("BoxShape_rock")
+
+[node name="Pillar_R_01" type="StaticBody3D" parent="WideGroundPillars" unique_id=1935497268]
+transform = Transform3D(2.8492594, -0.7963913, -0.9888544, 0.15700787, 15.978072, 0, 0.92578053, -0.25876322, 3.043381, 19, 7.65, -36)
+
+[node name="Mesh" type="Node3D" parent="WideGroundPillars/Pillar_R_01" unique_id=745890517]
+transform = Transform3D(15.632182, -0.81924814, -5.086175, 0.86140835, 16.436651, -1.604498e-08, 5.079204, -0.26618984, 15.653637, 19, 7.65, -36)
+top_level = true
+metadata/whitebox_original_path = "WideGroundPillars/Pillar_R_01/Mesh"
+metadata/uniform_scale = 16.459206689667806
+
+[node name="StoneModel" parent="WideGroundPillars/Pillar_R_01/Mesh" unique_id=305095016 instance=ExtResource("4_exyop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh3" type="Node3D" parent="WideGroundPillars/Pillar_R_01" unique_id=933372652]
+transform = Transform3D(5.0861773, -0.81924844, 15.632188, -4.199007e-08, 16.436657, 0.86140877, -15.653642, -0.26619002, 5.0792065, 14.977318, 7.65, -24.570171)
+top_level = true
+metadata/whitebox_original_path = "WideGroundPillars/Pillar_R_01/Mesh3"
+metadata/uniform_scale = 16.459212414509036
+
+[node name="StoneModel" parent="WideGroundPillars/Pillar_R_01/Mesh3" unique_id=800178264 instance=ExtResource("10_ki4s4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh2" type="Node3D" parent="WideGroundPillars/Pillar_R_01" unique_id=1619263221]
+transform = Transform3D(5.086179, -0.8192489, 15.632194, -4.199008e-08, 16.436663, 0.8614093, -15.653646, -0.2661902, 5.0792084, -6.778887, 7.6500006, -39.161797)
+top_level = true
+metadata/whitebox_original_path = "WideGroundPillars/Pillar_R_01/Mesh2"
+metadata/uniform_scale = 16.45921813935027
+
+[node name="StoneModel" parent="WideGroundPillars/Pillar_R_01/Mesh2" unique_id=1194313100 instance=ExtResource("10_ki4s4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WideGroundPillars/Pillar_R_01" unique_id=236911311]
+shape = SubResource("BoxShape_rock")
+
+[node name="Pillar_L_02" type="StaticBody3D" parent="WideGroundPillars" unique_id=524736497]
+transform = Transform3D(3.1437082, 0.68696713, -0.5904038, -0.2232207, 9.975641, 0, 0.5543206, 0.12113084, 3.3483465, -19, 4.65, -64)
+
+[node name="Mesh" type="Node3D" parent="WideGroundPillars/Pillar_L_02" unique_id=1163470347]
+transform = Transform3D(10.106046, 0.70668346, -1.7863197, -0.71758527, 10.261948, -1.1243745e-08, 1.7819685, 0.12460736, 10.130723, -19, 4.65, -64)
+top_level = true
+metadata/whitebox_original_path = "WideGroundPillars/Pillar_L_02/Mesh"
+metadata/uniform_scale = 10.28700632785784
+
+[node name="StoneModel" parent="WideGroundPillars/Pillar_L_02/Mesh" unique_id=90450314 instance=ExtResource("3_f2630")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh2" type="Node3D" parent="WideGroundPillars/Pillar_L_02" unique_id=1179306529]
+transform = Transform3D(10.106046, 0.70668346, -1.7863196, -0.71758527, 10.261948, -1.5095793e-08, 1.7819684, 0.124607354, 10.130723, -19.000002, 4.65, -45.037567)
+top_level = true
+metadata/whitebox_original_path = "WideGroundPillars/Pillar_L_02/Mesh2"
+metadata/uniform_scale = 10.28700632785784
+
+[node name="StoneModel" parent="WideGroundPillars/Pillar_L_02/Mesh2" unique_id=1137783413 instance=ExtResource("3_f2630")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WideGroundPillars/Pillar_L_02" unique_id=1817067046]
+shape = SubResource("BoxShape_rock")
+
+[node name="Pillar_R_02" type="StaticBody3D" parent="WideGroundPillars" unique_id=2052914568]
+transform = Transform3D(2.6898932, -0.40257055, 0.82691205, 0.09771859, 11.99269, 0, -0.77131444, 0.11543526, 2.883785, 19, 5.65, -84)
+
+[node name="Mesh" type="Node3D" parent="WideGroundPillars/Pillar_R_02" unique_id=599597493]
+transform = Transform3D(-3.4025798, -0.41412458, 11.858975, -3.5119627e-09, 12.336886, 0.43081355, -11.866205, 0.11874833, -3.4005067, 19, 5.65, -84)
+top_level = true
+metadata/whitebox_original_path = "WideGroundPillars/Pillar_R_02/Mesh"
+metadata/uniform_scale = 12.344406448461164
+
+[node name="StoneModel" parent="WideGroundPillars/Pillar_R_02/Mesh" unique_id=1650062847 instance=ExtResource("5_nays2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WideGroundPillars/Pillar_R_02" unique_id=1033752563]
+shape = SubResource("BoxShape_rock")
+
+[node name="Pillar_L_03" type="StaticBody3D" parent="WideGroundPillars" unique_id=746644744]
+transform = Transform3D(3.148105, 0.87345105, 1.3485837, -0.17794226, 17.97533, 0, -1.2719169, -0.3528971, 3.3378618, -19, 8.65, -118)
+
+[node name="Mesh" type="Node3D" parent="WideGroundPillars/Pillar_L_03" unique_id=1013574442]
+transform = Transform3D(-6.936443, 0.89851946, 17.14477, 4.853962e-08, 18.491232, -0.9690844, -17.168299, -0.3630254, -6.926937, -19, 8.65, -118)
+top_level = true
+metadata/whitebox_original_path = "WideGroundPillars/Pillar_L_03/Mesh"
+metadata/uniform_scale = 18.516607764411333
+
+[node name="StoneModel" parent="WideGroundPillars/Pillar_L_03/Mesh" unique_id=879944503 instance=ExtResource("11_dcjna")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh2" type="Node3D" parent="WideGroundPillars/Pillar_L_03" unique_id=608438844]
+transform = Transform3D(-6.9364414, 0.8985195, 17.14477, 8.4757716e-08, 18.491232, -0.9690843, -17.1683, -0.36302528, -6.926935, 10.3750305, 8.649999, -104.508415)
+top_level = true
+metadata/whitebox_original_path = "WideGroundPillars/Pillar_L_03/Mesh2"
+metadata/uniform_scale = 18.516607764411333
+
+[node name="StoneModel" parent="WideGroundPillars/Pillar_L_03/Mesh2" unique_id=1220656128 instance=ExtResource("8_548p1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh3" type="Node3D" parent="WideGroundPillars/Pillar_L_03" unique_id=399751482]
+transform = Transform3D(17.14477, 0.8985195, 6.936441, -0.9690843, 18.491232, -4.7181395e-08, -6.9269347, -0.36302528, 17.1683, -11.891266, 8.649999, -99.22176)
+top_level = true
+metadata/whitebox_original_path = "WideGroundPillars/Pillar_L_03/Mesh3"
+metadata/uniform_scale = 18.516607764411333
+
+[node name="StoneModel" parent="WideGroundPillars/Pillar_L_03/Mesh3" unique_id=39239533 instance=ExtResource("10_ki4s4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh4" type="Node3D" parent="WideGroundPillars/Pillar_L_03" unique_id=846593512]
+transform = Transform3D(-6.9364414, 0.8985195, 17.14477, 7.279847e-08, 18.491232, -0.9690843, -17.1683, -0.36302528, -6.926935, -11.891266, 8.649999, -127.27151)
+top_level = true
+metadata/whitebox_original_path = "WideGroundPillars/Pillar_L_03/Mesh4"
+metadata/uniform_scale = 18.516607764411333
+
+[node name="StoneModel" parent="WideGroundPillars/Pillar_L_03/Mesh4" unique_id=1797215488 instance=ExtResource("10_ki4s4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh5" type="Node3D" parent="WideGroundPillars/Pillar_L_03" unique_id=1463161138]
+transform = Transform3D(-10.604104, 1.3736142, 26.210115, 1.2591703e-07, 28.268522, -1.4814904, -26.246088, -0.5549759, -10.589572, 5.1982784, 8.649998, -120.387054)
+top_level = true
+metadata/whitebox_original_path = "WideGroundPillars/Pillar_L_03/Mesh5"
+metadata/uniform_scale = 28.30731597740851
+
+[node name="StoneModel" parent="WideGroundPillars/Pillar_L_03/Mesh5" unique_id=1647690876 instance=ExtResource("9_he20v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.47607532, -0.3269043, 0.8517333)
+
+[node name="Mesh7" type="Node3D" parent="WideGroundPillars/Pillar_L_03" unique_id=332467272]
+transform = Transform3D(-6.9364414, 0.8985195, 17.14477, 8.714955e-08, 18.491232, -0.9690843, -17.1683, -0.36302528, -6.926935, 5.1982822, 8.649998, -176.5891)
+top_level = true
+metadata/whitebox_original_path = "WideGroundPillars/Pillar_L_03/Mesh7"
+metadata/uniform_scale = 18.516607764411333
+
+[node name="StoneModel" parent="WideGroundPillars/Pillar_L_03/Mesh7" unique_id=1047682560 instance=ExtResource("10_ki4s4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh13" type="Node3D" parent="WideGroundPillars/Pillar_L_03" unique_id=379195596]
+transform = Transform3D(-6.9364414, 0.8985195, 17.14477, 7.519029e-08, 18.491232, -0.9690843, -17.1683, -0.36302528, -6.926935, -13.680214, 8.649995, -340.54187)
+top_level = true
+metadata/whitebox_original_path = "WideGroundPillars/Pillar_L_03/Mesh13"
+metadata/uniform_scale = 18.516607764411333
+
+[node name="StoneModel" parent="WideGroundPillars/Pillar_L_03/Mesh13" unique_id=734348473 instance=ExtResource("4_exyop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh6" type="Node3D" parent="WideGroundPillars/Pillar_L_03" unique_id=422947443]
+transform = Transform3D(17.14477, 0.8985195, 6.936441, -0.9690843, 18.491232, -4.4789534e-08, -6.9269347, -0.36302528, 17.1683, 5.265602, 8.649996, -159.74902)
+top_level = true
+metadata/whitebox_original_path = "WideGroundPillars/Pillar_L_03/Mesh6"
+metadata/uniform_scale = 18.516607764411333
+
+[node name="StoneModel" parent="WideGroundPillars/Pillar_L_03/Mesh6" unique_id=337956847 instance=ExtResource("3_f2630")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh8" type="Node3D" parent="WideGroundPillars/Pillar_L_03" unique_id=909214389]
+transform = Transform3D(-10.604104, 1.3736142, 26.210115, 1.14947376e-07, 28.268522, -1.4814904, -26.246088, -0.5549759, -10.589572, -9.735065, 8.649993, -236.66171)
+top_level = true
+metadata/whitebox_original_path = "WideGroundPillars/Pillar_L_03/Mesh8"
+metadata/uniform_scale = 28.30731597740851
+
+[node name="StoneModel" parent="WideGroundPillars/Pillar_L_03/Mesh8" unique_id=257348540 instance=ExtResource("9_he20v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3269043, 0)
+
+[node name="Mesh14" type="Node3D" parent="WideGroundPillars/Pillar_L_03" unique_id=1003301945]
+transform = Transform3D(17.14477, 0.8985195, 6.936441, -0.9690843, 18.491232, -3.2830272e-08, -6.9269347, -0.36302528, 17.1683, 12.491646, 8.649991, -308.71948)
+top_level = true
+metadata/whitebox_original_path = "WideGroundPillars/Pillar_L_03/Mesh14"
+metadata/uniform_scale = 18.516607764411333
+
+[node name="StoneModel" parent="WideGroundPillars/Pillar_L_03/Mesh14" unique_id=1040342995 instance=ExtResource("3_f2630")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh16" type="Node3D" parent="WideGroundPillars/Pillar_L_03" unique_id=1311053346]
+transform = Transform3D(-6.9364414, 0.8985195, 17.14477, 7.519029e-08, 18.491232, -0.9690843, -17.1683, -0.36302528, -6.926935, 9.165604, 8.64999, -364.29385)
+top_level = true
+metadata/whitebox_original_path = "WideGroundPillars/Pillar_L_03/Mesh16"
+metadata/uniform_scale = 18.516607764411333
+
+[node name="StoneModel" parent="WideGroundPillars/Pillar_L_03/Mesh16" unique_id=944962571 instance=ExtResource("8_548p1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh17" type="Node3D" parent="WideGroundPillars/Pillar_L_03" unique_id=497065406]
+transform = Transform3D(-10.604104, 1.3736142, 26.210115, 1.14947376e-07, 28.268522, -1.4814904, -26.246088, -0.5549759, -10.589572, 9.165619, 8.649988, -444.38376)
+top_level = true
+metadata/whitebox_original_path = "WideGroundPillars/Pillar_L_03/Mesh17"
+metadata/uniform_scale = 28.30731597740851
+
+[node name="StoneModel" parent="WideGroundPillars/Pillar_L_03/Mesh17" unique_id=343281517 instance=ExtResource("9_he20v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3269043, 0)
+
+[node name="Mesh10" type="Node3D" parent="WideGroundPillars/Pillar_L_03" unique_id=249639517]
+transform = Transform3D(-10.604104, 1.3736142, 26.210115, 1.14947376e-07, 28.268522, -1.4814904, -26.246088, -0.5549759, -10.589572, -9.735069, 8.649992, -285.7633)
+top_level = true
+metadata/whitebox_original_path = "WideGroundPillars/Pillar_L_03/Mesh10"
+metadata/uniform_scale = 28.30731597740851
+
+[node name="StoneModel" parent="WideGroundPillars/Pillar_L_03/Mesh10" unique_id=1888901271 instance=ExtResource("9_he20v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3269043, 0)
+
+[node name="Mesh9" type="Node3D" parent="WideGroundPillars/Pillar_L_03" unique_id=544041324]
+transform = Transform3D(17.14477, 0.8985195, 6.936441, -0.9690843, 18.491232, -3.2830272e-08, -6.9269347, -0.36302528, 17.1683, 5.0945854, 8.649991, -221.52994)
+top_level = true
+metadata/whitebox_original_path = "WideGroundPillars/Pillar_L_03/Mesh9"
+metadata/uniform_scale = 18.516607764411333
+
+[node name="StoneModel" parent="WideGroundPillars/Pillar_L_03/Mesh9" unique_id=1743285718 instance=ExtResource("8_548p1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh12" type="Node3D" parent="WideGroundPillars/Pillar_L_03" unique_id=1553870501]
+transform = Transform3D(17.14477, 0.8985195, 6.936441, -0.9690843, 18.491232, -3.2830272e-08, -6.9269347, -0.36302528, 17.1683, 10.493523, 8.64999, -268.51)
+top_level = true
+metadata/whitebox_original_path = "WideGroundPillars/Pillar_L_03/Mesh12"
+metadata/uniform_scale = 18.516607764411333
+
+[node name="StoneModel" parent="WideGroundPillars/Pillar_L_03/Mesh12" unique_id=1648119350 instance=ExtResource("8_548p1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="Mesh11" type="Node3D" parent="WideGroundPillars/Pillar_L_03" unique_id=244989270]
+transform = Transform3D(-12.104771, 1.5680047, 29.919308, 1.3121443e-07, 32.269012, -1.6911473, -29.96037, -0.63351476, -12.088182, -12.482288, 8.649992, -269.03394)
+top_level = true
+metadata/whitebox_original_path = "WideGroundPillars/Pillar_L_03/Mesh11"
+metadata/uniform_scale = 32.31329590260017
+
+[node name="StoneModel" parent="WideGroundPillars/Pillar_L_03/Mesh11" unique_id=1978683059 instance=ExtResource("6_711ap")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.28637695, 0)
+
+[node name="Mesh15" type="Node3D" parent="WideGroundPillars/Pillar_L_03" unique_id=1000243467]
+transform = Transform3D(17.14477, 0.8985195, 6.936441, -0.9690843, 18.491232, -3.2830272e-08, -6.9269347, -0.36302528, 17.1683, -12.482285, 8.64999, -367.5762)
+top_level = true
+metadata/whitebox_original_path = "WideGroundPillars/Pillar_L_03/Mesh15"
+metadata/uniform_scale = 18.516607764411333
+
+[node name="StoneModel" parent="WideGroundPillars/Pillar_L_03/Mesh15" unique_id=130123885 instance=ExtResource("4_exyop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WideGroundPillars/Pillar_L_03" unique_id=1306919239]
+shape = SubResource("BoxShape_rock")
+
+[node name="Pillar_R_03" type="StaticBody3D" parent="WideGroundPillars" unique_id=1496674883]
+transform = Transform3D(2.9996917, -0.917695, -1.0944644, 0.2232207, 13.965897, 0, 1.0917984, -0.33401364, 3.0070164, 19, 6.65, -146)
+
+[node name="Mesh" type="Node3D" parent="WideGroundPillars/Pillar_R_03" unique_id=1988268528]
+transform = Transform3D(13.500306, -0.9440332, -4.9257083, 1.0046191, 14.366725, 0, 4.913709, -0.34359998, 13.533273, 19, 6.65, -146)
+top_level = true
+metadata/whitebox_original_path = "WideGroundPillars/Pillar_R_03/Mesh"
+metadata/uniform_scale = 14.40180752320469
+
+[node name="StoneModel" parent="WideGroundPillars/Pillar_R_03/Mesh" unique_id=562557701 instance=ExtResource("5_nays2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WideGroundPillars/Pillar_R_03" unique_id=661779373]
+shape = SubResource("BoxShape_rock")
+
+[node name="Pillar_L_04" type="StaticBody3D" parent="WideGroundPillars" unique_id=728754664]
+transform = Transform3D(2.9091141, 0.406354, -0.7741501, -0.10469849, 11.99269, 0, 0.72532356, 0.101315424, 3.1049464, -19, 5.65, -188)
+
+[node name="Mesh" type="Node3D" parent="WideGroundPillars/Pillar_L_04" unique_id=873722108]
+transform = Transform3D(11.970428, 0.4180165, -2.986382, -0.43081352, 12.336886, -8.024527e-09, 2.9845629, 0.104223214, 11.977725, -19, 5.65, -188)
+top_level = true
+metadata/whitebox_original_path = "WideGroundPillars/Pillar_L_04/Mesh"
+metadata/uniform_scale = 12.344407402601368
+
+[node name="StoneModel" parent="WideGroundPillars/Pillar_L_04/Mesh" unique_id=725380358 instance=ExtResource("3_f2630")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WideGroundPillars/Pillar_L_04" unique_id=264368650]
+shape = SubResource("BoxShape_rock")
+
+[node name="Pillar_R_04" type="StaticBody3D" parent="WideGroundPillars" unique_id=79672415]
+transform = Transform3D(3.321144, -0.8190767, 0.7068998, 0.17794226, 15.978072, 0, -0.705931, 0.17410013, 3.325702, 19, 7.65, -226)
+
+[node name="Mesh" type="Node3D" parent="WideGroundPillars/Pillar_R_04" unique_id=1564913299]
+transform = Transform3D(16.07747, -0.8425846, 3.422062, 0.8614084, 16.436651, 1.8009205e-08, -3.417372, 0.17909689, 16.099535, 19, 7.65, -226)
+top_level = true
+metadata/whitebox_original_path = "WideGroundPillars/Pillar_R_04/Mesh"
+metadata/uniform_scale = 16.459206689667806
+
+[node name="StoneModel" parent="WideGroundPillars/Pillar_R_04/Mesh" unique_id=1346813662 instance=ExtResource("4_exyop")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.49975586, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WideGroundPillars/Pillar_R_04" unique_id=8790972]
+shape = SubResource("BoxShape_rock")
+
+[node name="Player" type="CharacterBody3D" parent="." unique_id=1703597058]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
+script = ExtResource("13_jc30c")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player" unique_id=374459069]
+shape = SubResource("Capsule_player")
+
+[node name="Head" type="Node3D" parent="Player" unique_id=1296205992]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.65, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Player/Head" unique_id=122913282]
+current = true
+fov = 46.8
+
+[node name="Pursuer" type="CharacterBody3D" parent="." unique_id=195105900]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -42)
+script = ExtResource("14_hgmkb")
+
+[node name="Mesh" type="MeshInstance3D" parent="Pursuer" unique_id=396686167]
+material_override = SubResource("Mat_pursuer")
+mesh = SubResource("Capsule_pursuer")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Pursuer" unique_id=2101532771]
+shape = SubResource("Capsule_pursuer_shape")
+
+[node name="Light" type="OmniLight3D" parent="Pursuer" unique_id=981398226]
+light_color = Color(1, 0.08, 0.02, 1)
+light_energy = 4.0
+omni_range = 9.0
+
+[node name="Lighting" type="Node3D" parent="." unique_id=655927141]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Lighting" unique_id=1363455162]
+environment = SubResource("Environment_scene4")
+
+[node name="Sun" type="DirectionalLight3D" parent="Lighting" unique_id=1081390883]
+transform = Transform3D(0.7880108, 0.34427354, -0.51040655, 0, 0.8290376, 0.5591929, 0.6156615, -0.44065002, 0.65329057, 0, 0, 0)
+light_color = Color(1, 0.82, 0.62, 1)
+light_energy = 1.4
+shadow_enabled = true
+
+[node name="NightFill" type="DirectionalLight3D" parent="Lighting" unique_id=2003348237]
+transform = Transform3D(-0.81915206, -0.46984634, 0.32898995, 0, 0.57357645, 0.81915206, -0.57357645, 0.6710101, -0.46984634, 0, 0, 0)
+light_color = Color(0.25, 0.38, 0.7, 1)
+light_energy = 0.18
+
+[node name="ExitGlow" type="OmniLight3D" parent="Lighting" unique_id=1433896617]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, -476)
+light_color = Color(0.1, 0.55, 1, 1)
+light_energy = 6.0
+omni_range = 18.0
+
+[node name="Triggers" type="Node3D" parent="." unique_id=1816446017]
+
+[node name="ChaseStart" type="Area3D" parent="Triggers" unique_id=1686035784]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -24)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Triggers/ChaseStart" unique_id=1735117647]
+shape = SubResource("BoxShape_trigger")
+
+[node name="Exit" type="Node3D" parent="." unique_id=731843652]
+
+[node name="Gate" type="MeshInstance3D" parent="Exit" unique_id=1566174404]
+transform = Transform3D(7, 0, 0, 0, 5, 0, 0, 0, 0.8, 0, 5, -478)
+material_override = SubResource("Mat_exit")
+mesh = SubResource("BoxMesh_rock")
+
+[node name="ExitTrigger" type="Area3D" parent="Exit" unique_id=1190950959]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -472)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Exit/ExitTrigger" unique_id=583934811]
+shape = SubResource("BoxShape_exit")
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=564213778]
+
+[node name="Status" type="Label" parent="HUD" unique_id=525762704]
+offset_left = 24.0
+offset_top = 22.0
+offset_right = 760.0
+offset_bottom = 60.0
+theme_override_colors/font_color = Color(1, 0.9, 0.72, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.8)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 22
+text = "榛勬槒鍏ュ彛 路 WASD 绉诲姩 / Shift 濂旇窇 路 榧犳爣杞悜"
+
+[node name="Progress" type="ProgressBar" parent="HUD" unique_id=179127518]
+offset_left = 24.0
+offset_top = 62.0
+offset_right = 360.0
+offset_bottom = 80.0
+show_percentage = false
+
+[node name="Crosshair" type="Label" parent="HUD" unique_id=287816997]
+offset_left = 570.0
+offset_top = 312.0
+offset_right = 590.0
+offset_bottom = 336.0
+theme_override_colors/font_color = Color(1, 1, 1, 0.8)
+theme_override_font_sizes/font_size = 20
+text = "+"
